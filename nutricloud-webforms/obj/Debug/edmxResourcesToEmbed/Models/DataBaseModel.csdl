@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nutricloudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="alimento">
+    <Key>
+      <PropertyRef Name="id_alimento" />
+    </Key>
+    <Property Name="id_alimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nro" Type="Int32" />
+    <Property Name="alimento1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="energia_kj" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="energia_kcal" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="sodio_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="potasio_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="calcio_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="fosforo_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="hierro_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="zinc_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="tiamina_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="rivoflavina_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="niacina_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="vitamina_c_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="colesterol_mg" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="cenizas_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="agua_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="grasa_total_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="carbohidratos_totales_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="carbohidratos_disponibles_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="ac_grasos_saturados_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="ac_grasos_monoinsaturados_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="ac_grasos_poliinsaturados_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="fibra_dietetica_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="proteinas_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="agp_w6_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="agp_w3_g" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="porcion" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="id_alimento_tipo" Type="Int32" Nullable="false" />
+    <Property Name="id_alimento_genero" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="alimento_genero" Relationship="Self.FK_alimento_alimento_genero" FromRole="alimento" ToRole="alimento_genero" />
+    <NavigationProperty Name="alimento_tipo" Relationship="Self.FK_alimento_alimento_tipo" FromRole="alimento" ToRole="alimento_tipo" />
+    <NavigationProperty Name="usuario_alimento" Relationship="Self.FK_usuario_alimento_alimento" FromRole="alimento" ToRole="usuario_alimento" />
+  </EntityType>
+  <EntityType Name="alimento_genero">
+    <Key>
+      <PropertyRef Name="id_alimento_genero" />
+    </Key>
+    <Property Name="id_alimento_genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="alimento_genero1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="alimento" Relationship="Self.FK_alimento_alimento_genero" FromRole="alimento_genero" ToRole="alimento" />
+  </EntityType>
+  <EntityType Name="alimento_tipo">
+    <Key>
+      <PropertyRef Name="id_alimento_tipo" />
+    </Key>
+    <Property Name="id_alimento_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="alimento_tipo1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="unidad_medida" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="alimento" Relationship="Self.FK_alimento_alimento_tipo" FromRole="alimento_tipo" ToRole="alimento" />
+  </EntityType>
+  <EntityType Name="blog_nota">
+    <Key>
+      <PropertyRef Name="id_blog_nota" />
+    </Key>
+    <Property Name="id_blog_nota" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nota" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo_nota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="f_publicacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_blog_nota_usuario" FromRole="blog_nota" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="comida_tipo">
+    <Key>
+      <PropertyRef Name="id_comida_tipo" />
+    </Key>
+    <Property Name="id_comida_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="comida_tipo1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="usuario_alimento" Relationship="Self.FK_usuario_alimento_comida_tipo" FromRole="comida_tipo" ToRole="usuario_alimento" />
+  </EntityType>
+  <EntityType Name="consulta_conversacion">
+    <Key>
+      <PropertyRef Name="id_consulta_conversacion" />
+    </Key>
+    <Property Name="id_consulta_conversacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario_remitente" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario_destinatario" Type="Int32" Nullable="false" />
+    <Property Name="cerrada" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_consulta_conversacion_usuario" FromRole="consulta_conversacion" ToRole="usuario" />
+    <NavigationProperty Name="usuario1" Relationship="Self.FK_consulta_conversacion_usuario1" FromRole="consulta_conversacion" ToRole="usuario" />
+    <NavigationProperty Name="consulta_mensaje" Relationship="Self.FK_consulta_mensaje_consulta_conversacion" FromRole="consulta_conversacion" ToRole="consulta_mensaje" />
+  </EntityType>
+  <EntityType Name="consulta_mensaje">
+    <Key>
+      <PropertyRef Name="id_mensaje" />
+    </Key>
+    <Property Name="id_mensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="f_mensaje" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="id_consulta_conversacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="consulta_conversacion" Relationship="Self.FK_consulta_mensaje_consulta_conversacion" FromRole="consulta_mensaje" ToRole="consulta_conversacion" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="f_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="f_registro" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="f_ultimo_ingreso" Type="DateTime" Precision="3" />
+    <Property Name="id_usuario_tipo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="blog_nota" Relationship="Self.FK_blog_nota_usuario" FromRole="usuario" ToRole="blog_nota" />
+    <NavigationProperty Name="consulta_conversacion" Relationship="Self.FK_consulta_conversacion_usuario" FromRole="usuario" ToRole="consulta_conversacion" />
+    <NavigationProperty Name="consulta_conversacion1" Relationship="Self.FK_consulta_conversacion_usuario1" FromRole="usuario" ToRole="consulta_conversacion" />
+    <NavigationProperty Name="usuario_alimento" Relationship="Self.FK_usuario_alimento_usuario" FromRole="usuario" ToRole="usuario_alimento" />
+    <NavigationProperty Name="usuario_datos" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario" ToRole="usuario_datos" />
+    <NavigationProperty Name="usuario_muro" Relationship="Self.FK_usuario_muro_usuario" FromRole="usuario" ToRole="usuario_muro" />
+    <NavigationProperty Name="usuario_receta" Relationship="Self.FK_usuario_receta_usuario" FromRole="usuario" ToRole="usuario_receta" />
+    <NavigationProperty Name="usuario_tipo" Relationship="Self.FK_usuario_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
+    <NavigationProperty Name="usuario_usuario" Relationship="Self.FK_usuario_usuario_usuario" FromRole="usuario" ToRole="usuario_usuario" />
+    <NavigationProperty Name="usuario_usuario1" Relationship="Self.FK_usuario_usuario_usuario1" FromRole="usuario" ToRole="usuario_usuario" />
+  </EntityType>
+  <EntityType Name="usuario_alimento">
+    <Key>
+      <PropertyRef Name="id_usuario_alimento" />
+    </Key>
+    <Property Name="id_usuario_alimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_alimento" Type="Int32" Nullable="false" />
+    <Property Name="id_comida_tipo" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="id_unidad_medida" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="alimento" Relationship="Self.FK_usuario_alimento_alimento" FromRole="usuario_alimento" ToRole="alimento" />
+    <NavigationProperty Name="comida_tipo" Relationship="Self.FK_usuario_alimento_comida_tipo" FromRole="usuario_alimento" ToRole="comida_tipo" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_alimento_usuario" FromRole="usuario_alimento" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario_datos">
+    <Key>
+      <PropertyRef Name="id_usuario_datos" />
+    </Key>
+    <Property Name="id_usuario_datos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="altura_cm" Type="Int32" Nullable="false" />
+    <Property Name="peso_kg" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="f_ingreso" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="id_usuario_objetivo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario_datos" ToRole="usuario" />
+    <NavigationProperty Name="usuario_objetivo" Relationship="Self.FK_usuario_datos_usuario_objetivo" FromRole="usuario_datos" ToRole="usuario_objetivo" />
+  </EntityType>
+  <EntityType Name="usuario_muro">
+    <Key>
+      <PropertyRef Name="id_usuario_muro" />
+    </Key>
+    <Property Name="id_usuario_muro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="f_publicacion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_muro_usuario" FromRole="usuario_muro" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario_objetivo">
+    <Key>
+      <PropertyRef Name="id_usuario_objetivo" />
+    </Key>
+    <Property Name="id_usuario_objetivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_objetivo1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="usuario_datos" Relationship="Self.FK_usuario_datos_usuario_objetivo" FromRole="usuario_objetivo" ToRole="usuario_datos" />
+  </EntityType>
+  <EntityType Name="usuario_receta">
+    <Key>
+      <PropertyRef Name="id_usuario_receta" />
+    </Key>
+    <Property Name="id_usuario_receta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="receta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="titulo_receta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="f_publicacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_receta_usuario" FromRole="usuario_receta" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario_tipo">
+    <Key>
+      <PropertyRef Name="id_usuario_tipo" />
+    </Key>
+    <Property Name="id_usuario_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_tipo1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_usuario_tipo" FromRole="usuario_tipo" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario_usuario">
+    <Key>
+      <PropertyRef Name="id_usuario_usuario" />
+    </Key>
+    <Property Name="id_usuario_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario_seguidor" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario_seguido" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_usuario_usuario" FromRole="usuario_usuario" ToRole="usuario" />
+    <NavigationProperty Name="usuario1" Relationship="Self.FK_usuario_usuario_usuario1" FromRole="usuario_usuario" ToRole="usuario" />
+  </EntityType>
+  <Association Name="FK_alimento_alimento_genero">
+    <End Role="alimento_genero" Type="Self.alimento_genero" Multiplicity="1" />
+    <End Role="alimento" Type="Self.alimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="alimento_genero">
+        <PropertyRef Name="id_alimento_genero" />
+      </Principal>
+      <Dependent Role="alimento">
+        <PropertyRef Name="id_alimento_genero" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_alimento_alimento_tipo">
+    <End Role="alimento_tipo" Type="Self.alimento_tipo" Multiplicity="1" />
+    <End Role="alimento" Type="Self.alimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="alimento_tipo">
+        <PropertyRef Name="id_alimento_tipo" />
+      </Principal>
+      <Dependent Role="alimento">
+        <PropertyRef Name="id_alimento_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_alimento_alimento">
+    <End Role="alimento" Type="Self.alimento" Multiplicity="1" />
+    <End Role="usuario_alimento" Type="Self.usuario_alimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="alimento">
+        <PropertyRef Name="id_alimento" />
+      </Principal>
+      <Dependent Role="usuario_alimento">
+        <PropertyRef Name="id_alimento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_blog_nota_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="blog_nota" Type="Self.blog_nota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="blog_nota">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_alimento_comida_tipo">
+    <End Role="comida_tipo" Type="Self.comida_tipo" Multiplicity="1" />
+    <End Role="usuario_alimento" Type="Self.usuario_alimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="comida_tipo">
+        <PropertyRef Name="id_comida_tipo" />
+      </Principal>
+      <Dependent Role="usuario_alimento">
+        <PropertyRef Name="id_comida_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_consulta_conversacion_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="consulta_conversacion" Type="Self.consulta_conversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="consulta_conversacion">
+        <PropertyRef Name="id_usuario_remitente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_consulta_conversacion_usuario1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="consulta_conversacion" Type="Self.consulta_conversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="consulta_conversacion">
+        <PropertyRef Name="id_usuario_destinatario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_consulta_mensaje_consulta_conversacion">
+    <End Role="consulta_conversacion" Type="Self.consulta_conversacion" Multiplicity="1" />
+    <End Role="consulta_mensaje" Type="Self.consulta_mensaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="consulta_conversacion">
+        <PropertyRef Name="id_consulta_conversacion" />
+      </Principal>
+      <Dependent Role="consulta_mensaje">
+        <PropertyRef Name="id_consulta_conversacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_alimento_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_alimento" Type="Self.usuario_alimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_alimento">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_datos_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_datos" Type="Self.usuario_datos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_datos">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_muro_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_muro" Type="Self.usuario_muro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_muro">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_receta_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_receta" Type="Self.usuario_receta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_receta">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_usuario_tipo">
+    <End Role="usuario_tipo" Type="Self.usuario_tipo" Multiplicity="1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario_tipo">
+        <PropertyRef Name="id_usuario_tipo" />
+      </Principal>
+      <Dependent Role="usuario">
+        <PropertyRef Name="id_usuario_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_usuario_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_usuario" Type="Self.usuario_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_usuario">
+        <PropertyRef Name="id_usuario_seguido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_usuario_usuario1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_usuario" Type="Self.usuario_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_usuario">
+        <PropertyRef Name="id_usuario_seguidor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_datos_usuario_objetivo">
+    <End Role="usuario_objetivo" Type="Self.usuario_objetivo" Multiplicity="1" />
+    <End Role="usuario_datos" Type="Self.usuario_datos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario_objetivo">
+        <PropertyRef Name="id_usuario_objetivo" />
+      </Principal>
+      <Dependent Role="usuario_datos">
+        <PropertyRef Name="id_usuario_objetivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="nutricloudEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="alimento" EntityType="Self.alimento" />
+    <EntitySet Name="alimento_genero" EntityType="Self.alimento_genero" />
+    <EntitySet Name="alimento_tipo" EntityType="Self.alimento_tipo" />
+    <EntitySet Name="blog_nota" EntityType="Self.blog_nota" />
+    <EntitySet Name="comida_tipo" EntityType="Self.comida_tipo" />
+    <EntitySet Name="consulta_conversacion" EntityType="Self.consulta_conversacion" />
+    <EntitySet Name="consulta_mensaje" EntityType="Self.consulta_mensaje" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="usuario_alimento" EntityType="Self.usuario_alimento" />
+    <EntitySet Name="usuario_datos" EntityType="Self.usuario_datos" />
+    <EntitySet Name="usuario_muro" EntityType="Self.usuario_muro" />
+    <EntitySet Name="usuario_objetivo" EntityType="Self.usuario_objetivo" />
+    <EntitySet Name="usuario_receta" EntityType="Self.usuario_receta" />
+    <EntitySet Name="usuario_tipo" EntityType="Self.usuario_tipo" />
+    <EntitySet Name="usuario_usuario" EntityType="Self.usuario_usuario" />
+    <AssociationSet Name="FK_alimento_alimento_genero" Association="Self.FK_alimento_alimento_genero">
+      <End Role="alimento_genero" EntitySet="alimento_genero" />
+      <End Role="alimento" EntitySet="alimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_alimento_alimento_tipo" Association="Self.FK_alimento_alimento_tipo">
+      <End Role="alimento_tipo" EntitySet="alimento_tipo" />
+      <End Role="alimento" EntitySet="alimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_alimento_alimento" Association="Self.FK_usuario_alimento_alimento">
+      <End Role="alimento" EntitySet="alimento" />
+      <End Role="usuario_alimento" EntitySet="usuario_alimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_blog_nota_usuario" Association="Self.FK_blog_nota_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="blog_nota" EntitySet="blog_nota" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_alimento_comida_tipo" Association="Self.FK_usuario_alimento_comida_tipo">
+      <End Role="comida_tipo" EntitySet="comida_tipo" />
+      <End Role="usuario_alimento" EntitySet="usuario_alimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_consulta_conversacion_usuario" Association="Self.FK_consulta_conversacion_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="consulta_conversacion" EntitySet="consulta_conversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_consulta_conversacion_usuario1" Association="Self.FK_consulta_conversacion_usuario1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="consulta_conversacion" EntitySet="consulta_conversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_consulta_mensaje_consulta_conversacion" Association="Self.FK_consulta_mensaje_consulta_conversacion">
+      <End Role="consulta_conversacion" EntitySet="consulta_conversacion" />
+      <End Role="consulta_mensaje" EntitySet="consulta_mensaje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_alimento_usuario" Association="Self.FK_usuario_alimento_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_alimento" EntitySet="usuario_alimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_datos_usuario" Association="Self.FK_usuario_datos_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_datos" EntitySet="usuario_datos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_muro_usuario" Association="Self.FK_usuario_muro_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_muro" EntitySet="usuario_muro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_receta_usuario" Association="Self.FK_usuario_receta_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_receta" EntitySet="usuario_receta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_usuario_tipo" Association="Self.FK_usuario_usuario_tipo">
+      <End Role="usuario_tipo" EntitySet="usuario_tipo" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_usuario_usuario" Association="Self.FK_usuario_usuario_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_usuario" EntitySet="usuario_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_usuario_usuario1" Association="Self.FK_usuario_usuario_usuario1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_usuario" EntitySet="usuario_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_datos_usuario_objetivo" Association="Self.FK_usuario_datos_usuario_objetivo">
+      <End Role="usuario_objetivo" EntitySet="usuario_objetivo" />
+      <End Role="usuario_datos" EntitySet="usuario_datos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
