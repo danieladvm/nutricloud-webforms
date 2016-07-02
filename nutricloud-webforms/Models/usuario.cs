@@ -22,19 +22,18 @@ namespace nutricloud_webforms.Models
             this.consulta_conversacion1 = new HashSet<consulta_conversacion>();
             this.usuario_alimento = new HashSet<usuario_alimento>();
             this.usuario_datos = new HashSet<usuario_datos>();
+            this.usuario_estilo_vida = new HashSet<usuario_estilo_vida>();
+            this.usuario_idr = new HashSet<usuario_idr>();
             this.usuario_muro = new HashSet<usuario_muro>();
             this.usuario_receta = new HashSet<usuario_receta>();
             this.usuario_usuario = new HashSet<usuario_usuario>();
             this.usuario_usuario1 = new HashSet<usuario_usuario>();
-            this.usuario_idr = new HashSet<usuario_idr>();
         }
     
         public int id_usuario { get; set; }
-        public string usuario1 { get; set; }
+        public string email { get; set; }
         public string clave { get; set; }
         public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string email { get; set; }
         public string sexo { get; set; }
         public Nullable<System.DateTime> f_nacimiento { get; set; }
         public System.DateTime f_registro { get; set; }
@@ -52,6 +51,10 @@ namespace nutricloud_webforms.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario_datos> usuario_datos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuario_estilo_vida> usuario_estilo_vida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuario_idr> usuario_idr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario_muro> usuario_muro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario_receta> usuario_receta { get; set; }
@@ -60,7 +63,5 @@ namespace nutricloud_webforms.Models
         public virtual ICollection<usuario_usuario> usuario_usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuario_usuario> usuario_usuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usuario_idr> usuario_idr { get; set; }
     }
 }

@@ -14,6 +14,7 @@ drop table usuario_datos
 drop table usuario_objetivo
 drop table usuario_usuario
 drop table usuario_estilo_vida
+drop table estilo_vida
 drop table usuario_idr
 drop table usuario
 drop table usuario_tipo
@@ -326,7 +327,7 @@ GO
 
 ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_consulta_conversacion]
 GO
-CREATE TABLE [dbo].[usuario_estilo_vida](
+CREATE TABLE [dbo].[estilo_vida](
 	[id_estilo_de_vida] [int] IDENTITY(1,1) NOT NULL,
 	[estilo_de_vida] [varbinary](50) NOT NULL,
  CONSTRAINT [PK_usuario_estilo_vida] PRIMARY KEY CLUSTERED 
@@ -364,4 +365,28 @@ REFERENCES [dbo].[usuario] ([id_usuario])
 GO
 ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
 GO
+CREATE TABLE [dbo].[usuario_estilo_vida](
+	[id_usuario_estilo_vida] [int] IDENTITY(1,1) NOT NULL,
+	[id_usuario] [int] NOT NULL,
+	[id_estilo_de_vida] [int] NOT NULL,
+ CONSTRAINT [PK_usuario_estilo_vida_1] PRIMARY KEY CLUSTERED 
+(
+	[id_usuario_estilo_vida] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
+GO
+
+ALTER TABLE [dbo].[usuario_estilo_vida]  WITH CHECK ADD  CONSTRAINT [FK_usuario_estilo_vida_estilo_vida] FOREIGN KEY([id_estilo_de_vida])
+REFERENCES [dbo].[estilo_vida] ([id_estilo_de_vida])
+GO
+
+ALTER TABLE [dbo].[usuario_estilo_vida] CHECK CONSTRAINT [FK_usuario_estilo_vida_estilo_vida]
+GO
+
+ALTER TABLE [dbo].[usuario_estilo_vida]  WITH CHECK ADD  CONSTRAINT [FK_usuario_estilo_vida_usuario] FOREIGN KEY([id_usuario])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[usuario_estilo_vida] CHECK CONSTRAINT [FK_usuario_estilo_vida_usuario]
+GO

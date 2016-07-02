@@ -86,18 +86,23 @@
     <Property Name="f_mensaje" Type="datetime" Nullable="false" />
     <Property Name="id_consulta_conversacion" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="estilo_vida">
+    <Key>
+      <PropertyRef Name="id_estilo_de_vida" />
+    </Key>
+    <Property Name="id_estilo_de_vida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="estilo_de_vida" Type="varbinary" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="usuario">
     <Key>
       <PropertyRef Name="id_usuario" />
     </Key>
     <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="clave" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="apellido" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="clave" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" />
     <Property Name="sexo" Type="char" MaxLength="1" Nullable="false" />
-    <Property Name="f_nacimiento" Type="date" Nullable="false" />
+    <Property Name="f_nacimiento" Type="date" />
     <Property Name="f_registro" Type="datetime" Nullable="false" />
     <Property Name="f_ultimo_ingreso" Type="datetime" />
     <Property Name="id_usuario_tipo" Type="int" Nullable="false" />
@@ -123,6 +128,36 @@
     <Property Name="peso_kg" Type="decimal" Precision="5" Scale="2" Nullable="false" />
     <Property Name="f_ingreso" Type="datetime" Nullable="false" />
     <Property Name="id_usuario_objetivo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario_estilo_vida">
+    <Key>
+      <PropertyRef Name="id_usuario_estilo_vida" />
+    </Key>
+    <Property Name="id_usuario_estilo_vida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="id_estilo_de_vida" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario_idr">
+    <Key>
+      <PropertyRef Name="id_valores" />
+    </Key>
+    <Property Name="id_valores" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="energia_kj" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="energia_kcal" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="sodio_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="potasio_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="calcio_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="fosforo_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="hierro_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="zinc_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="vitamina_c_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="colesterol_mg" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="agua_g" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="grasa_total_g" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="carbohidratos_totales_g" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="carbohidratos_disponibles_g" Type="decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="proteinas_g" Type="decimal" Precision="10" Scale="3" Nullable="false" />
   </EntityType>
   <EntityType Name="usuario_muro">
     <Key>
@@ -297,6 +332,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_usuario_estilo_vida_estilo_vida">
+    <End Role="estilo_vida" Type="Self.estilo_vida" Multiplicity="1" />
+    <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estilo_vida">
+        <PropertyRef Name="id_estilo_de_vida" />
+      </Principal>
+      <Dependent Role="usuario_estilo_vida">
+        <PropertyRef Name="id_estilo_de_vida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_estilo_vida_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_estilo_vida">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_idr_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_idr" Type="Self.usuario_idr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_idr">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_usuario_muro_usuario">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="usuario_muro" Type="Self.usuario_muro" Multiplicity="*" />
@@ -365,9 +436,12 @@
     <EntitySet Name="comida_tipo" EntityType="Self.comida_tipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="consulta_conversacion" EntityType="Self.consulta_conversacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="consulta_mensaje" EntityType="Self.consulta_mensaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estilo_vida" EntityType="Self.estilo_vida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario_alimento" EntityType="Self.usuario_alimento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario_datos" EntityType="Self.usuario_datos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario_estilo_vida" EntityType="Self.usuario_estilo_vida" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario_idr" EntityType="Self.usuario_idr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario_muro" EntityType="Self.usuario_muro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario_objetivo" EntityType="Self.usuario_objetivo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario_receta" EntityType="Self.usuario_receta" Schema="dbo" store:Type="Tables" />
@@ -416,6 +490,18 @@
     <AssociationSet Name="FK_usuario_datos_usuario_objetivo" Association="Self.FK_usuario_datos_usuario_objetivo">
       <End Role="usuario_objetivo" EntitySet="usuario_objetivo" />
       <End Role="usuario_datos" EntitySet="usuario_datos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_estilo_vida_estilo_vida" Association="Self.FK_usuario_estilo_vida_estilo_vida">
+      <End Role="estilo_vida" EntitySet="estilo_vida" />
+      <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_estilo_vida_usuario" Association="Self.FK_usuario_estilo_vida_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_idr_usuario" Association="Self.FK_usuario_idr_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_idr" EntitySet="usuario_idr" />
     </AssociationSet>
     <AssociationSet Name="FK_usuario_muro_usuario" Association="Self.FK_usuario_muro_usuario">
       <End Role="usuario" EntitySet="usuario" />

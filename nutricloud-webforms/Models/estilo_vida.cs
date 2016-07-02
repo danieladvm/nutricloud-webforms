@@ -12,13 +12,18 @@ namespace nutricloud_webforms.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuario_estilo_vida
+    public partial class estilo_vida
     {
-        public int id_usuario_estilo_vida { get; set; }
-        public int id_usuario { get; set; }
-        public int id_estilo_de_vida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public estilo_vida()
+        {
+            this.usuario_estilo_vida = new HashSet<usuario_estilo_vida>();
+        }
     
-        public virtual estilo_vida estilo_vida { get; set; }
-        public virtual usuario usuario { get; set; }
+        public int id_estilo_de_vida { get; set; }
+        public byte[] estilo_de_vida { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuario_estilo_vida> usuario_estilo_vida { get; set; }
     }
 }

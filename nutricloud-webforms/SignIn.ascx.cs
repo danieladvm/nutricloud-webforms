@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using nutricloud_webforms.Repositories;
 
 namespace nutricloud_webforms
 {
@@ -11,14 +12,111 @@ namespace nutricloud_webforms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            rblTipoUsuario.Items.Clear();
-            rblTipoUsuario.Items.Add(new ListItem("Paciente"));
-            rblTipoUsuario.Items.Add(new ListItem("Profesional"));
+            if (!IsPostBack)
+            {
+                CargaTiposUsuario();
+            }
+
         }
 
         protected void registrarse_Click(object sender, EventArgs e)
         {
+            if (ValidaForm())
+            {
+                InsertRepository ir = new InsertRepository();
+                //Ir a agregar usuario :D
+                ir.InsertaUsuario(MapeaFormUsuario());
 
+                //PAGINA DESPUES DE REGISTRARSE (?
+            }
         }
+
+        #region Metodos propios
+        private void CargaTiposUsuario()
+        {
+            ListItem li;
+            ListRepository lr = new ListRepository();
+            rblTipoUsuario.Items.Clear();
+            foreach (Models.usuario_tipo item in lr.ListaTipoUsuario())
+            {
+                li = new ListItem();
+                li.Text = item.usuario_tipo1;
+                li.Value = item.id_usuario_tipo.ToString();
+                rblTipoUsuario.Items.Add(li);
+            }
+        }
+
+        private bool ValidaForm()
+        {
+            bool errores = false;
+            Label lblError;
+            ValidRepository vr = new ValidRepository();
+
+            //Valida vacios
+            if (!vr.ValidaVacio(email.Text))
+            {
+                lblError = new Label();
+                lblError.Text = "* El email no puede estar vacio <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+            else
+            {
+                if (!vr.ValidaMail(email.Text))
+                {
+                    lblError = new Label();
+                    lblError.Text = "* Email Inválido";
+                    pnlErrores.Controls.Add(lblError);
+                    errores = true;
+                }
+            }
+
+            if (!vr.ValidaVacio(password.Text))
+            {
+                lblError = new Label();
+                lblError.Text = "* La contraseña no puede estar vacia <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            //Valida longitud de password, que tenga entre 4 y 12 caracteres, por ejemplo
+            if (!vr.ValidaRangoLen(password.Text, 4, 12))
+            {
+                lblError = new Label();
+                lblError.Text = "* La contraseña debe tener entre 4 y 12 caracteres <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            //Valida iguales
+            if (!vr.ValidaIguales(password.Text, password2.Text))
+            {
+                lblError = new Label();
+                lblError.Text = "* Las contraseñas tienen que coincidir <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            if (rblTipoUsuario.SelectedValue == string.Empty)
+            {
+                lblError = new Label();
+                lblError.Text = "* Debe seleccionar un tipo de usuario <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            return errores;
+        }
+
+        private Models.usuario MapeaFormUsuario()
+        {
+            Models.usuario u = new Models.usuario();
+            u.email = email.Text;
+            u.clave = password.Text;
+            u.id_usuario_tipo = int.Parse(rblTipoUsuario.SelectedValue);
+
+            return u;
+        }
+        #endregion
     }
 }

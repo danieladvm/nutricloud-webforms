@@ -18,8 +18,7 @@
     <link rel="stylesheet" type="text/css" href="scripts/jquery.min.js" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
-    <script src="scripts/modernizr.js" />
-    </script>
+    <script src="scripts/modernizr.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css' />
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300|Righteous' rel='stylesheet' type='text/css' />

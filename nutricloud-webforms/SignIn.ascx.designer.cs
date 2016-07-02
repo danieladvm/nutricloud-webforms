@@ -19,7 +19,7 @@ namespace nutricloud_webforms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl email;
+        protected global::System.Web.UI.WebControls.TextBox email;
         
         /// <summary>
         /// password control.
@@ -28,7 +28,7 @@ namespace nutricloud_webforms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password;
+        protected global::System.Web.UI.WebControls.TextBox password;
         
         /// <summary>
         /// password2 control.
@@ -37,7 +37,7 @@ namespace nutricloud_webforms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword password2;
+        protected global::System.Web.UI.WebControls.TextBox password2;
         
         /// <summary>
         /// rblTipoUsuario control.
@@ -47,6 +47,15 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblTipoUsuario;
+        
+        /// <summary>
+        /// pnlErrores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlErrores;
         
         /// <summary>
         /// registrarse control.

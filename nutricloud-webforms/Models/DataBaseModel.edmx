@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="nutricloudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="nutricloudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="alimento">
           <Key>
             <PropertyRef Name="id_alimento" />
@@ -91,6 +91,13 @@
           <Property Name="f_mensaje" Type="datetime" Nullable="false" />
           <Property Name="id_consulta_conversacion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="estilo_vida">
+          <Key>
+            <PropertyRef Name="id_estilo_de_vida" />
+          </Key>
+          <Property Name="id_estilo_de_vida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estilo_de_vida" Type="varbinary" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
@@ -129,10 +136,11 @@
         </EntityType>
         <EntityType Name="usuario_estilo_vida">
           <Key>
-            <PropertyRef Name="id_estilo_de_vida" />
+            <PropertyRef Name="id_usuario_estilo_vida" />
           </Key>
-          <Property Name="id_estilo_de_vida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="estilo_de_vida" Type="varbinary" MaxLength="50" Nullable="false" />
+          <Property Name="id_usuario_estilo_vida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_estilo_de_vida" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario_idr">
           <Key>
@@ -329,6 +337,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_estilo_vida_estilo_vida">
+          <End Role="estilo_vida" Type="Self.estilo_vida" Multiplicity="1" />
+          <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estilo_vida">
+              <PropertyRef Name="id_estilo_de_vida" />
+            </Principal>
+            <Dependent Role="usuario_estilo_vida">
+              <PropertyRef Name="id_estilo_de_vida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_estilo_vida_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="usuario_estilo_vida">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_idr_usuario">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="usuario_idr" Type="Self.usuario_idr" Multiplicity="*" />
@@ -409,6 +441,7 @@
           <EntitySet Name="comida_tipo" EntityType="Self.comida_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="consulta_conversacion" EntityType="Self.consulta_conversacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="consulta_mensaje" EntityType="Self.consulta_mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estilo_vida" EntityType="Self.estilo_vida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_alimento" EntityType="Self.usuario_alimento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuario_datos" EntityType="Self.usuario_datos" Schema="dbo" store:Type="Tables" />
@@ -463,6 +496,14 @@
             <End Role="usuario_objetivo" EntitySet="usuario_objetivo" />
             <End Role="usuario_datos" EntitySet="usuario_datos" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario_estilo_vida_estilo_vida" Association="Self.FK_usuario_estilo_vida_estilo_vida">
+            <End Role="estilo_vida" EntitySet="estilo_vida" />
+            <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_estilo_vida_usuario" Association="Self.FK_usuario_estilo_vida_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_idr_usuario" Association="Self.FK_usuario_idr_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_idr" EntitySet="usuario_idr" />
@@ -488,7 +529,8 @@
             <End Role="usuario_usuario" EntitySet="usuario_usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nutricloudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -589,16 +631,22 @@
           <Property Name="id_consulta_conversacion" Type="Int32" Nullable="false" />
           <NavigationProperty Name="consulta_conversacion" Relationship="Self.FK_consulta_mensaje_consulta_conversacion" FromRole="consulta_mensaje" ToRole="consulta_conversacion" />
         </EntityType>
+        <EntityType Name="estilo_vida">
+          <Key>
+            <PropertyRef Name="id_estilo_de_vida" />
+          </Key>
+          <Property Name="id_estilo_de_vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estilo_de_vida" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="usuario_estilo_vida" Relationship="Self.FK_usuario_estilo_vida_estilo_vida" FromRole="estilo_vida" ToRole="usuario_estilo_vida" />
+        </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
           <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="f_nacimiento" Type="DateTime" Precision="0" />
           <Property Name="f_registro" Type="DateTime" Nullable="false" Precision="3" />
@@ -609,12 +657,13 @@
           <NavigationProperty Name="consulta_conversacion1" Relationship="Self.FK_consulta_conversacion_usuario1" FromRole="usuario" ToRole="consulta_conversacion" />
           <NavigationProperty Name="usuario_alimento" Relationship="Self.FK_usuario_alimento_usuario" FromRole="usuario" ToRole="usuario_alimento" />
           <NavigationProperty Name="usuario_datos" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario" ToRole="usuario_datos" />
+          <NavigationProperty Name="usuario_estilo_vida" Relationship="Self.FK_usuario_estilo_vida_usuario" FromRole="usuario" ToRole="usuario_estilo_vida" />
+          <NavigationProperty Name="usuario_idr" Relationship="Self.FK_usuario_idr_usuario" FromRole="usuario" ToRole="usuario_idr" />
           <NavigationProperty Name="usuario_muro" Relationship="Self.FK_usuario_muro_usuario" FromRole="usuario" ToRole="usuario_muro" />
           <NavigationProperty Name="usuario_receta" Relationship="Self.FK_usuario_receta_usuario" FromRole="usuario" ToRole="usuario_receta" />
           <NavigationProperty Name="usuario_tipo" Relationship="Self.FK_usuario_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
           <NavigationProperty Name="usuario_usuario" Relationship="Self.FK_usuario_usuario_usuario" FromRole="usuario" ToRole="usuario_usuario" />
           <NavigationProperty Name="usuario_usuario1" Relationship="Self.FK_usuario_usuario_usuario1" FromRole="usuario" ToRole="usuario_usuario" />
-          <NavigationProperty Name="usuario_idr" Relationship="nutricloudModel.FK_usuario_idr_usuario" FromRole="usuario" ToRole="usuario_idr" />
         </EntityType>
         <EntityType Name="usuario_alimento">
           <Key>
@@ -642,6 +691,39 @@
           <Property Name="id_usuario_objetivo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario_datos" ToRole="usuario" />
           <NavigationProperty Name="usuario_objetivo" Relationship="Self.FK_usuario_datos_usuario_objetivo" FromRole="usuario_datos" ToRole="usuario_objetivo" />
+        </EntityType>
+        <EntityType Name="usuario_estilo_vida">
+          <Key>
+            <PropertyRef Name="id_usuario_estilo_vida" />
+          </Key>
+          <Property Name="id_usuario_estilo_vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_estilo_de_vida" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="estilo_vida" Relationship="Self.FK_usuario_estilo_vida_estilo_vida" FromRole="usuario_estilo_vida" ToRole="estilo_vida" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_estilo_vida_usuario" FromRole="usuario_estilo_vida" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario_idr">
+          <Key>
+            <PropertyRef Name="id_valores" />
+          </Key>
+          <Property Name="id_valores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="energia_kj" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="energia_kcal" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="sodio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="potasio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="calcio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="fosforo_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="hierro_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="zinc_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="vitamina_c_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="colesterol_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="agua_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="grasa_total_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="carbohidratos_totales_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="carbohidratos_disponibles_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <Property Name="proteinas_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_idr_usuario" FromRole="usuario_idr" ToRole="usuario" />
         </EntityType>
         <EntityType Name="usuario_muro">
           <Key>
@@ -786,6 +868,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_estilo_vida_estilo_vida">
+          <End Role="estilo_vida" Type="Self.estilo_vida" Multiplicity="1" />
+          <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estilo_vida">
+              <PropertyRef Name="id_estilo_de_vida" />
+            </Principal>
+            <Dependent Role="usuario_estilo_vida">
+              <PropertyRef Name="id_estilo_de_vida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_usuario_alimento_usuario">
           <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
           <End Role="usuario_alimento" Type="Self.usuario_alimento" Multiplicity="*" />
@@ -806,6 +900,30 @@
               <PropertyRef Name="id_usuario" />
             </Principal>
             <Dependent Role="usuario_datos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_estilo_vida_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="usuario_estilo_vida">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_idr_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="usuario_idr" Type="Self.usuario_idr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="usuario_idr">
               <PropertyRef Name="id_usuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -890,9 +1008,12 @@
           <EntitySet Name="comida_tipo" EntityType="Self.comida_tipo" />
           <EntitySet Name="consulta_conversacion" EntityType="Self.consulta_conversacion" />
           <EntitySet Name="consulta_mensaje" EntityType="Self.consulta_mensaje" />
+          <EntitySet Name="estilo_vida" EntityType="Self.estilo_vida" />
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_alimento" EntityType="Self.usuario_alimento" />
           <EntitySet Name="usuario_datos" EntityType="Self.usuario_datos" />
+          <EntitySet Name="usuario_estilo_vida" EntityType="Self.usuario_estilo_vida" />
+          <EntitySet Name="usuario_idr" EntityType="Self.usuario_idr" />
           <EntitySet Name="usuario_muro" EntityType="Self.usuario_muro" />
           <EntitySet Name="usuario_objetivo" EntityType="Self.usuario_objetivo" />
           <EntitySet Name="usuario_receta" EntityType="Self.usuario_receta" />
@@ -930,6 +1051,10 @@
             <End Role="consulta_conversacion" EntitySet="consulta_conversacion" />
             <End Role="consulta_mensaje" EntitySet="consulta_mensaje" />
           </AssociationSet>
+          <AssociationSet Name="FK_usuario_estilo_vida_estilo_vida" Association="Self.FK_usuario_estilo_vida_estilo_vida">
+            <End Role="estilo_vida" EntitySet="estilo_vida" />
+            <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+          </AssociationSet>
           <AssociationSet Name="FK_usuario_alimento_usuario" Association="Self.FK_usuario_alimento_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_alimento" EntitySet="usuario_alimento" />
@@ -937,6 +1062,14 @@
           <AssociationSet Name="FK_usuario_datos_usuario" Association="Self.FK_usuario_datos_usuario">
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_datos" EntitySet="usuario_datos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_estilo_vida_usuario" Association="Self.FK_usuario_estilo_vida_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_idr_usuario" Association="Self.FK_usuario_idr_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_idr" EntitySet="usuario_idr" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_muro_usuario" Association="Self.FK_usuario_muro_usuario">
             <End Role="usuario" EntitySet="usuario" />
@@ -962,55 +1095,7 @@
             <End Role="usuario_objetivo" EntitySet="usuario_objetivo" />
             <End Role="usuario_datos" EntitySet="usuario_datos" />
           </AssociationSet>
-          <EntitySet Name="usuario_estilo_vida" EntityType="nutricloudModel.usuario_estilo_vida" />
-          <EntitySet Name="usuario_idr" EntityType="nutricloudModel.usuario_idr" />
-          <AssociationSet Name="FK_usuario_idr_usuario" Association="nutricloudModel.FK_usuario_idr_usuario">
-            <End Role="usuario" EntitySet="usuario" />
-            <End Role="usuario_idr" EntitySet="usuario_idr" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="usuario_estilo_vida">
-          <Key>
-            <PropertyRef Name="id_estilo_de_vida" />
-          </Key>
-          <Property Name="id_estilo_de_vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="estilo_de_vida" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="usuario_idr">
-          <Key>
-            <PropertyRef Name="id_valores" />
-          </Key>
-          <Property Name="id_valores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_usuario" Type="Int32" Nullable="false" />
-          <Property Name="energia_kj" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="energia_kcal" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="sodio_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="potasio_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="calcio_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="fosforo_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="hierro_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="zinc_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="vitamina_c_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="colesterol_mg" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="agua_g" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="grasa_total_g" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="carbohidratos_totales_g" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="carbohidratos_disponibles_g" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <Property Name="proteinas_g" Type="Decimal" Nullable="false" Precision="10" Scale="3" />
-          <NavigationProperty Name="usuario" Relationship="nutricloudModel.FK_usuario_idr_usuario" FromRole="usuario_idr" ToRole="usuario" />
-        </EntityType>
-        <Association Name="FK_usuario_idr_usuario">
-          <End Type="nutricloudModel.usuario" Role="usuario" Multiplicity="1" />
-          <End Type="nutricloudModel.usuario_idr" Role="usuario_idr" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="usuario">
-              <PropertyRef Name="id_usuario" />
-            </Principal>
-            <Dependent Role="usuario_idr">
-              <PropertyRef Name="id_usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1110,13 +1195,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="estilo_vida">
+            <EntityTypeMapping TypeName="nutricloudModel.estilo_vida">
+              <MappingFragment StoreEntitySet="estilo_vida">
+                <ScalarProperty Name="id_estilo_de_vida" ColumnName="id_estilo_de_vida" />
+                <ScalarProperty Name="estilo_de_vida" ColumnName="estilo_de_vida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="nutricloudModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="sexo" ColumnName="sexo" />
                 <ScalarProperty Name="f_nacimiento" ColumnName="f_nacimiento" />
                 <ScalarProperty Name="f_registro" ColumnName="f_registro" />
@@ -1146,6 +1239,38 @@
                 <ScalarProperty Name="peso_kg" ColumnName="peso_kg" />
                 <ScalarProperty Name="f_ingreso" ColumnName="f_ingreso" />
                 <ScalarProperty Name="id_usuario_objetivo" ColumnName="id_usuario_objetivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_estilo_vida">
+            <EntityTypeMapping TypeName="nutricloudModel.usuario_estilo_vida">
+              <MappingFragment StoreEntitySet="usuario_estilo_vida">
+                <ScalarProperty Name="id_usuario_estilo_vida" ColumnName="id_usuario_estilo_vida" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_estilo_de_vida" ColumnName="id_estilo_de_vida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_idr">
+            <EntityTypeMapping TypeName="nutricloudModel.usuario_idr">
+              <MappingFragment StoreEntitySet="usuario_idr">
+                <ScalarProperty Name="id_valores" ColumnName="id_valores" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="energia_kj" ColumnName="energia_kj" />
+                <ScalarProperty Name="energia_kcal" ColumnName="energia_kcal" />
+                <ScalarProperty Name="sodio_mg" ColumnName="sodio_mg" />
+                <ScalarProperty Name="potasio_mg" ColumnName="potasio_mg" />
+                <ScalarProperty Name="calcio_mg" ColumnName="calcio_mg" />
+                <ScalarProperty Name="fosforo_mg" ColumnName="fosforo_mg" />
+                <ScalarProperty Name="hierro_mg" ColumnName="hierro_mg" />
+                <ScalarProperty Name="zinc_mg" ColumnName="zinc_mg" />
+                <ScalarProperty Name="vitamina_c_mg" ColumnName="vitamina_c_mg" />
+                <ScalarProperty Name="colesterol_mg" ColumnName="colesterol_mg" />
+                <ScalarProperty Name="agua_g" ColumnName="agua_g" />
+                <ScalarProperty Name="grasa_total_g" ColumnName="grasa_total_g" />
+                <ScalarProperty Name="carbohidratos_totales_g" ColumnName="carbohidratos_totales_g" />
+                <ScalarProperty Name="carbohidratos_disponibles_g" ColumnName="carbohidratos_disponibles_g" />
+                <ScalarProperty Name="proteinas_g" ColumnName="proteinas_g" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1192,37 +1317,6 @@
                 <ScalarProperty Name="id_usuario_usuario" ColumnName="id_usuario_usuario" />
                 <ScalarProperty Name="id_usuario_seguidor" ColumnName="id_usuario_seguidor" />
                 <ScalarProperty Name="id_usuario_seguido" ColumnName="id_usuario_seguido" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuario_estilo_vida">
-            <EntityTypeMapping TypeName="nutricloudModel.usuario_estilo_vida">
-              <MappingFragment StoreEntitySet="usuario_estilo_vida">
-                <ScalarProperty Name="estilo_de_vida" ColumnName="estilo_de_vida" />
-                <ScalarProperty Name="id_estilo_de_vida" ColumnName="id_estilo_de_vida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="usuario_idr">
-            <EntityTypeMapping TypeName="nutricloudModel.usuario_idr">
-              <MappingFragment StoreEntitySet="usuario_idr">
-                <ScalarProperty Name="proteinas_g" ColumnName="proteinas_g" />
-                <ScalarProperty Name="carbohidratos_disponibles_g" ColumnName="carbohidratos_disponibles_g" />
-                <ScalarProperty Name="carbohidratos_totales_g" ColumnName="carbohidratos_totales_g" />
-                <ScalarProperty Name="grasa_total_g" ColumnName="grasa_total_g" />
-                <ScalarProperty Name="agua_g" ColumnName="agua_g" />
-                <ScalarProperty Name="colesterol_mg" ColumnName="colesterol_mg" />
-                <ScalarProperty Name="vitamina_c_mg" ColumnName="vitamina_c_mg" />
-                <ScalarProperty Name="zinc_mg" ColumnName="zinc_mg" />
-                <ScalarProperty Name="hierro_mg" ColumnName="hierro_mg" />
-                <ScalarProperty Name="fosforo_mg" ColumnName="fosforo_mg" />
-                <ScalarProperty Name="calcio_mg" ColumnName="calcio_mg" />
-                <ScalarProperty Name="potasio_mg" ColumnName="potasio_mg" />
-                <ScalarProperty Name="sodio_mg" ColumnName="sodio_mg" />
-                <ScalarProperty Name="energia_kcal" ColumnName="energia_kcal" />
-                <ScalarProperty Name="energia_kj" ColumnName="energia_kj" />
-                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="id_valores" ColumnName="id_valores" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

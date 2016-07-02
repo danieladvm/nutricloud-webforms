@@ -97,18 +97,24 @@
     <Property Name="id_consulta_conversacion" Type="Int32" Nullable="false" />
     <NavigationProperty Name="consulta_conversacion" Relationship="Self.FK_consulta_mensaje_consulta_conversacion" FromRole="consulta_mensaje" ToRole="consulta_conversacion" />
   </EntityType>
+  <EntityType Name="estilo_vida">
+    <Key>
+      <PropertyRef Name="id_estilo_de_vida" />
+    </Key>
+    <Property Name="id_estilo_de_vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="estilo_de_vida" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="usuario_estilo_vida" Relationship="Self.FK_usuario_estilo_vida_estilo_vida" FromRole="estilo_vida" ToRole="usuario_estilo_vida" />
+  </EntityType>
   <EntityType Name="usuario">
     <Key>
       <PropertyRef Name="id_usuario" />
     </Key>
     <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="usuario1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="clave" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="f_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="f_nacimiento" Type="DateTime" Precision="0" />
     <Property Name="f_registro" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="f_ultimo_ingreso" Type="DateTime" Precision="3" />
     <Property Name="id_usuario_tipo" Type="Int32" Nullable="false" />
@@ -117,6 +123,8 @@
     <NavigationProperty Name="consulta_conversacion1" Relationship="Self.FK_consulta_conversacion_usuario1" FromRole="usuario" ToRole="consulta_conversacion" />
     <NavigationProperty Name="usuario_alimento" Relationship="Self.FK_usuario_alimento_usuario" FromRole="usuario" ToRole="usuario_alimento" />
     <NavigationProperty Name="usuario_datos" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario" ToRole="usuario_datos" />
+    <NavigationProperty Name="usuario_estilo_vida" Relationship="Self.FK_usuario_estilo_vida_usuario" FromRole="usuario" ToRole="usuario_estilo_vida" />
+    <NavigationProperty Name="usuario_idr" Relationship="Self.FK_usuario_idr_usuario" FromRole="usuario" ToRole="usuario_idr" />
     <NavigationProperty Name="usuario_muro" Relationship="Self.FK_usuario_muro_usuario" FromRole="usuario" ToRole="usuario_muro" />
     <NavigationProperty Name="usuario_receta" Relationship="Self.FK_usuario_receta_usuario" FromRole="usuario" ToRole="usuario_receta" />
     <NavigationProperty Name="usuario_tipo" Relationship="Self.FK_usuario_usuario_tipo" FromRole="usuario" ToRole="usuario_tipo" />
@@ -149,6 +157,39 @@
     <Property Name="id_usuario_objetivo" Type="Int32" Nullable="false" />
     <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_datos_usuario" FromRole="usuario_datos" ToRole="usuario" />
     <NavigationProperty Name="usuario_objetivo" Relationship="Self.FK_usuario_datos_usuario_objetivo" FromRole="usuario_datos" ToRole="usuario_objetivo" />
+  </EntityType>
+  <EntityType Name="usuario_estilo_vida">
+    <Key>
+      <PropertyRef Name="id_usuario_estilo_vida" />
+    </Key>
+    <Property Name="id_usuario_estilo_vida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_estilo_de_vida" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="estilo_vida" Relationship="Self.FK_usuario_estilo_vida_estilo_vida" FromRole="usuario_estilo_vida" ToRole="estilo_vida" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_estilo_vida_usuario" FromRole="usuario_estilo_vida" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario_idr">
+    <Key>
+      <PropertyRef Name="id_valores" />
+    </Key>
+    <Property Name="id_valores" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="energia_kj" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="energia_kcal" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="sodio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="potasio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="calcio_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="fosforo_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="hierro_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="zinc_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="vitamina_c_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="colesterol_mg" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="agua_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="grasa_total_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="carbohidratos_totales_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="carbohidratos_disponibles_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <Property Name="proteinas_g" Type="Decimal" Precision="10" Scale="3" Nullable="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_idr_usuario" FromRole="usuario_idr" ToRole="usuario" />
   </EntityType>
   <EntityType Name="usuario_muro">
     <Key>
@@ -293,6 +334,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_usuario_estilo_vida_estilo_vida">
+    <End Role="estilo_vida" Type="Self.estilo_vida" Multiplicity="1" />
+    <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estilo_vida">
+        <PropertyRef Name="id_estilo_de_vida" />
+      </Principal>
+      <Dependent Role="usuario_estilo_vida">
+        <PropertyRef Name="id_estilo_de_vida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_usuario_alimento_usuario">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="usuario_alimento" Type="Self.usuario_alimento" Multiplicity="*" />
@@ -313,6 +366,30 @@
         <PropertyRef Name="id_usuario" />
       </Principal>
       <Dependent Role="usuario_datos">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_estilo_vida_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_estilo_vida" Type="Self.usuario_estilo_vida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_estilo_vida">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuario_idr_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="usuario_idr" Type="Self.usuario_idr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="usuario_idr">
         <PropertyRef Name="id_usuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -397,9 +474,12 @@
     <EntitySet Name="comida_tipo" EntityType="Self.comida_tipo" />
     <EntitySet Name="consulta_conversacion" EntityType="Self.consulta_conversacion" />
     <EntitySet Name="consulta_mensaje" EntityType="Self.consulta_mensaje" />
+    <EntitySet Name="estilo_vida" EntityType="Self.estilo_vida" />
     <EntitySet Name="usuario" EntityType="Self.usuario" />
     <EntitySet Name="usuario_alimento" EntityType="Self.usuario_alimento" />
     <EntitySet Name="usuario_datos" EntityType="Self.usuario_datos" />
+    <EntitySet Name="usuario_estilo_vida" EntityType="Self.usuario_estilo_vida" />
+    <EntitySet Name="usuario_idr" EntityType="Self.usuario_idr" />
     <EntitySet Name="usuario_muro" EntityType="Self.usuario_muro" />
     <EntitySet Name="usuario_objetivo" EntityType="Self.usuario_objetivo" />
     <EntitySet Name="usuario_receta" EntityType="Self.usuario_receta" />
@@ -437,6 +517,10 @@
       <End Role="consulta_conversacion" EntitySet="consulta_conversacion" />
       <End Role="consulta_mensaje" EntitySet="consulta_mensaje" />
     </AssociationSet>
+    <AssociationSet Name="FK_usuario_estilo_vida_estilo_vida" Association="Self.FK_usuario_estilo_vida_estilo_vida">
+      <End Role="estilo_vida" EntitySet="estilo_vida" />
+      <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+    </AssociationSet>
     <AssociationSet Name="FK_usuario_alimento_usuario" Association="Self.FK_usuario_alimento_usuario">
       <End Role="usuario" EntitySet="usuario" />
       <End Role="usuario_alimento" EntitySet="usuario_alimento" />
@@ -444,6 +528,14 @@
     <AssociationSet Name="FK_usuario_datos_usuario" Association="Self.FK_usuario_datos_usuario">
       <End Role="usuario" EntitySet="usuario" />
       <End Role="usuario_datos" EntitySet="usuario_datos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_estilo_vida_usuario" Association="Self.FK_usuario_estilo_vida_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_estilo_vida" EntitySet="usuario_estilo_vida" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_idr_usuario" Association="Self.FK_usuario_idr_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_idr" EntitySet="usuario_idr" />
     </AssociationSet>
     <AssociationSet Name="FK_usuario_muro_usuario" Association="Self.FK_usuario_muro_usuario">
       <End Role="usuario" EntitySet="usuario" />

@@ -94,15 +94,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="estilo_vida">
+      <EntityTypeMapping TypeName="nutricloudModel.estilo_vida">
+        <MappingFragment StoreEntitySet="estilo_vida">
+          <ScalarProperty Name="id_estilo_de_vida" ColumnName="id_estilo_de_vida" />
+          <ScalarProperty Name="estilo_de_vida" ColumnName="estilo_de_vida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="usuario">
       <EntityTypeMapping TypeName="nutricloudModel.usuario">
         <MappingFragment StoreEntitySet="usuario">
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-          <ScalarProperty Name="usuario1" ColumnName="usuario" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="clave" ColumnName="clave" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="apellido" ColumnName="apellido" />
-          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="sexo" ColumnName="sexo" />
           <ScalarProperty Name="f_nacimiento" ColumnName="f_nacimiento" />
           <ScalarProperty Name="f_registro" ColumnName="f_registro" />
@@ -132,6 +138,38 @@
           <ScalarProperty Name="peso_kg" ColumnName="peso_kg" />
           <ScalarProperty Name="f_ingreso" ColumnName="f_ingreso" />
           <ScalarProperty Name="id_usuario_objetivo" ColumnName="id_usuario_objetivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_estilo_vida">
+      <EntityTypeMapping TypeName="nutricloudModel.usuario_estilo_vida">
+        <MappingFragment StoreEntitySet="usuario_estilo_vida">
+          <ScalarProperty Name="id_usuario_estilo_vida" ColumnName="id_usuario_estilo_vida" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_estilo_de_vida" ColumnName="id_estilo_de_vida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_idr">
+      <EntityTypeMapping TypeName="nutricloudModel.usuario_idr">
+        <MappingFragment StoreEntitySet="usuario_idr">
+          <ScalarProperty Name="id_valores" ColumnName="id_valores" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="energia_kj" ColumnName="energia_kj" />
+          <ScalarProperty Name="energia_kcal" ColumnName="energia_kcal" />
+          <ScalarProperty Name="sodio_mg" ColumnName="sodio_mg" />
+          <ScalarProperty Name="potasio_mg" ColumnName="potasio_mg" />
+          <ScalarProperty Name="calcio_mg" ColumnName="calcio_mg" />
+          <ScalarProperty Name="fosforo_mg" ColumnName="fosforo_mg" />
+          <ScalarProperty Name="hierro_mg" ColumnName="hierro_mg" />
+          <ScalarProperty Name="zinc_mg" ColumnName="zinc_mg" />
+          <ScalarProperty Name="vitamina_c_mg" ColumnName="vitamina_c_mg" />
+          <ScalarProperty Name="colesterol_mg" ColumnName="colesterol_mg" />
+          <ScalarProperty Name="agua_g" ColumnName="agua_g" />
+          <ScalarProperty Name="grasa_total_g" ColumnName="grasa_total_g" />
+          <ScalarProperty Name="carbohidratos_totales_g" ColumnName="carbohidratos_totales_g" />
+          <ScalarProperty Name="carbohidratos_disponibles_g" ColumnName="carbohidratos_disponibles_g" />
+          <ScalarProperty Name="proteinas_g" ColumnName="proteinas_g" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
