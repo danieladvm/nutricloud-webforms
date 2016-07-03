@@ -136,13 +136,13 @@
                     <div class="col s12 m12 l6 txt-resp">
                         <p>
                             <h3>Podés disfrutar de nutricloud en cualquier dispositivo que tengas sin necesidad de instalar nada.
-                            <br>
+                            <br/>
                                 Es simple, rápido y cómodo!
                             </h3>
                         </p>
                     </div>
                     <div class="col s12 m12 l6 img-resp">
-                        <img class="responsive-img" src="Content/img/responsive.png">
+                        <img class="responsive-img" src="Content/img/responsive.png"/>
                     </div>
                 </div>
             </div>

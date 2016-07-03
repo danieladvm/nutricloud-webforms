@@ -23,9 +23,9 @@ namespace nutricloud_webforms
         {
             if (ValidaForm())
             {
-                InsertRepository ir = new InsertRepository();
+                UsuariotRepository ir = new UsuariotRepository();
                 //Ir a agregar usuario :D
-                ir.InsertaUsuario(MapeaFormUsuario());
+                ir.Insertar(MapeaFormUsuario());
 
                 //PAGINA DESPUES DE REGISTRARSE (?
             }
