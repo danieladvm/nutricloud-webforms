@@ -95,9 +95,9 @@ CREATE TABLE [dbo].[usuario](
 	[email] [varchar](100) NOT NULL,
 	[clave] [varchar](100) NOT NULL,
 	[nombre] [varchar](100) NULL,
-	[sexo] [char](1) NOT NULL,
+	[sexo] [char](1) NULL,
 	[f_nacimiento] [date] NULL,
-	[f_registro] [datetime] NOT NULL DEFAULT (getdate()),
+	[f_registro] [datetime] DEFAULT (getdate()),
 	[f_ultimo_ingreso] [datetime] NULL,
 	[id_usuario_tipo] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -328,11 +328,11 @@ GO
 ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_consulta_conversacion]
 GO
 CREATE TABLE [dbo].[estilo_vida](
-	[id_estilo_de_vida] [int] IDENTITY(1,1) NOT NULL,
-	[estilo_de_vida] [varbinary](50) NOT NULL,
+	[id_estilo_vida] [int] IDENTITY(1,1) NOT NULL,
+	[estilo_vida] [varchar](50) NOT NULL,
  CONSTRAINT [PK_usuario_estilo_vida] PRIMARY KEY CLUSTERED 
 (
-	[id_estilo_de_vida] ASC
+	[id_estilo_vida] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 go
@@ -368,7 +368,7 @@ GO
 CREATE TABLE [dbo].[usuario_estilo_vida](
 	[id_usuario_estilo_vida] [int] IDENTITY(1,1) NOT NULL,
 	[id_usuario] [int] NOT NULL,
-	[id_estilo_de_vida] [int] NOT NULL,
+	[id_estilo_vida] [int] NOT NULL,
  CONSTRAINT [PK_usuario_estilo_vida_1] PRIMARY KEY CLUSTERED 
 (
 	[id_usuario_estilo_vida] ASC
@@ -377,8 +377,8 @@ CREATE TABLE [dbo].[usuario_estilo_vida](
 
 GO
 
-ALTER TABLE [dbo].[usuario_estilo_vida]  WITH CHECK ADD  CONSTRAINT [FK_usuario_estilo_vida_estilo_vida] FOREIGN KEY([id_estilo_de_vida])
-REFERENCES [dbo].[estilo_vida] ([id_estilo_de_vida])
+ALTER TABLE [dbo].[usuario_estilo_vida]  WITH CHECK ADD  CONSTRAINT [FK_usuario_estilo_vida_estilo_vida] FOREIGN KEY([id_estilo_vida])
+REFERENCES [dbo].[estilo_vida] ([id_estilo_vida])
 GO
 
 ALTER TABLE [dbo].[usuario_estilo_vida] CHECK CONSTRAINT [FK_usuario_estilo_vida_estilo_vida]
@@ -390,3 +390,41 @@ GO
 
 ALTER TABLE [dbo].[usuario_estilo_vida] CHECK CONSTRAINT [FK_usuario_estilo_vida_usuario]
 GO
+SET IDENTITY_INSERT [dbo].[estilo_vida] ON
+INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (1, N'sedentario')
+INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (2, N'poco activo')
+INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (3, N'activo')
+INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (4, N'deportista')
+SET IDENTITY_INSERT [dbo].[estilo_vida] OFF
+GO
+SET IDENTITY_INSERT [dbo].[usuario_tipo] ON
+INSERT [dbo].[usuario_tipo] ([id_usuario_tipo], [usuario_tipo]) VALUES (1, N'Paciente')
+INSERT [dbo].[usuario_tipo] ([id_usuario_tipo], [usuario_tipo]) VALUES (2, N'Profesional')
+SET IDENTITY_INSERT [dbo].[usuario_tipo] OFF
+GO
+SET IDENTITY_INSERT [dbo].[usuario_objetivo] ON
+INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (1, N'bajar')
+INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (2, N'mantener')
+INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (3, N'subir')
+INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (4, N'aumentar rendimiento')
+SET IDENTITY_INSERT [dbo].[usuario_objetivo] OFF
+GO
+SET IDENTITY_INSERT [dbo].[comida_tipo] ON
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (1, N'Desayuno')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (2, N'Almuerzo')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (3, N'Merienda')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (4, N'Cena')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (5, N'Aperitivo')
+SET IDENTITY_INSERT [dbo].[comida_tipo] OFF
+GO
+SET IDENTITY_INSERT [dbo].[alimento_genero] ON
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (1, N'Carne vacuna')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (2, N'Cereales')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (3, N'Frutas')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (4, N'Grasas y aceites')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (5, N'Huevos')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (6, N'Lacteos')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (7, N'pescados y mariscos')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (8, N'vegetales')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (9, N'dulces')
+SET IDENTITY_INSERT [dbo].[alimento_genero] OFF

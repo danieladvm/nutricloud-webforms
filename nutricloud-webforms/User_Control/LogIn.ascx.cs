@@ -1,4 +1,4 @@
-﻿using nutricloud_webforms.Models;
+﻿using nutricloud_webforms.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,7 @@ namespace nutricloud_webforms
 {
     public partial class LogIn : System.Web.UI.UserControl
     {
-        public Models.nutricloudEntities ctx = new Models.nutricloudEntities();
-
+        #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,16 +20,6 @@ namespace nutricloud_webforms
         {
 
         }
-
-        #region Metodos propios
-        public usuario MapeaFormUsuario()
-        {
-            usuario u = new usuario();
-            u.email = TxtEmail.Text;
-            u.clave = TxtPass.Text;
-            return u;
-        }
-        #endregion
 
         protected void Button_Aceptar_Click(object sender, EventArgs e)
         {
@@ -55,5 +44,16 @@ namespace nutricloud_webforms
 
             }
         }
+        #endregion
+
+        #region Metodos propios
+        public usuario MapeaFormUsuario()
+        {
+            usuario u = new usuario();
+            u.email = TxtEmail.Text;
+            u.clave = TxtPass.Text;
+            return u;
+        }
+        #endregion
     }
 }

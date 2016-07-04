@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="nutricloud_webforms.Default" %>
 
-<%@ Register Src="~/SignIn.ascx" TagPrefix="uc1" TagName="SignIn" %>
-<%@ Register Src="~/LogIn.ascx" TagPrefix="uc1" TagName="LogIn" %>
+<%@ Register Src="~/User_Control/SignIn.ascx" TagPrefix="uc1" TagName="SignIn" %>
+<%@ Register Src="~/User_Control/LogIn.ascx" TagPrefix="uc1" TagName="LogIn" %>
 
 <!DOCTYPE html>
 

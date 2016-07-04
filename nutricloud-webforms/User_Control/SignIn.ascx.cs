@@ -10,6 +10,7 @@ namespace nutricloud_webforms
 {
     public partial class SignIn : System.Web.UI.UserControl
     {
+        #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,21 +24,22 @@ namespace nutricloud_webforms
         {
             if (ValidaForm())
             {
-                UsuariotRepository ir = new UsuariotRepository();
+                UsuariotRepository ur = new UsuariotRepository();
                 //Ir a agregar usuario :D
-                ir.Insertar(MapeaFormUsuario());
+                ur.Insertar(MapeaFormUsuario());
 
                 //PAGINA DESPUES DE REGISTRARSE (?
             }
         }
+        #endregion
 
         #region Metodos propios
         private void CargaTiposUsuario()
         {
             ListItem li;
-            ListRepository lr = new ListRepository();
+            UsuariotRepository ur = new UsuariotRepository();
             rblTipoUsuario.Items.Clear();
-            foreach (Models.usuario_tipo item in lr.ListaTipoUsuario())
+            foreach (DataBase.usuario_tipo item in ur.ListarTipoUsuario())
             {
                 li = new ListItem();
                 li.Text = item.usuario_tipo1;
@@ -105,12 +107,12 @@ namespace nutricloud_webforms
                 errores = true;
             }
 
-            return errores;
+            return !errores;
         }
 
-        private Models.usuario MapeaFormUsuario()
+        private DataBase.usuario MapeaFormUsuario()
         {
-            Models.usuario u = new Models.usuario();
+            DataBase.usuario u = new DataBase.usuario();
             u.email = email.Text;
             u.clave = password.Text;
             u.id_usuario_tipo = int.Parse(rblTipoUsuario.SelectedValue);
