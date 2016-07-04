@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col s12">
             <div class="input-field col s12">
-                <asp:TextBox ID="password2" runat="server" CssClass="validate"></asp:TextBox>
+                <asp:TextBox ID="password2" runat="server" TextMode="Password" CssClass="validate"></asp:TextBox>
                 <label for="password2">Repita Contraseña</label>
 
             </div>

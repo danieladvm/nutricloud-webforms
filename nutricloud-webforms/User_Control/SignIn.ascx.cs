@@ -24,7 +24,7 @@ namespace nutricloud_webforms
         {
             if (ValidaForm())
             {
-                UsuariotRepository ur = new UsuariotRepository();
+                UsuarioRepository ur = new UsuarioRepository();
                 //Ir a agregar usuario :D
                 ur.Insertar(MapeaFormUsuario());
 
@@ -37,7 +37,7 @@ namespace nutricloud_webforms
         private void CargaTiposUsuario()
         {
             ListItem li;
-            UsuariotRepository ur = new UsuariotRepository();
+            UsuarioRepository ur = new UsuarioRepository();
             rblTipoUsuario.Items.Clear();
             foreach (DataBase.usuario_tipo item in ur.ListarTipoUsuario())
             {

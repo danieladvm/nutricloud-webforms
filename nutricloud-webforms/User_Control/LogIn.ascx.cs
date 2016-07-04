@@ -25,16 +25,13 @@ namespace nutricloud_webforms
         {
             if (Page.IsValid)
             {
-                Repositories.UsuariotRepository ur = new Repositories.UsuariotRepository();
-                usuario u = ur.Listar(MapeaFormUsuario());
+                Repositories.UsuarioRepository ur = new Repositories.UsuarioRepository();
+                usuario u = ur.BuscarUsuarioLogIn(MapeaFormUsuario());
 
                 if (u != null)
                 {
                     Session.Add("UsuarioLogueado", u);
                     Response.Redirect("pages/Home.aspx");
-
-                    usuario us = (usuario)Session["UsuarioLogueado"];
-
                 }
 
                 else

@@ -97,19 +97,25 @@ CREATE TABLE [dbo].[usuario](
 	[nombre] [varchar](100) NULL,
 	[sexo] [char](1) NULL,
 	[f_nacimiento] [date] NULL,
-	[f_registro] [datetime] DEFAULT (getdate()),
+	[f_registro] [datetime] NOT NULL DEFAULT (getdate()),
 	[f_ultimo_ingreso] [datetime] NULL,
 	[id_usuario_tipo] [int] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_usuario] UNIQUE NONCLUSTERED 
+(
+	[email] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
+
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD  CONSTRAINT [FK_usuario_usuario_tipo] FOREIGN KEY([id_usuario_tipo])
 REFERENCES [dbo].[usuario_tipo] ([id_usuario_tipo])
 GO
+
 ALTER TABLE [dbo].[usuario] CHECK CONSTRAINT [FK_usuario_usuario_tipo]
 GO
 CREATE TABLE [dbo].[usuario_objetivo](

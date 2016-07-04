@@ -105,20 +105,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\usuario.png" />
-    <Content Include="pages\Alimento.aspx" />
-    <Content Include="pages\Buscador.aspx" />
-    <Content Include="Models\DataBaseModel.Context.tt">
+    <Content Include="DataBase\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
       <LastGenOutput>DataBaseModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataBaseModel.tt">
+    <Content Include="DataBase\DataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
       <LastGenOutput>DataBaseModel.cs</LastGenOutput>
     </Content>
-    <Content Include="pages\Muro.aspx" />
-    <Content Include="pages\Home.aspx" />
+    <Content Include="Pages\Alimento.aspx" />
+    <Content Include="Pages\Buscador.aspx" />
+    <Content Include="Pages\Muro.aspx" />
+    <Content Include="Pages\Home.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -134,11 +134,11 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\img\icon\manifest.json" />
     <Content Include="HeaderFooter.Master" />
-    <EntityDeploy Include="Models\DataBaseModel.edmx">
+    <EntityDeploy Include="DataBase\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DataBaseModel.edmx.diagram">
+    <Content Include="DataBase\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -204,10 +204,9 @@
     <Content Include="Content\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="LogIn.ascx" />
-    <Content Include="pages\Perfil.aspx" />
-    <Content Include="pages\Registro.aspx" />
-    <Content Include="pages\Reportes.aspx" />
+    <Content Include="Pages\Perfil.aspx" />
+    <Content Include="Pages\Registro.aspx" />
+    <Content Include="Pages\Reportes.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\DateTimePicker.min.js" />
@@ -217,22 +216,98 @@
     <Content Include="scripts\materialize.js" />
     <Content Include="scripts\materialize.min.js" />
     <Content Include="scripts\modernizr.js" />
-    <Content Include="SignIn.ascx" />
+    <Content Include="User_Control\LogIn.ascx" />
+    <Content Include="User_Control\SignIn.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pages\Alimento.aspx.cs">
+    <Compile Include="DataBase\alimento.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\alimento_genero.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\alimento_tipo.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\blog_nota.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\comida_tipo.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\consulta_conversacion.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\consulta_mensaje.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\DataBaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\DataBaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\DataBaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\estilo_vida.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_alimento.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_datos.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_estilo_vida.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_idr.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_muro.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_objetivo.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_receta.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_tipo.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_usuario.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Alimento.aspx.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Alimento.aspx.designer.cs">
+    <Compile Include="Pages\Alimento.aspx.designer.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\Buscador.aspx.cs">
+    <Compile Include="Pages\Buscador.aspx.cs">
       <DependentUpon>Buscador.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Buscador.aspx.designer.cs">
+    <Compile Include="Pages\Buscador.aspx.designer.cs">
       <DependentUpon>Buscador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -252,131 +327,63 @@
     <Compile Include="HeaderFooter.Master.designer.cs">
       <DependentUpon>HeaderFooter.Master</DependentUpon>
     </Compile>
-    <Compile Include="Models\alimento.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\alimento_genero.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\alimento_tipo.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\blog_nota.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\comida_tipo.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\consulta_conversacion.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\consulta_mensaje.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBaseModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBaseModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataBaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataBaseModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\estilo_vida.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_alimento.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_datos.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_estilo_vida.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_idr.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_muro.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_objetivo.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_receta.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_tipo.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\usuario_usuario.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="pages\Muro.aspx.cs">
+    <Compile Include="Pages\Muro.aspx.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Muro.aspx.designer.cs">
+    <Compile Include="Pages\Muro.aspx.designer.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\Home.aspx.cs">
+    <Compile Include="Pages\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Home.aspx.designer.cs">
+    <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogIn.ascx.cs">
-      <DependentUpon>LogIn.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LogIn.ascx.designer.cs">
-      <DependentUpon>LogIn.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="pages\Perfil.aspx.cs">
+    <Compile Include="Pages\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Perfil.aspx.designer.cs">
+    <Compile Include="Pages\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="pages\Registro.aspx.cs">
+    <Compile Include="Pages\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Registro.aspx.designer.cs">
+    <Compile Include="Pages\Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="pages\Reportes.aspx.cs">
+    <Compile Include="Pages\Reportes.aspx.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="pages\Reportes.aspx.designer.cs">
+    <Compile Include="Pages\Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\ListRepository.cs" />
-    <Compile Include="Repositories\UsuariotRepository.cs" />
+    <Compile Include="Repositories\SeguridadRepository.cs" />
+    <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />
-    <Compile Include="SignIn.ascx.cs">
+    <Compile Include="User_Control\LogIn.ascx.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User_Control\LogIn.ascx.designer.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="User_Control\SignIn.ascx.cs">
       <DependentUpon>SignIn.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SignIn.ascx.designer.cs">
+    <Compile Include="User_Control\SignIn.ascx.designer.cs">
       <DependentUpon>SignIn.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
