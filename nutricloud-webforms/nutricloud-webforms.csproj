@@ -104,7 +104,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="pages\Home.aspx" />
+    <Content Include="Content\img\usuario.png" />
+    <Content Include="pages\Alimento.aspx" />
+    <Content Include="pages\Buscador.aspx" />
     <Content Include="Models\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
@@ -115,6 +117,8 @@
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
       <LastGenOutput>DataBaseModel.cs</LastGenOutput>
     </Content>
+    <Content Include="pages\Muro.aspx" />
+    <Content Include="pages\Home.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -129,6 +133,7 @@
     <Content Include="Content\font\roboto\Roboto-Regular.ttf" />
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\img\icon\manifest.json" />
+    <Content Include="HeaderFooter.Master" />
     <EntityDeploy Include="Models\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
@@ -136,7 +141,6 @@
     <Content Include="Models\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="HeaderFooter.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -201,6 +205,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LogIn.ascx" />
+    <Content Include="pages\Perfil.aspx" />
+    <Content Include="pages\Registro.aspx" />
+    <Content Include="pages\Reportes.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\DateTimePicker.min.js" />
@@ -214,6 +221,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pages\Alimento.aspx.cs">
+      <DependentUpon>Alimento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Alimento.aspx.designer.cs">
+      <DependentUpon>Alimento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Buscador.aspx.cs">
+      <DependentUpon>Buscador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Buscador.aspx.designer.cs">
+      <DependentUpon>Buscador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,20 +251,6 @@
     </Compile>
     <Compile Include="HeaderFooter.Master.designer.cs">
       <DependentUpon>HeaderFooter.Master</DependentUpon>
-    </Compile>
-    <Compile Include="pages\Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="pages\Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="LogIn.ascx.cs">
-      <DependentUpon>LogIn.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LogIn.ascx.designer.cs">
-      <DependentUpon>LogIn.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\alimento.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
@@ -284,15 +291,6 @@
     <Compile Include="Models\estilo_vida.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\usuario.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
@@ -323,9 +321,51 @@
     <Compile Include="Models\usuario_usuario.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="pages\Muro.aspx.cs">
+      <DependentUpon>Muro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Muro.aspx.designer.cs">
+      <DependentUpon>Muro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn.ascx.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogIn.ascx.designer.cs">
+      <DependentUpon>LogIn.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UsuariotRepository.cs" />
+    <Compile Include="pages\Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\ListRepository.cs" />
+    <Compile Include="Repositories\UsuariotRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />
     <Compile Include="SignIn.ascx.cs">
       <DependentUpon>SignIn.ascx</DependentUpon>

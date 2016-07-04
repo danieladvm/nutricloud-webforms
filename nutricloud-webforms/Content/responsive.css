@@ -22,12 +22,16 @@
         vertical-align: middle;
         height: 64px !important;
     }
-      .number{
-              top: 60px !important;
-              margin-left:17px !important;
-      }
+    .number{
+        top: 60px !important;
+        margin-left:17px !important;
+    }
     .divtop {
-    padding-left: 0px !important; 
+        padding-left: 0px !important; 
+    }
+    .modal-footer i{
+        line-height: 42px !important;
+        height: 43px !important;
     }
    
  }
@@ -53,6 +57,9 @@
 @media(max-width:760px){
     .seccionHeader h3, .reporte h3, seccionFood h3 {
         font-size: 30px;
+    }
+    .modal{
+        width:50% !important;
     }
 }
 @media (max-width:680px) {
@@ -99,6 +106,9 @@
     }
     .infogral li h6 {
     font-size: 15px;
+    }
+    .modal {
+    width: 75% !important;
     }
 }
 @media(max-width:448px){

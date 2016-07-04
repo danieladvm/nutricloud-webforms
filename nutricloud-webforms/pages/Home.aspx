@@ -26,7 +26,7 @@
                     <div class="col s12 m12">
                         <div class="card">
                             <div class="card-content orange-text text-darken-3">
-                                <img src="~/Content/img/healthy-breakfast.png" class="responsive-img icon-food"/>
+                                <img src="../Content/img/healthy-breakfast.png" class="responsive-img icon-food"/>
                                 <h4>Desayuno</h4>
                                 <ul>
                                     <li><span class="alimento">Té</span><span>cantidad</span></li>
@@ -48,7 +48,7 @@
                     <div class="col s12 m12">
                         <div class="card">
                             <div class="card-content orange-text text-darken-3">
-                                <img src="~/Content/img/salad-bowl.png" class="responsive-img icon-food"/>
+                                <img src="../Content/img/salad-bowl.png" class="responsive-img icon-food"/>
                                 <h4>Almuerzo</h4>
                                 <ul>
                                     <li><span class="alimento">Té</span><span>cantidad</span></li>
@@ -66,7 +66,7 @@
                     <div class="col s12 m12">
                         <div class="card">
                             <div class="card-content orange-text text-darken-3">
-                                <img src="~/Content/img/oatmeal.png" class="responsive-img icon-food"/>
+                                <img src="../Content/img/oatmeal.png" class="responsive-img icon-food"/>
                                 <h4>Merienda</h4>
                                 <ul>
                                     <li><span class="alimento">Té</span><span>cantidad</span></li>
@@ -84,7 +84,7 @@
                     <div class="col s12 m12">
                         <div class="card">
                             <div class="card-content orange-text text-darken-3">
-                                <img src="~/Content/img/dinner.png" class="responsive-img icon-food"/>
+                                <img src="../Content/img/dinner.png" class="responsive-img icon-food"/>
                                 <h4>Cena</h4>
                                 <ul>
                                     <li><span class="alimento">Té</span><span>cantidad</span></li>
@@ -102,7 +102,7 @@
                     <div class="col s12 m12">
                         <div class="card">
                             <div class="card-content orange-text text-darken-3">
-                                <img src="~/Content/img/coffee.png" class="responsive-img icon-food"/>
+                                <img src="../Content/img/coffee.png" class="responsive-img icon-food"/>
                                 <h4>Aperitivos</h4>
                                 <ul>
                                     <li><span class="alimento">Té</span><span>cantidad</span></li>

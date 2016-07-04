@@ -35,13 +35,13 @@
     </div>
     <!--/.row-->
     <div class="row checkusr">
-        <asp:RadioButtonList ID="rblTipoUsuario" runat="server" CssClass="with-gap"></asp:RadioButtonList>
+        <asp:RadioButtonList ID="rblTipoUsuario" runat="server" CssClass=""></asp:RadioButtonList>
     </div>
     <div class="row">
         <asp:Panel ID="pnlErrores" runat="server"></asp:Panel>
     </div>
     <div class="row">
-        <asp:Button ID="registrarse" runat="server" Text="Registrarse" class="btn waves-effect green-nutri" OnClick="registrarse_Click" />
+        <asp:Button ID="registrarse" runat="server" Text="Registrarse" class="btn waves-effect green-nutri btnregistro" OnClick="registrarse_Click" />
     </div>
     <!--/.row-->
 </div>

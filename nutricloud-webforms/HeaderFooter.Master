@@ -55,17 +55,17 @@
             <nav id="nav_f" class="header-index" role="navigation">
                 <div class="container">
                     <div class="nav-wrapper sticky">
-                        <a id="logo-container" href="#top" class="brand-logo">
+                        <a id="logo-container" href="Home.aspx" class="brand-logo">
                             <img src="../../content/img/logo.png">nutricloud
                         </a>
                         <ul id="nav-mobile" class="right side-nav">
-                            <li><a href="pages/home.aspx">Diario</a></li>
-                            <li><a href="pages/alimentos.aspx">Alimentos</a></li>
-                            <li><a href="pages/reportes.aspx">Reportes</a></li>
-                            <li><a href="pages/blog.aspx">Blog</a></li>
-                            <li><a href="pages/muro.aspx">Comunidad</a></li>
-                            <li><a href="pages/profesional.aspx">Profesionales</a></li>
-                            <li><a href="pages/perfil.aspx">Perfil</a></li>
+                            <li><a href="Home.aspx">Diario</a></li>
+                            <li><a href="Alimento.aspx">Alimentos</a></li>
+                            <li><a href="Reportes.aspx">Reportes</a></li>
+                            <li><a href="Blog.aspx">Blog</a></li>
+                            <li><a href="Muro.aspx">Comunidad</a></li>
+                            <li><a href="Profesionales.aspx">Profesionales</a></li>
+                            <li><a href="Perfil.aspx">Perfil</a></li>
                             <li><a href="#">
                                 <i class="material-icons sobre">markunread</i>
                                 <div class="number">2</div>
