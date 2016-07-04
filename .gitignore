@@ -254,3 +254,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+.vs/config/applicationhost.config
+.vs/nutricloud-webforms/v14/.suo
+nutricloud-webforms/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
