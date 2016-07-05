@@ -24,11 +24,12 @@ namespace nutricloud_webforms
         {
             if (ValidaForm())
             {
+                DataBase.usuario u = MapeaFormUsuario();
                 UsuarioRepository ur = new UsuarioRepository();
-                //Ir a agregar usuario :D
-                ur.Insertar(MapeaFormUsuario());
+                ur.Insertar(u);
+                Session.Add("usuario", u);
 
-                //PAGINA DESPUES DE REGISTRARSE (?
+                Response.Redirect("Pages/Registro.aspx");
             }
         }
         #endregion

@@ -16,11 +16,6 @@ namespace nutricloud_webforms
 
         }
 
-        protected void ingresar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void Button_Aceptar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -30,8 +25,8 @@ namespace nutricloud_webforms
 
                 if (u != null)
                 {
-                    Session.Add("UsuarioLogueado", u);
-                    Response.Redirect("pages/Home.aspx");
+                    Session.Add("usuario", u);
+                    Response.Redirect("Pages/Home.aspx");
                 }
 
                 else

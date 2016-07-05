@@ -11,7 +11,29 @@ namespace nutricloud_webforms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            MapeaUsuarioForm();
         }
+
+        #region Metodos propios
+        private void MapeaUsuarioForm()
+        {
+            DataBase.usuario u = (DataBase.usuario)Session["usuario"];
+
+            if (!string.IsNullOrEmpty(u.nombre))
+            {
+                txtName.Text = u.nombre;
+            }
+
+            if (!string.IsNullOrEmpty(u.f_nacimiento.ToString()))
+            {
+                txtDate.Text = u.f_nacimiento.ToString();
+            }
+
+            //if (!string.IsNullOrEmpty(u.))
+            //{
+            //    txtName.Text = u.nombre;
+            //}
+        }
+        #endregion
     }
 }

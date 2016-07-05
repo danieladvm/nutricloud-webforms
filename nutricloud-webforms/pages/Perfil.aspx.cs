@@ -17,11 +17,11 @@ namespace nutricloud_webforms
             UsuarioRepository repository = new UsuarioRepository();
             UsuarioDatosRepository usuarioDatosRepository = new UsuarioDatosRepository();
 
-            usuario usuario = (usuario)Session["UsuarioLogueado"];
+            usuario usuario = (usuario)Session["usuario"];
             TxtNombre.Text = usuario.nombre;
             TxtEmail.Text = usuario.email;
             // como convierto datetime a string
-            // TxtUltimoIngreso = usuario.f_ultimo_ingreso;
+            TxtUltimoIngreso.Text = usuario.f_ultimo_ingreso.ToString();
 
             usuario_datos datos = usuarioDatosRepository.Buscar(usuario.id_usuario);
 

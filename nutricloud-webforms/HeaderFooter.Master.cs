@@ -11,7 +11,16 @@ namespace nutricloud_webforms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuario"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+        }
 
+        protected void lbCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

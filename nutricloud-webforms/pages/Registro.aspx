@@ -1,68 +1,54 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="nutricloud_webforms.Registro" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-<div class="row seccionHeader">
-    <div class="container">
-        <h3>Regístrate</h3>
+    <div class="row seccionHeader">
+        <div class="container">
+            <h3>Datos</h3>
+        </div>
     </div>
-</div><!--/seccionHeader-->
+    <!--/seccionHeader-->
 
-<div class="container">
-    <p>
-        <h5>Usuarios Regulares</h5>
-    </p>
+    <div class="container">
+        <p>
+            <h5>Paciente</h5>
+        </p>
         <div class="row">
-            <form class="col s12 m12 l8 register-form">
+            <div class="col s12 m12 l8 register-form">
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">Nombre</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
-                        <label for="last_name">Apellido</label>
+                    <div class="input-field col s12">
+                        <asp:TextBox ID="txtName" runat="server" class="validate"></asp:TextBox>
+                        <label for="txtName">Nombre</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <label class="fecha-label">Fecha de Nacimiento</label>
-                        <input type="date" class="datepicker fecha">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
+                        <asp:TextBox ID="txtDate" runat="server" class="datepicker fecha" TextMode="Date"></asp:TextBox>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m6 s12">
-                        <input id="first_name" type="text" class="validate">
+                        <asp:TextBox ID="txtPeso" runat="server" class="validate"></asp:TextBox>
                         <label for="first_name">Peso Actual en Kg</label>
                     </div>
                     <div class="input-field col m6 s12">
-                        <input id="first_name" type="text" class="validate">
+                        <asp:TextBox ID="txtAltura" runat="server" class="validate"></asp:TextBox>
                         <label for="first_name">Estatura Actual en cm</label>
                     </div>
                 </div>
                 <div class="row">
                     <p>Género</p>
-                     <div class="input-field col m6 s6">
-                        <input class="with-gap" name="group1" type="radio" id="masc" />
-                        <label for="masc">Masculino</label>
-                     </div>
                     <div class="input-field col m6 s6">
-                        <input class="with-gap" name="group1" type="radio" id="fem" />
+                        <asp:RadioButton ID="m" runat="server" class="with-gap" GroupName="rbGenero" />
+                        <label for="masc">Masculino</label>
+                    </div>
+                    <div class="input-field col m6 s6">
+                        <asp:RadioButton ID="f" runat="server" class="with-gap" GroupName="rbGenero" />
                         <label for="fem">Femenino</label>
-                     </div>
-                 </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s12">
                         ¿Cuánta actividad física realizás?
@@ -95,8 +81,10 @@
                         Registrarse
                     </button>
                 </div>
-            </form>
-      </div> <!--/row-->
-</div><!--/container-->
+            </div>
+        </div>
+        <!--/row-->
+    </div>
+    <!--/container-->
 
 </asp:Content>

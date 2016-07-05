@@ -296,6 +296,7 @@
     <Compile Include="DataBase\usuario_usuario.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsuarioCompleto.cs" />
     <Compile Include="Pages\Alimento.aspx.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -364,6 +365,7 @@
       <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\SeguridadRepository.cs" />
+    <Compile Include="Repositories\UsuarioDatosRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />
     <Compile Include="User_Control\LogIn.ascx.cs">
@@ -383,7 +385,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
