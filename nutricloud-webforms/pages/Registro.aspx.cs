@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using nutricloud_webforms.Repositories;
 
 namespace nutricloud_webforms
 {
@@ -15,6 +16,20 @@ namespace nutricloud_webforms
         }
 
         #region Metodos propios
+        private void CargaActividades()
+        {
+            ListItem li;
+            UsuarioRepository ur = new UsuarioRepository();
+            rblActividad.Items.Clear();
+            foreach (DataBase.usuario_actividad item in ur.ListarActividades())
+            {
+                li = new ListItem();
+                li.Text = item.usuario_actividad1;
+                li.Value = item.id_usuario_actividad.ToString();
+                rblActividad.Items.Add(li);
+            }
+        }
+
         private void MapeaUsuarioForm()
         {
             DataBase.usuario u = (DataBase.usuario)Session["usuario"];

@@ -6,26 +6,25 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using nutricloud_webforms.Repositories;
 using nutricloud_webforms.DataBase;
+using nutricloud_webforms.Models;
+
 namespace nutricloud_webforms
 {
     public partial class Perfil : System.Web.UI.Page
     {
-        private nutricloudEntities context = new nutricloudEntities();
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            UsuarioRepository repository = new UsuarioRepository();
-            UsuarioDatosRepository usuarioDatosRepository = new UsuarioDatosRepository();
-
-            usuario usuario = (usuario)Session["usuario"];
-            TxtNombre.Text = usuario.nombre;
-            TxtEmail.Text = usuario.email;
+            UsuarioRepository ur = new UsuarioRepository();
+            UsuarioCompleto usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
+            
+            //TxtNombre.Text = usuario.
+            //TxtEmail.Text = usuario.;
             // como convierto datetime a string
-            TxtUltimoIngreso.Text = usuario.f_ultimo_ingreso.ToString();
+            //TxtUltimoIngreso.Text = usuario.f_ultimo_ingreso.ToString();
 
-            usuario_datos datos = usuarioDatosRepository.Buscar(usuario.id_usuario);
+            //usuario_datos datos = ur.Buscar(usuario.Id_usuario);
 
-            TxtPesoActual.Text = datos.peso_kg.ToString();
+            //TxtPesoActual.Text = datos.peso_kg.ToString();
 
         }
     }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using nutricloud_webforms.Repositories;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms
 {
@@ -27,7 +28,8 @@ namespace nutricloud_webforms
                 DataBase.usuario u = MapeaFormUsuario();
                 UsuarioRepository ur = new UsuarioRepository();
                 ur.Insertar(u);
-                Session.Add("usuario", u);
+
+                Sesion(u);
 
                 Response.Redirect("Pages/Registro.aspx");
             }
@@ -54,9 +56,10 @@ namespace nutricloud_webforms
             bool errores = false;
             Label lblError;
             ValidRepository vr = new ValidRepository();
+            pnlErrores.Controls.Clear();
 
             //Valida vacios
-            if (!vr.ValidaVacio(email.Text))
+            if (!vr.ValidaVacio(txtEmail.Text))
             {
                 lblError = new Label();
                 lblError.Text = "* El email no puede estar vacio <br/>"; //No me peguen por esto
@@ -65,7 +68,7 @@ namespace nutricloud_webforms
             }
             else
             {
-                if (!vr.ValidaMail(email.Text))
+                if (!vr.ValidaMail(txtEmail.Text))
                 {
                     lblError = new Label();
                     lblError.Text = "* Email Inválido";
@@ -74,25 +77,27 @@ namespace nutricloud_webforms
                 }
             }
 
-            if (!vr.ValidaVacio(password.Text))
+            if (!vr.ValidaVacio(txtPassword.Text))
             {
                 lblError = new Label();
                 lblError.Text = "* La contraseña no puede estar vacia <br/>"; //No me peguen por esto
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
-
-            //Valida longitud de password, que tenga entre 4 y 12 caracteres, por ejemplo
-            if (!vr.ValidaRangoLen(password.Text, 4, 12))
+            else
             {
-                lblError = new Label();
-                lblError.Text = "* La contraseña debe tener entre 4 y 12 caracteres <br/>"; //No me peguen por esto
-                pnlErrores.Controls.Add(lblError);
-                errores = true;
+                //Valida longitud de password, que tenga entre 4 y 12 caracteres, por ejemplo
+                if (!vr.ValidaRangoLen(txtPassword.Text, 4, 12))
+                {
+                    lblError = new Label();
+                    lblError.Text = "* La contraseña debe tener entre 4 y 12 caracteres <br/>"; //No me peguen por esto
+                    pnlErrores.Controls.Add(lblError);
+                    errores = true;
+                }
             }
-
+            
             //Valida iguales
-            if (!vr.ValidaIguales(password.Text, password2.Text))
+            if (!vr.ValidaIguales(txtPassword.Text, txtPassword2.Text))
             {
                 lblError = new Label();
                 lblError.Text = "* Las contraseñas tienen que coincidir <br/>"; //No me peguen por esto
@@ -114,11 +119,19 @@ namespace nutricloud_webforms
         private DataBase.usuario MapeaFormUsuario()
         {
             DataBase.usuario u = new DataBase.usuario();
-            u.email = email.Text;
-            u.clave = password.Text;
+            u.email = txtEmail.Text;
+            u.clave = txtPassword.Text;
             u.id_usuario_tipo = int.Parse(rblTipoUsuario.SelectedValue);
 
             return u;
+        }
+
+        private void Sesion(DataBase.usuario u)
+        {
+            UsuarioCompleto uc = new UsuarioCompleto();
+            uc.Usuario = u;
+
+            Session.Add("UsuarioCompleto", uc);
         }
         #endregion
     }

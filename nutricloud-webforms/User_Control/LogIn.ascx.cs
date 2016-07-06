@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using nutricloud_webforms.Repositories;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms
 {
@@ -18,20 +20,32 @@ namespace nutricloud_webforms
 
         protected void Button_Aceptar_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
+            if (ValidaForm())
             {
-                Repositories.UsuarioRepository ur = new Repositories.UsuarioRepository();
+                UsuarioRepository ur = new UsuarioRepository();
                 usuario u = ur.BuscarUsuarioLogIn(MapeaFormUsuario());
+                usuario_datos ud = new usuario_datos();
 
                 if (u != null)
                 {
-                    Session.Add("usuario", u);
-                    Response.Redirect("Pages/Home.aspx");
+                    ud = ur.Buscar(u.id_usuario);
+                    Sesion(u, ud);
+
+                    if (ud == null)
+                    {
+                        Response.Redirect("Pages/Registro.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Pages/Home.aspx");
+                    }
                 }
 
                 else
                 {
-                    LblError.Text = "Email/Contraseña Incorrectos";
+                    Label lblError = new Label();
+                    lblError.Text = "Email/Contraseña Incorrectos";
+                    pnlErrores.Controls.Add(lblError);
                 }
 
             }
@@ -45,6 +59,42 @@ namespace nutricloud_webforms
             u.email = TxtEmail.Text;
             u.clave = TxtPass.Text;
             return u;
+        }
+
+        private bool ValidaForm()
+        {
+            bool errores = false;
+            Label lblError;
+            ValidRepository vr = new ValidRepository();
+            pnlErrores.Controls.Clear();
+
+            //Valida vacios
+            if (!vr.ValidaVacio(TxtEmail.Text))
+            {
+                lblError = new Label();
+                lblError.Text = "* El email no puede estar vacio <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            if (!vr.ValidaVacio(TxtPass.Text))
+            {
+                lblError = new Label();
+                lblError.Text = "* La contraseña no puede estar vacia <br/>"; //No me peguen por esto
+                pnlErrores.Controls.Add(lblError);
+                errores = true;
+            }
+
+            return !errores;
+        }
+
+        private void Sesion(usuario u, usuario_datos ud)
+        {
+            UsuarioCompleto uc = new UsuarioCompleto();
+            uc.Usuario = u;
+            uc.UsuarioDatos = ud;
+
+            Session.Add("UsuarioCompleto", uc);
         }
         #endregion
     }

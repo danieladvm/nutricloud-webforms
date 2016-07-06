@@ -12,12 +12,7 @@ namespace nutricloud_webforms.Models
     /// </summary>
     public class UsuarioCompleto
     {
-        public string Email { get; set; }
-        public string Nombre { get; set; }
-        public DateTime F_Nacimiento { get; set; }
-        public decimal Peso { get; set; }
-        public decimal Altura { get; set; }
-        public char Sexo { get; set; }
-        public int Actividad { get; set; }
+        public DataBase.usuario Usuario { get; set; }
+        public DataBase.usuario_datos UsuarioDatos { get; set; }
     }
 }

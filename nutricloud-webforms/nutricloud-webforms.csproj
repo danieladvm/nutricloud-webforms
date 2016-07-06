@@ -260,22 +260,16 @@
     <Compile Include="DataBase\estilo_vida.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\usuario.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\usuario_actividad.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario_alimento.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario_datos.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\usuario_estilo_vida.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario_idr.cs">
@@ -365,7 +359,6 @@
       <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\SeguridadRepository.cs" />
-    <Compile Include="Repositories\UsuarioDatosRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />
     <Compile Include="User_Control\LogIn.ascx.cs">

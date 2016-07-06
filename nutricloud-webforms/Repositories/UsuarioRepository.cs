@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using nutricloud_webforms.DataBase;
 
 namespace nutricloud_webforms.Repositories
 {
     class UsuarioRepository
     {
-        DataBase.nutricloudEntities c = new DataBase.nutricloudEntities();
+        nutricloudEntities c = new nutricloudEntities();
 
         #region Interaccion con la base
-        public void Insertar(DataBase.usuario u)
+        public void Insertar(usuario u)
         {
             c.usuario.Add(PreparaUsuarioNuevo(u));
             c.SaveChanges();
         }
 
-        public DataBase.usuario BuscarUsuarioLogIn(DataBase.usuario usuario)
+        public usuario BuscarUsuarioLogIn(usuario usuario)
         {
             string claveEncriptada = SeguridadRepository.Encriptar(usuario.clave);
 
-            DataBase.usuario u = (from us in c.usuario
+            usuario u = (from us in c.usuario
                                   where us.email == usuario.email && us.clave == claveEncriptada
                                   select us).FirstOrDefault();
             if (u != null)
@@ -33,15 +34,32 @@ namespace nutricloud_webforms.Repositories
             return u;
         }
 
-        public List<DataBase.usuario_tipo> ListarTipoUsuario()
+        public List<usuario_tipo> ListarTipoUsuario()
         {
-            List<DataBase.usuario_tipo> tu = (from u in c.usuario_tipo select u).ToList();
+            List<usuario_tipo> tu = (from u in c.usuario_tipo select u).ToList();
             return tu;
         }
+
+        public List<usuario_actividad> ListarActividades()
+        {
+            List<usuario_actividad> ua = (from u in c.usuario_actividad select u).ToList();
+            return ua;
+        }
+
+        public usuario_datos Buscar(int idUsuario)
+        {
+            usuario_datos u = (from ud in c.usuario_datos
+                               where ud.id_usuario == idUsuario
+                               orderby ud.f_ingreso descending
+                               select ud).FirstOrDefault();
+
+            return u;
+        }
+
         #endregion
 
         #region Metodos
-        private DataBase.usuario PreparaUsuarioNuevo(DataBase.usuario u)
+        private usuario PreparaUsuarioNuevo(usuario u)
         {
             string claveEncriptada = SeguridadRepository.Encriptar(u.clave);
             u.clave = claveEncriptada;
@@ -50,7 +68,7 @@ namespace nutricloud_webforms.Repositories
             return u;
         }
 
-        private DataBase.usuario PraparaUsuarioUpdate(DataBase.usuario u)
+        private usuario PraparaUsuarioUpdate(usuario u)
         {
             u.f_ultimo_ingreso = DateTime.Now;
             return u;

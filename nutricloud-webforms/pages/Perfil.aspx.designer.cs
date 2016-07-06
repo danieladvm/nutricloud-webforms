@@ -13,6 +13,15 @@ namespace nutricloud_webforms {
     public partial class Perfil {
         
         /// <summary>
+        /// lblNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombre;
+        
+        /// <summary>
         /// TxtNombre control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,14 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtUltimoIngreso;
+        
+        /// <summary>
+        /// btnActualiza control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnActualiza;
     }
 }
