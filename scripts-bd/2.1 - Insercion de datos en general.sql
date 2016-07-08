@@ -1,4 +1,5 @@
-
+USE [nutricloud]
+GO
 SET IDENTITY_INSERT [dbo].[alimento_tipo] ON 
 INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (1, N'Sólidos', N'gr')
 INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (2, N'Líquidos', N'l')
@@ -43,3 +44,15 @@ INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES 
 INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (8, N'Vegetales')
 INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (9, N'Dulces')
 SET IDENTITY_INSERT [dbo].[alimento_genero] OFF
+USE [nutricloud]
+GO
+SET IDENTITY_INSERT [dbo].[usuario] ON
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (1, N'usuario1@prueba.com', N'KQ83RRF7N21CqICiirrSEfsxtbA=', NULL, NULL, NULL, CAST(N'2016-07-08 16:19:55.040' AS DateTime), NULL, 1, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (2, N'usuario2@prueba.com', N'IPNtrjFY0sbP/4HJUeLN8mIbsGs=', NULL, NULL, NULL, CAST(N'2016-07-08 16:24:23.577' AS DateTime), NULL, 1, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (3, N'usuario3@prueba.com', N'1z4x9yVPaQ2+9aviU4HcMkgqZ1c=', NULL, NULL, NULL, CAST(N'2016-07-08 16:25:45.450' AS DateTime), NULL, 1, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (4, N'usuario4@prueba.com', N'M25TfrkoZfjXa3SB6GpR2lJUPDM=', NULL, NULL, NULL, CAST(N'2016-07-08 16:28:14.127' AS DateTime), NULL, 1, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (5, N'profesional1@prueba.com', N'avqZH3R2jZOBbj+WfqJKmMbzJRk=', NULL, NULL, NULL, CAST(N'2016-07-08 16:28:58.393' AS DateTime), NULL, 2, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (6, N'profesional2@prueba.com', N'Tu6MT6mql0Amu3iYfgO3vmq77v4=', NULL, NULL, NULL, CAST(N'2016-07-08 16:29:20.503' AS DateTime), NULL, 2, NULL)
+INSERT [dbo].[usuario] ([id_usuario], [email], [clave], [nombre], [sexo], [f_nacimiento], [f_registro], [f_ultimo_ingreso], [id_usuario_tipo], [id_usuario_actividad]) VALUES (7, N'profesional3@prueba.com', N'mB1QcchhnQvzQ85LWFRk1uOJqyw=', NULL, NULL, NULL, CAST(N'2016-07-08 16:29:41.310' AS DateTime), NULL, 2, NULL)
+SET IDENTITY_INSERT [dbo].[usuario] OFF
+GO

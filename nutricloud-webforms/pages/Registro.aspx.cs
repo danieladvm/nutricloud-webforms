@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using nutricloud_webforms.Repositories;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms
 {
@@ -32,16 +33,16 @@ namespace nutricloud_webforms
 
         private void MapeaUsuarioForm()
         {
-            DataBase.usuario u = (DataBase.usuario)Session["usuario"];
+            UsuarioCompleto u = (UsuarioCompleto)Session["UsuarioCompleto"];
 
-            if (!string.IsNullOrEmpty(u.nombre))
+            if (!string.IsNullOrEmpty(u.Usuario.nombre))
             {
-                txtName.Text = u.nombre;
+                txtName.Text = u.Usuario.nombre;
             }
 
-            if (!string.IsNullOrEmpty(u.f_nacimiento.ToString()))
+            if (!string.IsNullOrEmpty(u.Usuario.f_nacimiento.ToString()))
             {
-                txtDate.Text = u.f_nacimiento.ToString();
+                txtDate.Text = u.Usuario.f_nacimiento.ToString();
             }
 
             //if (!string.IsNullOrEmpty(u.))
