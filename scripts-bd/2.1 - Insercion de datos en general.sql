@@ -1,10 +1,7 @@
 
 SET IDENTITY_INSERT [dbo].[alimento_tipo] ON 
-GO
 INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (1, N'Sólidos', N'gr')
-GO
 INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (2, N'Líquidos', N'l')
-GO
 SET IDENTITY_INSERT [dbo].[alimento_tipo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[estilo_vida] ON
@@ -35,7 +32,8 @@ INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (5, N'Aperit
 SET IDENTITY_INSERT [dbo].[comida_tipo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[alimento_genero] ON
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (1, N'Carne vacuna')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (0, N'No definido')
+INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (1, N'Carnes')
 INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (2, N'Cereales')
 INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (3, N'Frutas')
 INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (4, N'Grasas y aceites')
