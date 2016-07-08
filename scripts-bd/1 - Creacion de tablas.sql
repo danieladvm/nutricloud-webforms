@@ -63,7 +63,7 @@ CREATE TABLE [dbo].[alimento](
 	[agp_w3_g] [decimal](10, 3) NULL default 0,
 	[porcion] [decimal](10, 3) NOT NULL,
 	[id_alimento_tipo] [int] NOT NULL,
-	[id_alimento_genero] [int] NOT NULL,
+	[id_alimento_genero] [int] NOT NULL default 0,
 PRIMARY KEY CLUSTERED 
 (
 	[id_alimento] ASC
@@ -387,43 +387,3 @@ ALTER TABLE [dbo].[usuario_idr]  WITH CHECK ADD  CONSTRAINT [FK_usuario_idr_usua
 REFERENCES [dbo].[usuario] ([id_usuario])
 GO
 ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
-
-GO
-SET IDENTITY_INSERT [dbo].[estilo_vida] ON
-INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (1, N'sedentario')
-INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (2, N'poco activo')
-INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (3, N'activo')
-INSERT [dbo].[estilo_vida] ([id_estilo_vida], [estilo_vida]) VALUES (4, N'deportista')
-SET IDENTITY_INSERT [dbo].[estilo_vida] OFF
-GO
-SET IDENTITY_INSERT [dbo].[usuario_tipo] ON
-INSERT [dbo].[usuario_tipo] ([id_usuario_tipo], [usuario_tipo]) VALUES (1, N'Paciente')
-INSERT [dbo].[usuario_tipo] ([id_usuario_tipo], [usuario_tipo]) VALUES (2, N'Profesional')
-SET IDENTITY_INSERT [dbo].[usuario_tipo] OFF
-GO
-SET IDENTITY_INSERT [dbo].[usuario_objetivo] ON
-INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (1, N'bajar')
-INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (2, N'mantener')
-INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (3, N'subir')
-INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALUES (4, N'aumentar rendimiento')
-SET IDENTITY_INSERT [dbo].[usuario_objetivo] OFF
-GO
-SET IDENTITY_INSERT [dbo].[comida_tipo] ON
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (1, N'Desayuno')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (2, N'Almuerzo')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (3, N'Merienda')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (4, N'Cena')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (5, N'Aperitivo')
-SET IDENTITY_INSERT [dbo].[comida_tipo] OFF
-GO
-SET IDENTITY_INSERT [dbo].[alimento_genero] ON
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (1, N'Carne vacuna')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (2, N'Cereales')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (3, N'Frutas')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (4, N'Grasas y aceites')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (5, N'Huevos')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (6, N'Lacteos')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (7, N'pescados y mariscos')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (8, N'vegetales')
-INSERT [dbo].[alimento_genero] ([id_alimento_genero], [alimento_genero]) VALUES (9, N'dulces')
-SET IDENTITY_INSERT [dbo].[alimento_genero] OFF
