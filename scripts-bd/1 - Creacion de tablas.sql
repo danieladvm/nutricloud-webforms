@@ -230,6 +230,7 @@ CREATE TABLE [dbo].[usuario_alimento](
 	[id_comida_tipo] [int] NOT NULL,
 	[cantidad] [int] NOT NULL,
 	[id_unidad_medida] [int] NOT NULL,
+	[f_ingreso] [datetime] NOT NULL DEFAULT (getdate()),
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario_alimento] ASC
