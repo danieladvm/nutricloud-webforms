@@ -7,25 +7,47 @@ using System.Web.UI.WebControls;
 using nutricloud_webforms.Repositories;
 using nutricloud_webforms.DataBase;
 using nutricloud_webforms.Models;
+using System.Data.Entity;
 
 namespace nutricloud_webforms
 {
     public partial class Perfil : System.Web.UI.Page
     {
+        private UsuarioRepository ur = new UsuarioRepository();
+        private nutricloudEntities db = new nutricloudEntities();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            UsuarioRepository ur = new UsuarioRepository();
             UsuarioCompleto usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
-            
-            //TxtNombre.Text = usuario.
-            //TxtEmail.Text = usuario.;
-            // como convierto datetime a string
-            //TxtUltimoIngreso.Text = usuario.f_ultimo_ingreso.ToString();
 
-            //usuario_datos datos = ur.Buscar(usuario.Id_usuario);
+            if (!IsPostBack)
+            {
+                TxtNombre.Text = usuario.Usuario.nombre;
+                TxtEmail.Text = usuario.Usuario.email;
+                LblUltimoIngreso.Text = usuario.Usuario.f_registro.ToString();
+                TxtPesoActual.Text = usuario.UsuarioDatos.peso_kg.ToString();
+            }
+        }
 
-            //TxtPesoActual.Text = datos.peso_kg.ToString();
+        protected void Button_ActualizarDatos_Click(object sender, EventArgs e)
+        {
+            UsuarioCompleto userSession = (UsuarioCompleto)Session["UsuarioCompleto"];
 
+            var user = db.usuario.Find(userSession.Usuario.id_usuario);
+            user.nombre = TxtNombre.Text;
+            user.email = TxtEmail.Text;
+
+            var userData = db.usuario_datos.Find(userSession.UsuarioDatos.id_usuario_datos);
+            userData.peso_kg = Decimal.Parse(TxtPesoActual.Text);
+
+            // Actualizo la base de datos
+            db.Entry(user);
+            db.Entry(userData);
+            db.SaveChanges();
+
+            // Actualizo datos de la session
+            userSession.Usuario = user;
+            userSession.UsuarioDatos = userData;
         }
     }
 }
