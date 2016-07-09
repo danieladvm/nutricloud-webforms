@@ -23,7 +23,7 @@
         height: 64px !important;
     }
     .number{
-        top: 60px !important;
+        top: 12px !important;
         margin-left:17px !important;
     }
     .divtop {
@@ -32,6 +32,12 @@
     .modal-footer i{
         line-height: 42px !important;
         height: 43px !important;
+    }
+    .paginador li {
+        margin-left: 11px;
+    }
+    .search-blog form{
+        float: left;
     }
    
  }
