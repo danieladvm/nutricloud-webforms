@@ -832,8 +832,15 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button{
     border: none !important;
 }
 
-    
+.text-error {
+    color: #e53935;
+    font-size: small;
+    display: block;
+}    
 
+.panel-errores {
+    padding: 20px;
+}
 
 
 

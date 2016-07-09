@@ -17,33 +17,34 @@
     <link href="Content/responsive.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="scripts/jquery.min.js" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+    <%--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />--%>
     <script src="scripts/modernizr.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css' />
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300|Righteous' rel='stylesheet' type='text/css' />
 
     <!-- Icon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="../../content/img/icon/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="../../content/img/icon/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="../../content/img/icon/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../content/img/icon/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="../../content/img/icon/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="../../content/img/icon/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="../../content/img/icon/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="../../content/img/icon/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../../content/img/icon/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="../../content/img/icon/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../../content/img/icon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="../../content/img/icon/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../content/img/icon/favicon-16x16.png" />
-    <link rel="manifest" href="../../content/img/icon/manifest.json" />
+    <link rel="apple-touch-icon" sizes="57x57" href="Content/img/icon/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="Content/img/icon/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="Content/img/icon/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="Content/img/icon/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="Content/img/icon/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="Content/img/icon/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="Content/img/icon/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="Content/img/icon/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="Content/img/icon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="Content/img/icon/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="Content/img/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="Content/img/icon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="Content/img/icon/favicon-16x16.png" />
+    <link rel="manifest" href="Content/img/icon/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-TileImage" content="../../content/img/icon/ms-icon-144x144.png" />
+    <meta name="msapplication-TileImage" content="Content/img/icon/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
 </head>
 <body id="top" class="scrollspy">
     <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- Pre Loader -->
         <div id="loader-wrapper">
             <div id="loader"></div>
@@ -136,13 +137,13 @@
                     <div class="col s12 m12 l6 txt-resp">
                         <p>
                             <h3>Podés disfrutar de nutricloud en cualquier dispositivo que tengas sin necesidad de instalar nada.
-                            <br/>
+                            <br />
                                 Es simple, rápido y cómodo!
                             </h3>
                         </p>
                     </div>
                     <div class="col s12 m12 l6 img-resp">
-                        <img class="responsive-img" src="Content/img/responsive.png"/>
+                        <img class="responsive-img" src="Content/img/responsive.png" />
                     </div>
                 </div>
             </div>
@@ -156,7 +157,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="../../content/img/card3.jpg">
+                                <img class="activator" src="Content/img/card3.jpg">
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Base de datos
@@ -176,7 +177,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="../../content/img/card2.jpg">
+                                <img class="activator" src="Content/img/card2.jpg">
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Estadísticas
@@ -196,7 +197,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="../../content/img/card4.jpg">
+                                <img class="activator" src="Content/img/card4.jpg">
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Blog de nutrición

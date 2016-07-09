@@ -20,6 +20,8 @@ namespace nutricloud_webforms
 
         protected void Button_Aceptar_Click(object sender, EventArgs e)
         {
+            pnlErrores.Controls.Clear();
+
             if (ValidaForm())
             {
                 UsuarioRepository ur = new UsuarioRepository();
@@ -44,7 +46,8 @@ namespace nutricloud_webforms
                 else
                 {
                     Label lblError = new Label();
-                    lblError.Text = "Email/Contraseña Incorrectos";
+                    lblError.Text = "* Email/Contraseña Incorrectos";
+                    lblError.CssClass = "text-error";
                     pnlErrores.Controls.Add(lblError);
                 }
 
@@ -72,7 +75,8 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(TxtEmail.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* El email no puede estar vacio <br/>"; //No me peguen por esto
+                lblError.Text = "* El email no puede estar vacio";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
@@ -80,7 +84,8 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(TxtPass.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* La contraseña no puede estar vacia <br/>"; //No me peguen por esto
+                lblError.Text = "* La contraseña no puede estar vacia";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }

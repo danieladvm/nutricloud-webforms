@@ -62,7 +62,8 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(txtEmail.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* El email no puede estar vacio <br/>"; //No me peguen por esto
+                lblError.Text = "* El email no puede estar vacio";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
@@ -72,6 +73,7 @@ namespace nutricloud_webforms
                 {
                     lblError = new Label();
                     lblError.Text = "* Email Inválido";
+                    lblError.CssClass = "text-error";
                     pnlErrores.Controls.Add(lblError);
                     errores = true;
                 }
@@ -80,7 +82,8 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(txtPassword.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* La contraseña no puede estar vacia <br/>"; //No me peguen por esto
+                lblError.Text = "* La contraseña no puede estar vacia";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
@@ -90,7 +93,8 @@ namespace nutricloud_webforms
                 if (!vr.ValidaRangoLen(txtPassword.Text, 4, 12))
                 {
                     lblError = new Label();
-                    lblError.Text = "* La contraseña debe tener entre 4 y 12 caracteres <br/>"; //No me peguen por esto
+                    lblError.Text = "* La contraseña debe tener entre 4 y 12 caracteres";
+                    lblError.CssClass = "text-error";
                     pnlErrores.Controls.Add(lblError);
                     errores = true;
                 }
@@ -100,7 +104,8 @@ namespace nutricloud_webforms
             if (!vr.ValidaIguales(txtPassword.Text, txtPassword2.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* Las contraseñas tienen que coincidir <br/>"; //No me peguen por esto
+                lblError.Text = "* Las contraseñas tienen que coincidir";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
@@ -108,7 +113,8 @@ namespace nutricloud_webforms
             if (rblTipoUsuario.SelectedValue == string.Empty)
             {
                 lblError = new Label();
-                lblError.Text = "* Debe seleccionar un tipo de usuario <br/>"; //No me peguen por esto
+                lblError.Text = "* Debe seleccionar un tipo de usuario";
+                lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
             }
