@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using nutricloud_webforms.Repositories;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms
 {
@@ -13,5 +15,26 @@ namespace nutricloud_webforms
         {
 
         }
+
+        protected void Buscar_Click(object sender, EventArgs e)
+        {
+            string nombrealimento = TxtBuscar.Text;
+
+            AlimentoRepository ar = new AlimentoRepository();
+            List<DataBase.alimento> a = ar.BuscarAlimento(nombrealimento);
+
+            if (a != null)
+            {
+                if (!IsPostBack)
+                {
+                    repalimentos.DataSource = a;
+                    repalimentos.DataBind();
+
+                }
+
+            }
+
+        }
+
     }
 }

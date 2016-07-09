@@ -20,40 +20,25 @@
 
         <div class="col l9 m9 s12 home">
             <div class="divtop">
-                <button class="btn waves-effect orange btn-buscar" type="submit" name="action">
+                <Button class="btn waves-effect orange btn-buscar" type="submit" name="action" OnClick="Buscar_Click" runat="server">
                     <i class="material-icons">search</i>
-                </button>
-                <input type="text" size="30" class="altercalendar" placeholder="Buscar alimentos">
+                </Button>
+                <asp:Textbox ID="TxtBuscar" type="text" size="30" class="altercalendar" runat="server" placeholder="Buscar alimentos"/>
             </div>
             <div class="list-food">
                 <div class="row">
                     <div class="col s12 m12">
                         <h5>Resultados de Búsqueda</h5>
-                        <ul class="resultados">
+                        <ul>
+                            <asp:Repeater ID="repalimentos" runat="server">
+                            <ItemTemplate>
                             <li>
-                                <a href="#">
-                                    <h6>Carne</h6>
-                                    <p>Porción básica, 7282 calorías</p>
-                                </a>
+                                <h6>Nombre: <asp:Textbox ID="txtNombre" runat="server" Text='<%# Eval("alimento1") %>'></asp:Textbox></h6>
+                                <p>Proteinas: <asp:Textbox ID="txtProteina" runat="server" Text='<%# Eval("proteinas_g") %>'></asp:Textbox></p>
+                                <p>Carbohidratos: <asp:Textbox ID="txtCarbo" runat="server" Text='<%# Eval("carbohidratos_totales_g") %>'></asp:Textbox></p>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <h6>Carne</h6>
-                                    <p>Porción básica, 7282 calorías</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <h6>Carne</h6>
-                                    <p>Porción básica, 7282 calorías</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <h6>Carne</h6>
-                                    <p>Porción básica, 7282 calorías</p>
-                                </a>
-                            </li>
+                            </ItemTemplate>
+                            </asp:Repeater>
                         </ul>
                     </div>
                 </div><!--/row-->
