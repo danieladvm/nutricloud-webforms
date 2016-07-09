@@ -44,10 +44,10 @@
                             </li>
                             <li>
                                 <h6>Ultimo ingreso: </h6>
-                                <asp:Label ID="LblUltimoIngreso" runat="server" ></asp:Label>
+                                <asp:TextBox ID="TxtUltimoIngreso" runat="server"></asp:TextBox>
                             </li>
                             <li class="row btn-registro nomargin">
-                                <asp:Button ID="btnActualizar" OnClick="Button_ActualizarDatos_Click" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Datos" />
+                                <asp:Button ID="btnActualiza" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Datos" />
                             </li>
                         </ul>
                     </div>
