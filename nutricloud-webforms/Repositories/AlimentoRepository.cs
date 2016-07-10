@@ -1,44 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using nutricloud_webforms.DataBase;
 
 namespace nutricloud_webforms.Repositories
 {
     public class AlimentoRepository
     {
-        DataBase.nutricloudEntities c = new DataBase.nutricloudEntities();
+        private nutricloudEntities c = new nutricloudEntities();
 
         //mostrar todos los alimentos
-        public List<DataBase.alimento> ListarAlimento()
+        public List<alimento> ListarAlimento()
         {
-            List<DataBase.alimento> al = (from a in c.alimento select a).ToList();
+            List<alimento> al = (from a in c.alimento select a).ToList();
             return al;
         }
 
         //muestra un solo alimento
-        public DataBase.alimento ListarUnAlimento(int idali)
+        public alimento ListarUnAlimento(int idali)
         {
-            DataBase.alimento al = (from a in c.alimento
-                                    where a.id_alimento == idali
-                                    select a).FirstOrDefault();
+            alimento al = (from a in c.alimento where a.id_alimento == idali select a).FirstOrDefault();
             return al;
         }
 
         //buscar y listar alimentos por nombre ingresado
-        public List<DataBase.alimento> BuscarAlimento(string nombrea)
+        public List<alimento> BuscarAlimento(string parametro)
         {
+            var resultado = (from a in c.alimento where a.alimento1.Contains(parametro) select a).ToList();
 
-            List<DataBase.alimento> al = (from bu in c.alimento
-                                          where bu.alimento1.Contains(nombrea)
-                                          orderby bu.id_alimento descending
-                                          select bu).ToList();
-
-
-
-            return al;
+            return resultado;
         }
-
 
     }
 }

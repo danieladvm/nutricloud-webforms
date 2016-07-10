@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using nutricloud_webforms.Repositories;
-using nutricloud_webforms.Models;
+using nutricloud_webforms.DataBase;
 
 namespace nutricloud_webforms
 {
@@ -21,17 +18,18 @@ namespace nutricloud_webforms
             string nombrealimento = TxtBuscar.Text;
 
             AlimentoRepository ar = new AlimentoRepository();
-            List<DataBase.alimento> a = ar.BuscarAlimento(nombrealimento);
+            List<alimento> a = ar.BuscarAlimento(nombrealimento);
 
-            if (a != null)
+            lblMsjSinResultados.Text = "";
+
+            if (a.Count() > 0)
             {
-                if (!IsPostBack)
-                {
-                    repalimentos.DataSource = a;
-                    repalimentos.DataBind();
-
-                }
-
+                repalimentos.DataSource = a;
+                repalimentos.DataBind();
+            }
+            else
+            {
+                lblMsjSinResultados.Text = "No se encontraron resultados";
             }
 
         }
