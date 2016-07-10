@@ -43,7 +43,7 @@
                             </li>
                             <li>
                                 <h6>Email:</h6>
-                                <asp:TextBox ID="TxtEmail" runat="server"></asp:TextBox>
+                                <asp:Label ID="LblEmail" runat="server"></asp:Label>
                             </li>
                             <li>
                                 <h6>Nombre:</h6>
@@ -53,17 +53,14 @@
                                 <div class="row">
                                     <h6>Género:</h6>
                                     <asp:RadioButtonList ID="rblGenero" runat="server"></asp:RadioButtonList>
-                                    <%--                                    <div class="input-field col m6 s6">
-                                        <asp:RadioButton ID="m" runat="server" Text="Masculino" CssClass="with-gap" GroupName="rbGenero" />
-                                    </div>
-                                    <div class="input-field col m6 s6">
-                                        <asp:RadioButton ID="f" runat="server" Text="Femenino" CssClass="with-gap" GroupName="rbGenero" />
-                                    </div>--%>
                                 </div>
                             </li>
                             <li>
                                 <h6>Fecha de nacimiento: </h6>
-                                <asp:Label ID="LblFechaNacimiento" runat="server"></asp:Label>
+                                <asp:TextBox ID="TxtFechaNacimiento" runat="server" CssClass="datepicker fecha" TextMode="Date"></asp:TextBox>
+                            </li>
+                            <li>
+                                <asp:Panel ID="pnlErrores" runat="server" CssClass="panel-errores"></asp:Panel>
                             </li>
                             <li class="row btn-registro nomargin">
                                 <asp:Button ID="btnActualizarInfoGral" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Información General" OnClick="btnActualizarInfoGral_Click" />

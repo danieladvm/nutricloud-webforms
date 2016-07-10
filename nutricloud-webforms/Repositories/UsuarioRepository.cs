@@ -18,6 +18,24 @@ namespace nutricloud_webforms.Repositories
             c.SaveChanges();
         }
 
+        public void ActualizarUsuario(usuario u)
+        {
+            var usuario = c.usuario.Find(u.id_usuario);
+            usuario.clave = u.clave;
+            usuario.nombre = u.nombre;
+            usuario.sexo = u.sexo;
+            usuario.f_nacimiento = u.f_nacimiento;
+
+            c.Entry(usuario);
+            c.SaveChanges();
+        }
+
+        public void InsertarDatosUsuario(usuario_datos ud)
+        {
+            c.usuario_datos.Add(ud);
+            c.SaveChanges();
+        }
+
         public usuario BuscarUsuarioLogIn(usuario usuario)
         {
             string claveEncriptada = SeguridadRepository.Encriptar(usuario.clave);
@@ -25,6 +43,7 @@ namespace nutricloud_webforms.Repositories
             usuario u = (from us in c.usuario
                          where us.email == usuario.email && us.clave == claveEncriptada
                          select us).FirstOrDefault();
+
             if (u != null)
             {
                 c.Entry(PraparaUsuarioUpdate(u));

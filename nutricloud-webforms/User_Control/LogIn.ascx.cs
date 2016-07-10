@@ -35,7 +35,7 @@ namespace nutricloud_webforms
 
                     if (ud == null)
                     {
-                        Response.Redirect("Pages/Registro.aspx");
+                        Response.Redirect("Pages/Perfil.aspx");
                     }
                     else
                     {
@@ -75,7 +75,7 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(TxtEmail.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* El email no puede estar vacio";
+                lblError.Text = "* El email no puede estar vacío";
                 lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
@@ -84,7 +84,7 @@ namespace nutricloud_webforms
             if (!vr.ValidaVacio(TxtPass.Text))
             {
                 lblError = new Label();
-                lblError.Text = "* La contraseña no puede estar vacia";
+                lblError.Text = "* La contraseña no puede estar vacía";
                 lblError.CssClass = "text-error";
                 pnlErrores.Controls.Add(lblError);
                 errores = true;
