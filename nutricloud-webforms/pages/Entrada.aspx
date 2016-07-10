@@ -20,12 +20,10 @@
             </div>
         </div>
         <div class="row">
-            <form>
-                <textarea rows="10" cols="60">
-                    Ingresa el contenido de la entrada.
-                </textarea>
-                    <a href="Nota.aspx" class="button btn waves-effect orange btn-ingresar">Subir entrada</a>
-            </form>
+            <textarea rows="10" cols="60">
+                Ingresa el contenido de la entrada.
+            </textarea>
+            <a href="Nota.aspx" class="button btn waves-effect orange btn-ingresar">Subir entrada</a>
         </div>
     </div>
     <!--/container-->

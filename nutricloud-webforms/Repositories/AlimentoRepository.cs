@@ -20,8 +20,8 @@ namespace nutricloud_webforms.Repositories
         public DataBase.alimento ListarUnAlimento(int idali)
         {
             DataBase.alimento al = (from a in c.alimento
-                           where a.id_alimento == idali
-                           select a).FirstOrDefault();
+                                    where a.id_alimento == idali
+                                    select a).FirstOrDefault();
             return al;
         }
 
@@ -30,9 +30,9 @@ namespace nutricloud_webforms.Repositories
         {
 
             List<DataBase.alimento> al = (from bu in c.alimento
-                                 where bu.alimento1 == nombrea
-                                 orderby bu.id_alimento descending
-                                 select bu).ToList();
+                                          where bu.alimento1.Contains(nombrea)
+                                          orderby bu.id_alimento descending
+                                          select bu).ToList();
 
 
 

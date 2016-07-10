@@ -43,7 +43,7 @@
     <meta name="theme-color" content="#ffffff" />
 </head>
 <body id="top" class="scrollspy">
-    <form id="form1" runat="server">
+    <form id="formDefault" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <!-- Pre Loader -->
         <div id="loader-wrapper">

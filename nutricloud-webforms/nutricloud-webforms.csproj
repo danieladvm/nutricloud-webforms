@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\usuario.png" />
+    <Content Include="Content\stylepro.css" />
     <Content Include="DataBase\DataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
@@ -116,7 +117,9 @@
       <LastGenOutput>DataBaseModel.cs</LastGenOutput>
     </Content>
     <Content Include="Pages\Alimento.aspx" />
+    <Content Include="Pages\Blog.aspx" />
     <Content Include="Pages\Buscador.aspx" />
+    <Content Include="Pages\Entrada.aspx" />
     <Content Include="Pages\Muro.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="packages.config" />
@@ -134,6 +137,7 @@
     <Content Include="Content\font\roboto\Roboto-Thin.ttf" />
     <Content Include="Content\img\icon\manifest.json" />
     <Content Include="HeaderFooter.Master" />
+    <Content Include="MasterPro.Master" />
     <EntityDeploy Include="DataBase\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
@@ -204,6 +208,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Nota.aspx" />
     <Content Include="Pages\Perfil.aspx" />
     <Content Include="Pages\Registro.aspx" />
     <Content Include="Pages\Reportes.aspx" />
@@ -213,9 +218,12 @@
     <Content Include="scripts\init.js" />
     <Content Include="scripts\jquery-ui.min.js" />
     <Content Include="scripts\jquery.min.js" />
+    <Content Include="scripts\jquery.tinymce.min.js" />
     <Content Include="scripts\materialize.js" />
     <Content Include="scripts\materialize.min.js" />
     <Content Include="scripts\modernizr.js" />
+    <Content Include="scripts\styles.js" />
+    <Content Include="scripts\tinymce.min.js" />
     <Content Include="User_Control\LogIn.ascx" />
     <Content Include="User_Control\SignIn.ascx" />
     <Content Include="Web.config" />
@@ -290,6 +298,13 @@
     <Compile Include="DataBase\usuario_usuario.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MasterPro.Master.cs">
+      <DependentUpon>MasterPro.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPro.Master.designer.cs">
+      <DependentUpon>MasterPro.Master</DependentUpon>
+    </Compile>
     <Compile Include="Models\UsuarioCompleto.cs" />
     <Compile Include="Pages\Alimento.aspx.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
@@ -297,6 +312,13 @@
     </Compile>
     <Compile Include="Pages\Alimento.aspx.designer.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Blog.aspx.cs">
+      <DependentUpon>Blog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Blog.aspx.designer.cs">
+      <DependentUpon>Blog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Buscador.aspx.cs">
       <DependentUpon>Buscador.aspx</DependentUpon>
@@ -322,6 +344,13 @@
     <Compile Include="HeaderFooter.Master.designer.cs">
       <DependentUpon>HeaderFooter.Master</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Entrada.aspx.cs">
+      <DependentUpon>Entrada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Entrada.aspx.designer.cs">
+      <DependentUpon>Entrada.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Muro.aspx.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,6 +364,13 @@
     </Compile>
     <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Nota.aspx.cs">
+      <DependentUpon>Nota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Nota.aspx.designer.cs">
+      <DependentUpon>Nota.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
@@ -358,6 +394,8 @@
     <Compile Include="Pages\Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\AlimentoRepository.cs" />
+    <Compile Include="Repositories\DiarioRepository.cs" />
     <Compile Include="Repositories\SeguridadRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />

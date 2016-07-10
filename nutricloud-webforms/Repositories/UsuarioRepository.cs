@@ -23,8 +23,8 @@ namespace nutricloud_webforms.Repositories
             string claveEncriptada = SeguridadRepository.Encriptar(usuario.clave);
 
             usuario u = (from us in c.usuario
-                                  where us.email == usuario.email && us.clave == claveEncriptada
-                                  select us).FirstOrDefault();
+                         where us.email == usuario.email && us.clave == claveEncriptada
+                         select us).FirstOrDefault();
             if (u != null)
             {
                 c.Entry(PraparaUsuarioUpdate(u));
@@ -42,18 +42,20 @@ namespace nutricloud_webforms.Repositories
 
         public List<usuario_actividad> ListarActividades()
         {
-            List<usuario_actividad> ua = (from u in c.usuario_actividad select u).ToList();
-            return ua;
+            return (from u in c.usuario_actividad select u).ToList();
         }
 
         public usuario_datos Buscar(int idUsuario)
         {
-            usuario_datos u = (from ud in c.usuario_datos
-                               where ud.id_usuario == idUsuario
-                               orderby ud.f_ingreso descending
-                               select ud).FirstOrDefault();
+            return (from ud in c.usuario_datos
+                    where ud.id_usuario == idUsuario
+                    orderby ud.f_ingreso descending
+                    select ud).FirstOrDefault();
+        }
 
-            return u;
+        public List<usuario_objetivo> ListarObjetivos()
+        {
+            return (from ob in c.usuario_objetivo select ob).ToList();
         }
 
         #endregion

@@ -13,22 +13,22 @@ namespace nutricloud_webforms {
     public partial class Perfil {
         
         /// <summary>
-        /// lblNombre control.
+        /// LblFechaRegistro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombre;
+        protected global::System.Web.UI.WebControls.Label LblFechaRegistro;
         
         /// <summary>
-        /// TxtNombre control.
+        /// LblFechaUltimoIngreso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtNombre;
+        protected global::System.Web.UI.WebControls.Label LblFechaUltimoIngreso;
         
         /// <summary>
         /// TxtEmail control.
@@ -40,30 +40,84 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.TextBox TxtEmail;
         
         /// <summary>
-        /// TxtPesoActual control.
+        /// TxtNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPesoActual;
+        protected global::System.Web.UI.WebControls.TextBox TxtNombre;
         
         /// <summary>
-        /// TxtUltimoIngreso control.
+        /// rblGenero control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtUltimoIngreso;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblGenero;
         
         /// <summary>
-        /// btnActualiza control.
+        /// LblFechaNacimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnActualiza;
+        protected global::System.Web.UI.WebControls.Label LblFechaNacimiento;
+        
+        /// <summary>
+        /// btnActualizarInfoGral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnActualizarInfoGral;
+        
+        /// <summary>
+        /// TxtPeso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtPeso;
+        
+        /// <summary>
+        /// TxtAltura control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtAltura;
+        
+        /// <summary>
+        /// rblActividad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblActividad;
+        
+        /// <summary>
+        /// rblObjetivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblObjetivo;
+        
+        /// <summary>
+        /// btnActualizarDatosFisicos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnActualizarDatosFisicos;
     }
 }

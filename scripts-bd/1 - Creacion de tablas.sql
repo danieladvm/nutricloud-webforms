@@ -8,12 +8,12 @@ drop table comida_tipo
 drop table alimento
 drop table alimento_tipo
 drop table alimento_genero
+drop table estilo_vida
 drop table usuario_receta
 drop table usuario_muro
 drop table usuario_datos
 drop table usuario_objetivo
 drop table usuario_usuario
-drop table estilo_vida
 drop table usuario_idr
 drop table usuario
 drop table usuario_tipo
@@ -93,7 +93,7 @@ GO
 CREATE TABLE [dbo].[usuario_actividad](
 	[id_usuario_actividad] [int] IDENTITY(1,1) NOT NULL,
 	[usuario_actividad] [varchar](50) NOT NULL,
- CONSTRAINT [PK_usuario_estilo_vida_1] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_usuario_usuario_actividad] PRIMARY KEY CLUSTERED 
 (
 	[id_usuario_actividad] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -111,7 +111,6 @@ CREATE TABLE [dbo].[usuario](
 	[f_registro] [datetime] NOT NULL,
 	[f_ultimo_ingreso] [datetime] NULL,
 	[id_usuario_tipo] [int] NOT NULL,
-	[id_usuario_actividad] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC
@@ -121,13 +120,6 @@ PRIMARY KEY CLUSTERED
 	[email] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[usuario]  WITH CHECK ADD  CONSTRAINT [FK_usuario_usuario_actividad] FOREIGN KEY([id_usuario_actividad])
-REFERENCES [dbo].[usuario_actividad] ([id_usuario_actividad])
-GO
-
-ALTER TABLE [dbo].[usuario] CHECK CONSTRAINT [FK_usuario_usuario_actividad]
 GO
 
 ALTER TABLE [dbo].[usuario]  WITH CHECK ADD  CONSTRAINT [FK_usuario_usuario_tipo] FOREIGN KEY([id_usuario_tipo])
@@ -153,6 +145,7 @@ CREATE TABLE [dbo].[usuario_datos](
 	[peso_kg] [decimal](5, 2) NOT NULL,
 	[f_ingreso] [datetime] NOT NULL DEFAULT (getdate()),
 	[id_usuario_objetivo] [int] NOT NULL,
+	[id_usuario_actividad] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario_datos] ASC
@@ -169,6 +162,13 @@ GO
 
 ALTER TABLE [dbo].[usuario_datos]  WITH CHECK ADD  CONSTRAINT [FK_usuario_datos_usuario] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[usuario_datos]  WITH CHECK ADD  CONSTRAINT [FK_usuario_usuario_actividad] FOREIGN KEY([id_usuario_actividad])
+REFERENCES [dbo].[usuario_actividad] ([id_usuario_actividad])
+GO
+
+ALTER TABLE [dbo].[usuario_datos] CHECK CONSTRAINT [FK_usuario_usuario_actividad]
 GO
 
 ALTER TABLE [dbo].[usuario_datos] CHECK CONSTRAINT [FK_usuario_datos_usuario]
