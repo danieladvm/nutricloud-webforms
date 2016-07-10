@@ -13,7 +13,6 @@ namespace nutricloud_webforms
 {
     public partial class Perfil : System.Web.UI.Page
     {
-        private UsuarioRepository ur = new UsuarioRepository();
         private nutricloudEntities db = new nutricloudEntities();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -38,14 +37,14 @@ namespace nutricloud_webforms
             user.email = TxtEmail.Text;
 
             var userData = db.usuario_datos.Find(userSession.UsuarioDatos.id_usuario_datos);
-            userData.peso_kg = Decimal.Parse(TxtPesoActual.Text);
+            userData.peso_kg = decimal.Parse(TxtPesoActual.Text);
 
-            // Actualizo la base de datos
+            // Actualizo los datos de la base
             db.Entry(user);
             db.Entry(userData);
             db.SaveChanges();
 
-            // Actualizo datos de la session
+            // Actualizo los datos de la session
             userSession.Usuario = user;
             userSession.UsuarioDatos = userData;
         }
