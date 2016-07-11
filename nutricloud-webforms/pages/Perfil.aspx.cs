@@ -121,7 +121,7 @@ namespace nutricloud_webforms
             bool errores = false;
             Label lblError;
             ValidRepository vr = new ValidRepository();
-            pnlErrores.Controls.Clear();
+            pnlErroresInfoGral.Controls.Clear();
 
             //Valida vacios
             if (!vr.ValidaVacio(TxtNombre.Text))
@@ -129,7 +129,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* El nombre no puede estar vacío";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresInfoGral.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -138,7 +138,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* Debe seleccionar su género";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresInfoGral.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -147,7 +147,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* La fecha de nacimiento no puede estar vacía";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresInfoGral.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -159,7 +159,7 @@ namespace nutricloud_webforms
             bool errores = false;
             Label lblError;
             ValidRepository vr = new ValidRepository();
-            pnlErrores.Controls.Clear();
+            pnlErroresDatosFisicos.Controls.Clear();
 
             //Valida vacios
             if (!vr.ValidaVacio(TxtPeso.Text))
@@ -167,7 +167,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* Su peso no puede estar vacío";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresDatosFisicos.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -176,7 +176,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* La altura no puede estar vacía";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresDatosFisicos.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -185,7 +185,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* Debe seleccionar su nivel de actividad";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresDatosFisicos.Controls.Add(lblError);
                 errores = true;
             }
 
@@ -194,7 +194,7 @@ namespace nutricloud_webforms
                 lblError = new Label();
                 lblError.Text = "* Debe establecer su objetivo";
                 lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
+                pnlErroresDatosFisicos.Controls.Add(lblError);
                 errores = true;
             }
 

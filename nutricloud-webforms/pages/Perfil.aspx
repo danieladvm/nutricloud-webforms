@@ -59,9 +59,7 @@
                                 <h6>Fecha de nacimiento: </h6>
                                 <asp:TextBox ID="TxtFechaNacimiento" runat="server" CssClass="datepicker fecha" TextMode="Date"></asp:TextBox>
                             </li>
-                            <li>
-                                <asp:Panel ID="pnlErrores" runat="server" CssClass="panel-errores"></asp:Panel>
-                            </li>
+                            <asp:Panel ID="pnlErroresInfoGral" runat="server" CssClass="panel-errores"></asp:Panel>
                             <li class="row btn-registro nomargin">
                                 <asp:Button ID="btnActualizarInfoGral" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Información General" OnClick="btnActualizarInfoGral_Click" />
                             </li>
@@ -95,6 +93,7 @@
                                 <h6>Objetivo: </h6>
                                 <asp:RadioButtonList ID="rblObjetivo" runat="server"></asp:RadioButtonList>
                             </li>
+                            <asp:Panel ID="pnlErroresDatosFisicos" runat="server" CssClass="panel-errores"></asp:Panel>
                             <li class="row btn-registro nomargin">
                                 <asp:Button ID="btnActualizarDatosFisicos" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Datos Físicos" OnClick="btnActualizarDatosFisicos_Click" />
                             </li>

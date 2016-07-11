@@ -67,13 +67,13 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.TextBox TxtFechaNacimiento;
         
         /// <summary>
-        /// pnlErrores control.
+        /// pnlErroresInfoGral control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlErrores;
+        protected global::System.Web.UI.WebControls.Panel pnlErroresInfoGral;
         
         /// <summary>
         /// btnActualizarInfoGral control.
@@ -119,6 +119,15 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblObjetivo;
+        
+        /// <summary>
+        /// pnlErroresDatosFisicos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlErroresDatosFisicos;
         
         /// <summary>
         /// btnActualizarDatosFisicos control.
