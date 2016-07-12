@@ -8,7 +8,6 @@ drop table comida_tipo
 drop table alimento
 drop table alimento_tipo
 drop table alimento_genero
-drop table estilo_vida
 drop table usuario_receta
 drop table usuario_muro
 drop table usuario_datos
@@ -111,6 +110,8 @@ CREATE TABLE [dbo].[usuario](
 	[f_registro] [datetime] NOT NULL,
 	[f_ultimo_ingreso] [datetime] NULL,
 	[id_usuario_tipo] [int] NOT NULL,
+	vegetariano bit default 0,
+	vegano bit default 0,
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC
@@ -304,8 +305,6 @@ GO
 
 CREATE TABLE [dbo].[consulta_conversacion](
 	[id_consulta_conversacion] [int] IDENTITY(1,1) NOT NULL,
-	[id_usuario_remitente] [int] NOT NULL,
-	[id_usuario_destinatario] [int] NOT NULL,
 	[cerrada] [bit] NOT NULL,
  CONSTRAINT [PK_consulta_conversacion] PRIMARY KEY CLUSTERED 
 (
@@ -318,31 +317,22 @@ GO
 ALTER TABLE [dbo].[consulta_conversacion] ADD  DEFAULT ((0)) FOR [cerrada]
 GO
 
-ALTER TABLE [dbo].[consulta_conversacion]  WITH CHECK ADD  CONSTRAINT [FK_consulta_conversacion_usuario] FOREIGN KEY([id_usuario_remitente])
-REFERENCES [dbo].[usuario] ([id_usuario])
-GO
-
-ALTER TABLE [dbo].[consulta_conversacion] CHECK CONSTRAINT [FK_consulta_conversacion_usuario]
-GO
-
-ALTER TABLE [dbo].[consulta_conversacion]  WITH CHECK ADD  CONSTRAINT [FK_consulta_conversacion_usuario1] FOREIGN KEY([id_usuario_destinatario])
-REFERENCES [dbo].[usuario] ([id_usuario])
-GO
-
-ALTER TABLE [dbo].[consulta_conversacion] CHECK CONSTRAINT [FK_consulta_conversacion_usuario1]
-GO
-
 CREATE TABLE [dbo].[consulta_mensaje](
-	[id_mensaje] [int] IDENTITY(1,1) NOT NULL,
+	[id_consulta_mensaje] [int] IDENTITY(1,1) NOT NULL,
 	[mensaje] [text] NOT NULL,
-	[f_mensaje] [datetime] NOT NULL DEFAULT (getdate()),
+	[f_mensaje] [datetime] NOT NULL,
 	[id_consulta_conversacion] [int] NOT NULL,
+	[id_usuario_remitente] [int] NOT NULL,
+	[id_usuario_destinatario] [int] NOT NULL,
  CONSTRAINT [PK_consulta_mensaje] PRIMARY KEY CLUSTERED 
 (
-	[id_mensaje] ASC
+	[id_consulta_mensaje] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
+GO
+
+ALTER TABLE [dbo].[consulta_mensaje] ADD  DEFAULT (getdate()) FOR [f_mensaje]
 GO
 
 ALTER TABLE [dbo].[consulta_mensaje]  WITH CHECK ADD  CONSTRAINT [FK_consulta_mensaje_consulta_conversacion] FOREIGN KEY([id_consulta_conversacion])
@@ -351,15 +341,21 @@ GO
 
 ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_consulta_conversacion]
 GO
-CREATE TABLE [dbo].[estilo_vida](
-	[id_estilo_vida] [int] IDENTITY(1,1) NOT NULL,
-	[estilo_vida] [varchar](50) NOT NULL,
- CONSTRAINT [PK_usuario_estilo_vida] PRIMARY KEY CLUSTERED 
-(
-	[id_estilo_vida] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-go
+
+ALTER TABLE [dbo].[consulta_mensaje]  WITH CHECK ADD  CONSTRAINT [FK_consulta_mensaje_usuario] FOREIGN KEY([id_usuario_destinatario])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_usuario]
+GO
+
+ALTER TABLE [dbo].[consulta_mensaje]  WITH CHECK ADD  CONSTRAINT [FK_consulta_mensaje_usuario1] FOREIGN KEY([id_usuario_remitente])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_usuario1]
+GO
+
 CREATE TABLE [dbo].[usuario_idr](
 	[id_valores] [int] identity(1,1) NOT NULL,
 	[id_usuario] [int] NOT NULL,
