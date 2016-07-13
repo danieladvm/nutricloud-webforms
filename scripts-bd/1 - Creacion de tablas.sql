@@ -305,6 +305,9 @@ GO
 
 CREATE TABLE [dbo].[consulta_conversacion](
 	[id_consulta_conversacion] [int] IDENTITY(1,1) NOT NULL,
+	[asunto] [varchar](100) NOT NULL,
+	[id_usuario_remitente] [int] NOT NULL,
+	[id_usuario_destinatario] [int] NULL,
 	[cerrada] [bit] NOT NULL,
  CONSTRAINT [PK_consulta_conversacion] PRIMARY KEY CLUSTERED 
 (
@@ -317,13 +320,27 @@ GO
 ALTER TABLE [dbo].[consulta_conversacion] ADD  DEFAULT ((0)) FOR [cerrada]
 GO
 
+ALTER TABLE [dbo].[consulta_conversacion]  WITH CHECK ADD  CONSTRAINT [FK_consulta_conversacion_usuario] FOREIGN KEY([id_usuario_destinatario])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[consulta_conversacion] CHECK CONSTRAINT [FK_consulta_conversacion_usuario]
+GO
+
+ALTER TABLE [dbo].[consulta_conversacion]  WITH CHECK ADD  CONSTRAINT [FK_consulta_conversacion_usuario1] FOREIGN KEY([id_usuario_remitente])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[consulta_conversacion] CHECK CONSTRAINT [FK_consulta_conversacion_usuario1]
+GO
+
 CREATE TABLE [dbo].[consulta_mensaje](
 	[id_consulta_mensaje] [int] IDENTITY(1,1) NOT NULL,
 	[mensaje] [text] NOT NULL,
 	[f_mensaje] [datetime] NOT NULL,
 	[id_consulta_conversacion] [int] NOT NULL,
 	[id_usuario_remitente] [int] NOT NULL,
-	[id_usuario_destinatario] [int] NOT NULL,
+	[id_usuario_destinatario] [int],
  CONSTRAINT [PK_consulta_mensaje] PRIMARY KEY CLUSTERED 
 (
 	[id_consulta_mensaje] ASC
