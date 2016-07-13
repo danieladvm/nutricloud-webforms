@@ -117,6 +117,11 @@
     width: 75% !important;
     }
 }
+@media(max-width:400px){
+    .resultados span input[type=text], .resultados span{
+        display: none !important;
+    }
+}
 @media(max-width:448px){
     .menu-left ul li {
         margin-right: 5px;

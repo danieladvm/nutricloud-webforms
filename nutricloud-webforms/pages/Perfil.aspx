@@ -61,7 +61,7 @@
                             </li>
                             <asp:Panel ID="pnlErroresInfoGral" runat="server" CssClass="panel-errores"></asp:Panel>
                             <li class="row btn-registro nomargin">
-                                <asp:Button ID="btnActualizarInfoGral" runat="server" CssClass="btn waves-effect orange btn-ingresar" Text="Actualizar Información General" OnClick="btnActualizarInfoGral_Click" />
+                                <asp:Button ID="btnActualizarInfoGral" runat="server" CssClass="btn waves-effect orange waves-input-wrapper" Text="Actualizar Información General" OnClick="btnActualizarInfoGral_Click" />
                             </li>
                         </ul>
                     </div>

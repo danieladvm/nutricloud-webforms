@@ -641,8 +641,47 @@ nav .nav-wrapper i {
         border-bottom: solid 1px #B7B7B7;
 }
 .resultados li h6{
-        font-size: 18px;
+    font-size: 18px;
     margin-bottom: 0px;
+    display: inline-block;
+    width: 60%;
+    height: 53px;
+}
+.resultados li span .caloriab{
+    width: 29%;
+}
+.resultados li span{
+    display: inline-block;
+    float: right;
+    text-align: right;
+    line-height: 62px;
+    color: #3d8708;
+    width: 29%;
+    height: 49px;
+}
+.caloriab, .nombreb, .caloriab:focus, .nombreb:focus{
+    border-bottom: none !important;
+}
+.resultados input[type=text], .resultados input[type=text]:focus{
+     border-bottom: none !important;
+     -webkit-box-shadow: 0 0 0 !important; 
+    -moz-box-shadow: 0 0 0 !important;
+    box-shadow: 0 0 0 !important;
+    cursor: pointer;
+}
+input#ContentPlaceHolder1_repalimentos_txtNombre_0{
+    border-bottom: none !important;
+}
+input#ContentPlaceHolder1_repalimentos_txtCaloria_0, .caloriab, .resultados span input[type=text]{
+        color: #3d8708 !important;
+        border-bottom: none;
+        cursor: pointer;
+}
+.resultados a h6, .resultados a span{
+    cursor: pointer;
+}
+.buscador-food{
+    padding-left: 0px;
 }
 .resultados li p{
         margin-top: 0px;
@@ -899,8 +938,12 @@ input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button{
         width: 188px;
 }
 .search-blog form .input-field{
-        margin-top: 34px;
+    margin-top: 34px;
     width: 100%;
+}
+.search-blog .input-field {
+    text-align: right;
+    float: right;
 }
 .search-blog form input{
         border: none;
@@ -982,6 +1025,11 @@ input#ContentPlaceHolder1_busqueda{
 }
 nav.searchnav{
     margin-bottom: 30px;
+}
+input#ContentPlaceHolder1_btnActualizarInfoGral, input#ContentPlaceHolder1_btnActualizarDatosFisicos, input.waves-button-input{
+    font-style: normal;
+    border: none;
+        background-color: #ff9800;
 }
 
 

@@ -5,7 +5,7 @@
 
 <div class="row seccionFood">
     <div class="container">
-        <h3>Hamburguesa Doble</h3>
+        <h3><asp:Label ID="LblNombre" runat="server"></asp:Label></h3>
     </div>
 </div><!--/seccionFood-->
 
@@ -22,23 +22,23 @@
 
         <div class="col l9 m9 s12 home">
             <div class="divtop">
-                <h5>Información Nutricional por Porción</h5>
+                <h5>Información Nutricional por Porción (100gr.)</h5>
                 <ul class="datosFood">
                     <li>
-                        <h6>197</h6>
+                        <h6><asp:Label ID="LblCalo" runat="server"></asp:Label></h6>
                         <span>Calorías</span>
                     </li>
                     <li>
-                        <h6>197</h6>
+                        <h6><asp:Label ID="LblCarbo" runat="server"></asp:Label></h6>
+                        <span>Carbo.</span>
+                    </li>
+                    <li>
+                        <h6><asp:Label ID="LblProt" runat="server"></asp:Label></h6>
                         <span>Proteínas</span>
                     </li>
                     <li>
-                        <h6>197</h6>
+                        <h6><asp:Label ID="LblGrasa" runat="server"></asp:Label></h6>
                         <span>Grasas</span>
-                    </li>
-                    <li>
-                        <h6>197</h6>
-                        <span>Carbo.</span>
                     </li>
                 </ul>
             </div>
@@ -46,92 +46,87 @@
                     <div class="col s12 ingresos-food">
                         <div class="row nobottom">
                             <div class="input-field col s12">
-                                <select>
-                                    <option value="" disabled selected>Ingresar a:</option>
-                                    <option value="1">Almuerzo</option>
-                                    <option value="2">Merienda</option>
-                                    <option value="3">Cena</option>
-                                    <option value="3">Aperitivos</option>
-                                </select>
+                                <asp:Label ID="Lbllista" runat="server" Text="Ingresar a:"></asp:Label>
+                                <asp:DropDownList ID="ddlComidaTipo" runat="server">
+                                    <asp:listitem value ="1"> Desayuno </asp:listitem>
+                                    <asp:listitem value ="2"> Almuerzo </asp:listitem>
+                                    <asp:listitem value ="3"> Merienda </asp:listitem>
+                                    <asp:listitem value ="4"> Cena </asp:listitem>
+                                    <asp:listitem value ="5"> Aperitivo </asp:listitem>
+                                </asp:DropDownList>
                              </div>
                         </div>
                         <div class="row nobottom">
                             <div class="input-field col s12">
-                                <input id="porcion" type="text" class="validate altercalendar porcion">
+                                <asp:TextBox id="porcion" class="validate altercalendar porcion" runat="server"></asp:TextBox> 
                                 <label for="porcion">Porción:</label>
                             </div>
                         </div>
-                        <div class="row nobottom">
-                            <div class="input-field col s12">
-                                <select>
-                                    <option value="" disabled selected>Elegir Medida:</option>
-                                    <option value="1">200 grs.</option>
-                                    <option value="2">20 kg.</option>
-                                    <option value="3">90 grs.</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button class="btn waves-effect orange btn-ingresar" type="submit" name="action">
-                            Ingresar
-                        </button>
+                        <input type="hidden" ID="Hidden1" runat="server"/>
+                        <ASP:Button class="btn waves-effect orange btn-ingresar" ID="ingresar" type="submit" Text="Ingresar" OnClick="ingresar_Click" runat="server">    
+                        </ASP:Button>
                  </div>
             </div><!--/row-->
             <div class="row mtop">
-                <h4 class="listaHeader">Información General</h4>
+                <h4 class="listaHeader">Información General (gr.)</h4>
                <ul class="infogral">
                    <li>
                        <h6>Calorías</h6>
-                       <span>20g.</span>
+                       <span><asp:Label ID="LblCalo2" runat="server"></asp:Label></span>
                    </li>
                    <li>
                        <h6>Carbohidratos</h6>
-                       <span>20g.</span>
+                       <span><asp:Label ID="lblCarbo2" runat="server"></asp:Label></span>
                    </li>
                    <li>
-                       <h6>Azúcares</h6>
-                       <span>20g.</span>
+                       <h6>Proteínas</h6>
+                       <span><asp:Label ID="LblProt2" runat="server"></asp:Label></span>
                    </li>
                    <li>
-                       <h6>Sodio</h6>
-                       <span>20g.</span>
+                       <h6>Grasas</h6>
+                       <span><asp:Label ID="LblGrasa2" runat="server"></asp:Label></span>
                    </li>
                    <li>
                        <h6>Agua</h6>
-                       <span>20g.</span>
+                       <span><asp:Label ID="LblAgua" runat="server"></asp:Label></span>
+                   </li>
+                   <li>
+                       <h6>Fibra</h6>
+                       <span><asp:Label ID="LblFibra" runat="server"></asp:Label></span>
                    </li>
                </ul>
             </div><!--/row-->
                 <div class="row mtop">
-                    <h4 class="listaHeader">Vitaminas</h4>
+                    <h4 class="listaHeader">Vitaminas (mg.)</h4>
                     <ul class="infogral">
                         <li>
-                            <h6>Vitamina A</h6>
-                            <span>20 mg.</span>
+                            <h6>Vitamina B1</h6>
+                            <span><asp:Label ID="LblB1" runat="server"></asp:Label></span>
                         </li>
                         <li>
-                            <h6>Vitamina B</h6>
-                            <span>20g.</span>
+                            <h6>Vitamina B2</h6>
+                            <span><asp:Label ID="LblB2" runat="server"></asp:Label></span>
+                        </li>
+                        <li>
+                            <h6>Vitamina B3</h6>
+                            <span><asp:Label ID="LblB3" runat="server"></asp:Label></span>
                         </li>
                         <li>
                             <h6>Vitamina C</h6>
-                            <span>20g.</span>
+                            <span><asp:Label ID="LblVitC" runat="server"></asp:Label></span>
                         </li>
                     </ul>
                 </div><!--/row-->
                 <div class="row mtop">
-                    <h4 class="listaHeader">Minerales</h4>
+                    <h4 class="listaHeader">Minerales (mg.)</h4>
                     <ul class="infogral">
                         <li>
                             <h6>Calcio</h6>
-                            <span>20 mg.</span>
+                            <span><asp:Label ID="LblCal" runat="server"></asp:Label></span>
                         </li>
                         <li>
-                            <h6>Cobre</h6>
-                            <span>20g.</span>
-                        </li>
-                        <li>
-                            <h6>Hierros</h6>
-                            <span>20g.</span>
+                            <h6>Hierro</h6>
+                            <span><asp:Label ID="LblHie" runat="server"></asp:Label></span>
                         </li>
                     </ul>
                 </div><!--/row-->

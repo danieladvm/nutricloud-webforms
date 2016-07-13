@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using nutricloud_webforms.DataBase;
+using System;
 
 namespace nutricloud_webforms.Repositories
 {
@@ -27,6 +28,15 @@ namespace nutricloud_webforms.Repositories
         {
             var resultado = (from a in c.alimento where a.alimento1.Contains(parametro) select a).ToList();
 
+            return resultado;
+        }
+
+        public alimento BuscarAlimentoId(string parametro)
+        {
+            int param = Convert.ToInt32(parametro);
+            var resultado = (from a in c.alimento where a.id_alimento == param select a).First();
+
+            
             return resultado;
         }
 
