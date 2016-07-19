@@ -44,6 +44,23 @@
             <asp:AsyncPostBackTrigger ControlID="registrarse" />
         </Triggers>
     </asp:UpdatePanel>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <div class="row">
         <asp:Button ID="registrarse" runat="server" Text="Registrarse" CssClass="btn waves-effect green-nutri btnregistro" OnClick="registrarse_Click" />
     </div>

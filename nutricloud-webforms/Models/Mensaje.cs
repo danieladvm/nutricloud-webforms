@@ -11,5 +11,6 @@ namespace nutricloud_webforms.Models
         public int id_conversacion { get; set; }
         public string Asunto { get; set; }
         public string Texto { get; set; }
+        public int id_remitente { get; set; }
     }
 }

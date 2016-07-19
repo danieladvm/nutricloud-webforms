@@ -33,14 +33,22 @@ namespace nutricloud_webforms
                     ud = ur.Buscar(u.id_usuario);
                     Sesion(u, ud);
 
-                    if (ud == null)
+                    if (u.id_usuario_tipo == 1) //Paciente
                     {
-                        Response.Redirect("Pages/Perfil.aspx");
+                        if (ud == null)
+                        {
+                            Response.Redirect("Pages/Perfil.aspx");
+                        }
+                        else
+                        {
+                            Response.Redirect("Pages/Home.aspx");
+                        }
                     }
-                    else
+                    if (u.id_usuario_tipo == 2) //Profesional
                     {
-                        Response.Redirect("Pages/Home.aspx");
+                        Response.Redirect("Profesionales/Home.aspx");
                     }
+
                 }
 
                 else

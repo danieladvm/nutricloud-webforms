@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace nutricloud_webforms.Pages
+namespace nutricloud_webforms.Profesionales
 {
     public partial class Mensajes : System.Web.UI.Page
     {

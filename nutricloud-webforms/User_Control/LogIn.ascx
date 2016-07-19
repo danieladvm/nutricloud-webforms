@@ -33,6 +33,23 @@
                     <asp:AsyncPostBackTrigger ControlID="ingresar" />
                 </Triggers>
             </asp:UpdatePanel>
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                <ProgressTemplate>
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
             <div class="modal-footer">
                 <asp:Button ID="ingresar" runat="server" Text="Ingresar" CssClass="btn waves-effect green-nutri" OnClick="Button_Aceptar_Click" />
                 <a href="#">Olvidaste tu contraseña?</a>

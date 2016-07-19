@@ -7,10 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nutricloud_webforms {
+namespace nutricloud_webforms.User_Control {
     
     
-    public partial class LogIn {
+    public partial class Mensajes {
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -22,66 +31,84 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// LblMail control.
+        /// rConversaciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblMail;
+        protected global::System.Web.UI.WebControls.Repeater rConversaciones;
         
         /// <summary>
-        /// TxtEmail control.
+        /// btnNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtEmail;
+        protected global::System.Web.UI.WebControls.Button btnNuevo;
         
         /// <summary>
-        /// LblPass control.
+        /// pnlMsjs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblPass;
+        protected global::System.Web.UI.WebControls.Panel pnlMsjs;
         
         /// <summary>
-        /// TxtPass control.
+        /// lblCerrada control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtPass;
+        protected global::System.Web.UI.WebControls.Label lblCerrada;
         
         /// <summary>
-        /// pnlErrores control.
+        /// btnCerrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlErrores;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
         
         /// <summary>
-        /// UpdateProgress1 control.
+        /// pnlNuevoMsj control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.WebControls.Panel pnlNuevoMsj;
         
         /// <summary>
-        /// ingresar control.
+        /// TxtAsunto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ingresar;
+        protected global::System.Web.UI.WebControls.TextBox TxtAsunto;
+        
+        /// <summary>
+        /// TxtMensaje control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtMensaje;
+        
+        /// <summary>
+        /// btnenviar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnenviar;
     }
 }

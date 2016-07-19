@@ -30,11 +30,12 @@
                         <div class="col s12 m12 resultados">
                             <h5>Resultados de Búsqueda</h5>
                             <ul>
-                               <asp:Repeater ID="repalimentos" runat="server">
+                                <asp:Repeater ID="repalimentos" runat="server">
                                     <ItemTemplate>
                                         <li>
-                                                <h6><a href='Alimento.aspx?Idalimento=<%#Eval("id_alimento") %>'><%# Eval("alimento1") %></a></h6>
-                                               <span><asp:Label ID="LblCaloria" runat="server" Text='<%# Eval("energia_kcal") %>' CssClass="caloriab"></asp:Label></span>
+                                            <h6><a href='Alimento.aspx?Idalimento=<%#Eval("id_alimento") %>'><%# Eval("alimento1") %></a></h6>
+                                            <span>
+                                                <asp:Label ID="LblCaloria" runat="server" Text='<%# Eval("energia_kcal") %>' CssClass="caloriab"></asp:Label></span>
                                         </li>
                                     </ItemTemplate>
                                 </asp:Repeater>
