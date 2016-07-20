@@ -71,7 +71,8 @@ namespace nutricloud_webforms.Repositories
             if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
             {
                 return (from co in c.consulta_conversacion
-                        where co.id_usuario_destinatario == null || co.id_usuario_destinatario == usuario.Usuario.id_usuario
+                        where (co.id_usuario_destinatario == null && !co.cerrada) ||
+                        co.id_usuario_destinatario == usuario.Usuario.id_usuario
                         orderby co.f_ultimo_mensaje descending
                         select co).ToList();
             }

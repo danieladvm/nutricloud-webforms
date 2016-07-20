@@ -13,6 +13,7 @@ namespace nutricloud_webforms.User_Control
     public partial class Mensajes : System.Web.UI.UserControl
     {
         ConversacionRepository cr = new ConversacionRepository();
+        ValidRepository vr = new ValidRepository();
         UsuarioCompleto usuario;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -42,8 +43,11 @@ namespace nutricloud_webforms.User_Control
 
         protected void btnenviar_Click(object sender, EventArgs e)
         {
-            int id_conversacion = cr.Insertar(MapeaMensajeEnviado(), this.usuario);
-            Actualiza(id_conversacion);
+            if (vr.ValidaVacio(TxtAsunto.Text) && vr.ValidaVacio(TxtMensaje.Text))
+            {
+                int id_conversacion = cr.Insertar(MapeaMensajeEnviado(), this.usuario);
+                Actualiza(id_conversacion);
+            }
         }
 
         protected void lnkConversacion_Click(object sender, EventArgs e)
@@ -57,26 +61,38 @@ namespace nutricloud_webforms.User_Control
         {
             consulta_conversacion cc = cr.GetConversacion(id_conversacion);
 
-            Label label;
+            Panel pnlMensaje;
+            Label lblMensaje;
+            Label lblFecha;
+
             TxtAsunto.Text = cc.asunto;
             TxtAsunto.Enabled = false;
 
             foreach (var item in cr.ListarMensajes(id_conversacion, this.usuario))
             {
-                label = new Label();
-                label.Text = item.mensaje;
-                label.CssClass = "msj";
+                pnlMensaje = new Panel();
+                pnlMensaje.CssClass = "msj";
 
                 if (this.usuario.Usuario.id_usuario == item.id_usuario_remitente)
                 {
-                    label.CssClass += " msj-enviado";
+                    pnlMensaje.CssClass += " msj-enviado";
                 }
                 else
                 {
-                    label.CssClass += " msj-recibido";
+                    pnlMensaje.CssClass += " msj-recibido";
                 }
 
-                pnlMsjs.Controls.Add(label);
+                lblMensaje = new Label();
+                lblMensaje.Text = item.mensaje;
+
+                lblFecha = new Label();
+                lblFecha.Text = item.f_mensaje.ToString();
+                lblFecha.CssClass = "msj-fecha";
+
+                pnlMensaje.Controls.Add(lblMensaje);
+                pnlMensaje.Controls.Add(lblFecha);
+
+                pnlMsjs.Controls.Add(pnlMensaje);
             }
 
             if (cc.cerrada)
@@ -87,9 +103,19 @@ namespace nutricloud_webforms.User_Control
             }
             else
             {
-                lblCerrada.Visible = false;
-                btnCerrar.Visible = true;
-                pnlNuevoMsj.Visible = true;
+                if (this.usuario.Usuario.id_usuario == cc.id_usuario_destinatario ||
+                    this.usuario.Usuario.id_usuario == cc.id_usuario_remitente)
+                {
+                    lblCerrada.Visible = false;
+                    btnCerrar.Visible = true;
+                    pnlNuevoMsj.Visible = true;
+                }
+                else
+                {
+                    lblCerrada.Visible = false;
+                    btnCerrar.Visible = false;
+                    pnlNuevoMsj.Visible = true;
+                }
             }
 
             SetSessionIdConversacion(id_conversacion);

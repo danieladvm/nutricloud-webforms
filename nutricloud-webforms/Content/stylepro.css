@@ -31,4 +31,68 @@ nav .nav-wrapper i .sobre{
     padding: 20px;
 }
 
+/* Mensajes */
+.msj {
+    display: block;
+    padding: 10px;
+    border: solid #fff;
+    border-radius: 10px;
+}
+
+.msj-enviado {
+    margin-left: 30%;
+    background-color: #085787;
+    color: #fff;
+}
+
+.msj-recibido {
+    margin-right: 30%;
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+.msj-fecha {
+    display: block;
+    font-size: x-small;
+    text-align: right;
+}
+
+.container-cerrar {
+    text-align: center;
+    padding: 5px;
+}
+
+.container.mensajes {
+    padding-top: 10px;
+}
+
+#ContentPlaceHolder1_ucMensajes_UpdatePanel1 {
+    padding: 10px 0;
+}
+
+#ContentPlaceHolder1_ucMensajes_pnlMsjs {
+    height: 250px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px #085787; 
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 10px #085787;
+}
+::-moz-selection {
+    background: #085787;
+    color: #fff;
+}
+
+::selection {
+    background: #085787;
+    color: #fff;
+}
     

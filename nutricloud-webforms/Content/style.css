@@ -1235,6 +1235,12 @@ input#ContentPlaceHolder1_btnActualizarInfoGral, input#ContentPlaceHolder1_btnAc
     color: #000;
 }
 
+.msj-fecha {
+    display: block;
+    font-size: x-small;
+    text-align: right;
+}
+
 .container-cerrar {
     text-align: center;
     padding: 5px;
@@ -1258,12 +1264,13 @@ input#ContentPlaceHolder1_btnActualizarInfoGral, input#ContentPlaceHolder1_btnAc
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 1px #3D8708; 
+    -webkit-box-shadow: inset 0 0 1px #3D8708;
 }
 
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 10px #3D8708;
 }
+
 ::-moz-selection {
     background: #3D8708;
     color: #fff;
@@ -1273,4 +1280,3 @@ input#ContentPlaceHolder1_btnActualizarInfoGral, input#ContentPlaceHolder1_btnAc
     background: #3D8708;
     color: #fff;
 }
-/*61 135 8 1*/
