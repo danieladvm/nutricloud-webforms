@@ -8,7 +8,7 @@
             <div class="modalrow green-nutri">
                 <h4>Iniciar Sesión</h4>
             </div>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <asp:UpdatePanel ID="UpdatePanelLogin" runat="server">
                 <ContentTemplate>
                     <div class="row nomargin nobottom">
                         <div class="row nomargin nobottom">
@@ -33,18 +33,22 @@
                     <asp:AsyncPostBackTrigger ControlID="ingresar" />
                 </Triggers>
             </asp:UpdatePanel>
-            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+            <asp:UpdateProgress ID="UpdateProgressLogin" runat="server">
                 <ProgressTemplate>
-                    <div class="preloader-wrapper small active">
-                        <div class="spinner-layer spinner-green-only">
-                            <div class="circle-clipper left">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="gap-patch">
-                                <div class="circle"></div>
-                            </div>
-                            <div class="circle-clipper right">
-                                <div class="circle"></div>
+                    <div class="row nomargin nobottom">
+                        <div class="col s4 offset-s4 center">
+                            <div class="preloader-wrapper small active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

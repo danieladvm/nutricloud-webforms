@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SignIn.ascx.cs" Inherits="nutricloud_webforms.SignIn" %>
 <div class="col l4 m12 s12 pcipal-index">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanelSignin" runat="server">
         <ContentTemplate>
             <div class="row nobottom">
                 <div class="col s12">
@@ -44,18 +44,22 @@
             <asp:AsyncPostBackTrigger ControlID="registrarse" />
         </Triggers>
     </asp:UpdatePanel>
-    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+    <asp:UpdateProgress ID="UpdateProgressSignin" runat="server">
         <ProgressTemplate>
-            <div class="preloader-wrapper small active">
-                <div class="spinner-layer spinner-green-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
+            <div class="row nomargin nobottom">
+                <div class="col s4 offset-s4 center">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-green-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

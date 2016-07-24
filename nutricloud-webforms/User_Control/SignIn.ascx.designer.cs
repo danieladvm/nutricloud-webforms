@@ -13,13 +13,13 @@ namespace nutricloud_webforms {
     public partial class SignIn {
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// UpdatePanelSignin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelSignin;
         
         /// <summary>
         /// txtEmail control.
@@ -67,13 +67,13 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.Panel pnlErrores;
         
         /// <summary>
-        /// UpdateProgress1 control.
+        /// UpdateProgressSignin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdateProgress UpdateProgressSignin;
         
         /// <summary>
         /// registrarse control.
