@@ -25,11 +25,11 @@ INSERT [dbo].[usuario_objetivo] ([id_usuario_objetivo], [usuario_objetivo]) VALU
 SET IDENTITY_INSERT [dbo].[usuario_objetivo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[comida_tipo] ON
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (1, N'Desayuno')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (2, N'Almuerzo')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (3, N'Merienda')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (4, N'Cena')
-INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo]) VALUES (5, N'Aperitivo')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo], [imagen]) VALUES (1, N'Desayuno', N'healthy-breakfast.png')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo], [imagen]) VALUES (2, N'Almuerzo', N'salad-bowl.png')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo], [imagen]) VALUES (3, N'Merienda', N'oatmeal.png')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo], [imagen]) VALUES (4, N'Cena', N'dinner.png')
+INSERT [dbo].[comida_tipo] ([id_comida_tipo], [comida_tipo], [imagen]) VALUES (5, N'Aperitivo', N'coffee.png')
 SET IDENTITY_INSERT [dbo].[comida_tipo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[alimento_genero] ON

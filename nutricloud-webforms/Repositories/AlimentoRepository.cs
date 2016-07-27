@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity.Core.Objects;
 using nutricloud_webforms.DataBase;
-using System;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms.Repositories
 {
@@ -21,6 +23,17 @@ namespace nutricloud_webforms.Repositories
         {
             alimento al = (from a in c.alimento where a.id_alimento == idali select a).FirstOrDefault();
             return al;
+        }
+
+        public ObjectResult<sp_alimento_diario_Result> ListarDiario(int id_usuario, int id_comida_tipo, DateTime fecha)
+        {
+            return c.sp_alimento_diario(id_usuario, id_comida_tipo, fecha);
+        }
+
+        public List<comida_tipo> ListarTipoComida()
+        {
+            return (from ct in c.comida_tipo
+                    select ct).ToList();
         }
 
         //buscar y listar alimentos por nombre ingresado

@@ -221,7 +221,8 @@ ALTER TABLE [dbo].[usuario_muro] CHECK CONSTRAINT [FK_usuario_muro_usuario]
 GO
 create table comida_tipo (
 	id_comida_tipo int identity(1,1) primary key,
-	comida_tipo varchar(30) not null
+	comida_tipo varchar(30) not null,
+	imagen varchar(50) null
 )
 go
 CREATE TABLE [dbo].[usuario_alimento](

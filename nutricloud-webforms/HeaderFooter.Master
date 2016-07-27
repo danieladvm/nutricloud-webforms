@@ -185,15 +185,37 @@
 
     <script>
         $(function () {
+            CargaComidas();
+
             $("#datepicker").datepicker({
                 showOn: "button",
                 buttonImage: "../../content/img/calendario.png",
                 buttonImageOnly: true,
                 buttonText: "Seleccione la Fecha",
                 altField: "#alternate",
-                altFormat: "DD, d MM, yy"
+                altFormat: "DD, d MM, yy",
+                onSelect: function () {
+                    CargaComidas();
+                }
             });
         });
+
+        function CargaComidas() {
+            var fechaSeleccionada = $("#alternate").val();
+
+            $.ajax({
+                type: "POST",
+                url: "Home.aspx/GetAlimentos",
+                data: "{fecha:'" + fechaSeleccionada + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    // How to return data here like a table???  
+                    $("#lista-comidas").html(msg.d);
+                    //alert(msg.d);
+                }
+            });
+        }
     </script>
     <script>
         $(document).ready(function () {
