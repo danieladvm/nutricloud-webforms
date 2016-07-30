@@ -48,17 +48,22 @@ namespace nutricloud_webforms
                 sb.Append("<div class='card-content orange-text text-darken-3'>");
                 sb.Append("<img src='../Content/img/" + tipoComida.imagen + "' class='responsive-img icon-food' />");
                 sb.Append("<h4>" + tipoComida.comida_tipo1 + "</h4>");
-                sb.Append("<ul>");
-                sb.Append("<li>");
 
                 foreach (var comida in ar.ListarDiario(idUsuario, tipoComida.id_comida_tipo, f))
                 {
+                    sb.Append("<div class='row item-alimento'>");
+                    sb.Append("<div class='col s8'>");
                     sb.Append("<span class='alimento'>" + comida.alimento + "</span>");
-                    sb.Append("<span>" + comida.cantidad + "</span>");
+                    sb.Append("</div>");
+                    sb.Append("<div class='col s4'>");
+                    sb.Append("<span class='calorias'>" + comida.energia_kcal + "kcal</span>");
+                    sb.Append("</div>");
+                    sb.Append("<div class='col s12'>");
+                    sb.Append("<span class='cantidad'>" + comida.cantidad + comida.unidad_medida + "</span>");
+                    sb.Append("</div>");
+                    sb.Append("</div>");
                 }
-
-                sb.Append("</li>");
-                sb.Append("</ul>");
+                
                 sb.Append("</div>");
                 sb.Append("<div class='card-action action-home'>");
                 sb.Append("<a href='#'>Editar</a>");
@@ -113,7 +118,7 @@ namespace nutricloud_webforms
 
                 */
 
-            return sb.ToString();
+                    return sb.ToString();
         }
     }
 }

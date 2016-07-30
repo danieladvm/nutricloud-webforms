@@ -598,10 +598,23 @@ a.modal-action.modal-close.green-nutri.btn-flat {
     vertical-align: middle;
 }
 
-.alimento::after {
-    content: "-";
-    margin-left: 6px;
-    margin-right: 6px;
+div.row.item-alimento {
+    width: 100%;
+    border-bottom: solid 1px #3D8708;
+    padding: 5px;
+}
+
+span.alimento {
+    font-size: large;
+}
+
+span.cantidad {
+    font-size: small;
+    color: gray;
+}
+
+span.calorias {
+    font-size: medium;
 }
 
 .list-food {

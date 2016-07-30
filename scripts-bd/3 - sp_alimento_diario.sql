@@ -1,5 +1,6 @@
-
-create proc sp_alimento_diario (
+use nutricloud
+go
+alter proc sp_alimento_diario (
 	@id_usuario int,
 	@id_comida_tipo int,
 	@fecha datetime
@@ -16,9 +17,13 @@ BEGIN
 	,ua.f_ingreso
 
 	,al.alimento
-	,al.energia_kcal
+	,CONVERT(decimal(5,2), ua.cantidad * al.energia_kcal / al.porcion) energia_kcal
+
+	,at.unidad_medida
+
 	From usuario_alimento ua
 	Inner join alimento al on al.id_alimento = ua.id_alimento
+	inner join alimento_tipo at on at.id_alimento_tipo = al.id_alimento_tipo
 	where ua.id_usuario = @id_usuario
 	and ua.id_comida_tipo = @id_comida_tipo
 	and DAY(ua.f_ingreso) = DAY(@fecha)

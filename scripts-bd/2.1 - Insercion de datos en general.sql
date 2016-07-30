@@ -2,7 +2,7 @@ USE [nutricloud]
 GO
 SET IDENTITY_INSERT [dbo].[alimento_tipo] ON 
 INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (1, N'Sólidos', N'gr')
-INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (2, N'Líquidos', N'l')
+INSERT [dbo].[alimento_tipo] ([id_alimento_tipo], [alimento_tipo], [unidad_medida]) VALUES (2, N'Líquidos', N'ml')
 SET IDENTITY_INSERT [dbo].[alimento_tipo] OFF
 GO
 SET IDENTITY_INSERT [dbo].[usuario_actividad] ON
