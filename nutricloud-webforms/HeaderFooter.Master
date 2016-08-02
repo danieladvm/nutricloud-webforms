@@ -42,6 +42,8 @@
 <body id="top" class="scrollspy">
 
     <!-- Pre Loader -->
+    
+<form id="formHeaderFooter" runat="server">
     <div id="loader-wrapper">
         <div id="loader"></div>
 
@@ -72,7 +74,7 @@
                                 <div class="number">2</div>
                             </a>
                             </li>
-                            <li><a href="pages/logout.aspx">Cerrar Sesión</a></li>
+                            <li><ASP:LinkButton id="logout" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></ASP:LinkButton></li>
                         </ul>
                         <a href="#" data-activates="nav-mobile" class="button-collapse">
                             <i class="material-icons">menu</i>
@@ -82,9 +84,7 @@
             </nav>
         </div>
     </div>
-
-    <form id="formHeaderFooter" runat="server">
-        <div>
+    <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -198,6 +198,7 @@
                 onSelect: function () {
                     CargaComidas();
                 }
+                altFormat: "DD, d MM, yy"
             });
         });
 

@@ -13,5 +13,10 @@ namespace nutricloud_webforms
         {
 
         }
+    protected void logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("~/Default.aspx");
+        }
     }
 }

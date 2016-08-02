@@ -17,10 +17,12 @@ namespace nutricloud_webforms
             }
         }
 
-        protected void lbCerrarSesion_Click(object sender, EventArgs e)
+        protected void logout_Click(object sender, EventArgs e)
         {
             Session.Abandon();
             Response.Redirect("~/Default.aspx");
         }
+
     }
+
 }
