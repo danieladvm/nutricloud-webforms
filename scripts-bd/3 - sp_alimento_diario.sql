@@ -1,6 +1,8 @@
 use nutricloud
 go
-alter proc sp_alimento_diario (
+drop proc sp_alimento_diario
+go
+create proc sp_alimento_diario (
 	@id_usuario int,
 	@id_comida_tipo int,
 	@fecha datetime

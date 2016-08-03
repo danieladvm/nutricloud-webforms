@@ -8,6 +8,7 @@ drop table comida_tipo
 drop table alimento
 drop table alimento_tipo
 drop table alimento_genero
+drop view v_usuario_muro
 drop table usuario_receta
 drop table usuario_muro
 drop table usuario_datos
@@ -395,3 +396,14 @@ ALTER TABLE [dbo].[usuario_idr]  WITH CHECK ADD  CONSTRAINT [FK_usuario_idr_usua
 REFERENCES [dbo].[usuario] ([id_usuario])
 GO
 ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
+
+GO
+
+CREATE VIEW [dbo].[v_usuario_muro]
+AS
+SELECT um.id_usuario AS id_usuario_seguido, us.nombre AS nombre_usuario_seguido, um.estado, um.f_publicacion, us.sexo, uu.id_usuario_seguidor
+FROM dbo.usuario_muro AS um INNER JOIN
+dbo.usuario_usuario AS uu ON uu.id_usuario_seguido = um.id_usuario INNER JOIN
+dbo.usuario AS us ON us.id_usuario = um.id_usuario
+
+GO
