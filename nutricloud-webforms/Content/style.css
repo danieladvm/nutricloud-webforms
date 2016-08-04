@@ -604,7 +604,11 @@ div.row.item-alimento {
     padding: 5px;
 }
 
-span.alimento {
+div.row.item-alimento a {
+    color: #ef6c00 !important;
+}
+
+a.alimento {
     font-size: large;
 }
 

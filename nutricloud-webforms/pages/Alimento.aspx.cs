@@ -42,7 +42,7 @@ namespace nutricloud_webforms
             LblB2.Text = Convert.ToString(a.rivoflavina_mg);
             LblB3.Text = Convert.ToString(a.niacina_mg);
             Hidden1.Value = Convert.ToString(a.id_alimento);
-         }
+        }
 
         protected void ingresar_Click(object sender, EventArgs e)
         {
@@ -54,23 +54,18 @@ namespace nutricloud_webforms
 
             diario.id_alimento = a.id_alimento;
             diario.id_comida_tipo = Convert.ToInt32(ddlComidaTipo.SelectedValue);
-            if (a.id_alimento_tipo == 1)
-            {
-                diario.id_unidad_medida = 1;
-            }
-            else diario.id_unidad_medida = 2;
             diario.id_usuario = Convert.ToInt32(UsuarioCompleto.Usuario.id_usuario);
             diario.cantidad = Convert.ToInt32(porcion.Text);
             diario.f_ingreso = DateTime.Today;
 
 
             if (diario != null)
-            { 
-            dr.IngresarAlimentoDiario(diario);
-            Response.Redirect("Pages/Home.aspx");
+            {
+                dr.IngresarAlimentoDiario(diario);
+                Response.Redirect("Pages/Home.aspx");
             }
 
         }
 
-        }
+    }
 }
