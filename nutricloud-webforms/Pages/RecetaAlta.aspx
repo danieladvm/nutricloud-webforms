@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPro.Master" AutoEventWireup="true" CodeBehind="RecetaAlta.aspx.cs" Inherits="nutricloud_webforms.pages.Entrada" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPro.Master" AutoEventWireup="true" CodeBehind="RecetaAlta.aspx.cs" Inherits="nutricloud_webforms.pages.RecetaAlta" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 

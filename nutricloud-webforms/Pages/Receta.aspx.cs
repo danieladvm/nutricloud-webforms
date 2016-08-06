@@ -10,7 +10,7 @@ using nutricloud_webforms.DataBase;
 
 namespace nutricloud_webforms.pages
 {
-    public partial class Nota : System.Web.UI.Page
+    public partial class Receta : System.Web.UI.Page
     {
         private RecetaRepository recetaRepository = new RecetaRepository();
         private usuario_receta receta;

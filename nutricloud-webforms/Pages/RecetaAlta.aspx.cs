@@ -6,7 +6,7 @@ using System.IO;
 
 namespace nutricloud_webforms.pages
 {
-    public partial class Entrada : System.Web.UI.Page
+    public partial class RecetaAlta : System.Web.UI.Page
     {
 
         private RecetaRepository recetaRepository = new RecetaRepository();
@@ -28,7 +28,6 @@ namespace nutricloud_webforms.pages
 
                 if (imagenReceta.HasFile)
                 {
-                    // Genero con la fecha actual un nombre de archivo que sea irrepetible
                     string dateTimeNow = SeguridadRepository.Encriptar(DateTime.Now.ToString());
                     string fileExtension = Path.GetExtension(imagenReceta.PostedFile.FileName);
                     newFileName = usuario.Usuario.id_usuario + "-" + dateTimeNow + fileExtension;
