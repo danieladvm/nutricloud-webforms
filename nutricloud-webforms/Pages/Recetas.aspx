@@ -26,7 +26,8 @@
                     <ItemTemplate>
                         <asp:LinkButton CommandArgument=<%# Eval("id_usuario_receta") %> class="collection-item" OnClick="VerReceta" runat="server">
                             <div class="row">
-                                <div class="col l3 m3 s12 img-blog responsive-img"></div>
+                                <asp:Image ID="imgReceta" ImageUrl=<%# Eval("imagen_receta") %> CssClass="col l3 m3 s12 img-blog responsive-img" runat="server"/>
+                                <%--<div class="col l3 m3 s12 img-blog responsive-img"></div>--%>
                                 <div class="col l9 m9 s12 note-blog">
                                     <h5><%# Eval("titulo_receta") %></h5>
                                     <p class="grey-text">

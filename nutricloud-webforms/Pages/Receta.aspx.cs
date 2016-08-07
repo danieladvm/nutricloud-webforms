@@ -21,10 +21,12 @@ namespace nutricloud_webforms.pages
             this.receta = recetaRepository.getReceta(id);
             receta_titulo.InnerHtml = this.receta.titulo_receta;
             receta_texto.InnerHtml = this.receta.receta;
+            receta_descripcion.InnerHtml = this.receta.descripcion_receta;
 
-            if (this.receta.imagen_receta != null)
+            if (this.receta.imagen_receta != null && this.receta.imagen_receta != "")
             {
                 imgReceta.ImageUrl = "../../content/img/recetas/" + this.receta.imagen_receta;
+                imgReceta.CssClass = "imgentrada responsive-img";
             }
         }
 
@@ -43,7 +45,7 @@ namespace nutricloud_webforms.pages
                 string serverPath = Server.MapPath("~/Content/img/recetas/");
                 File.Delete(serverPath + this.receta.imagen_receta);
 
-                //TODO mostrar msj de exito y redirigir
+                //TODO mostrar msj de exito y redirigirbklhoihoihkjklkl
             }
             catch (Exception ex)
             {

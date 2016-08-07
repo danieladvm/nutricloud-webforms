@@ -7,19 +7,27 @@
     </div>
 
     <div class="container">
-        <form runat="server">
-            <div class="row">
-                <div class="col s10">
-                    <asp:FileUpload ID="imagenReceta" runat="server" />
+        <div class="row">
+             
+            <form runat="server">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Imagen</span>
+                        <asp:FileUpload ID="imagenReceta" runat="server"/>
+                     </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                    <asp:TextBox runat="server" ID="titulo_receta"></asp:TextBox>
-                    <asp:TextBox runat="server" ID="descripcion_receta"></asp:TextBox>
-                    <asp:TextBox ID="receta_texto" TextMode="MultiLine" runat="server" ValidateRequestMode="Disabled"></asp:TextBox>
-                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EditarReceta" Text="Guardar"></asp:LinkButton> 
-            </div>
-        </form>
+                <h6>Título</h6>
+                <asp:TextBox runat="server" ID="titulo_receta"></asp:TextBox>
+                <h6>Descripción</h6>
+                <asp:TextBox runat="server" ID="descripcion_receta"></asp:TextBox>
+                <h6 style="padding-bottom: 20px;">Receta</h6>
+                <asp:TextBox ID="receta_texto" TextMode="MultiLine" runat="server" ValidateRequestMode="Disabled"></asp:TextBox>
+                <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EditarReceta" Text="Guardar"></asp:LinkButton> 
+            </form>    
+        </div>
     </div>
     <!--/container-->
     <style>

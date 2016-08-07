@@ -18,10 +18,16 @@
         <div class="row">
             <div class="col l9 m12 s12">
                 <div class="row">
-                    <div class="col l6 s12">
-                        <asp:Image ID="imgReceta" CssClass="imgentrada responsive-img" runat="server"/>
-                        <span class="sharenote"><i class="material-icons">share</i></span>
+                    <div class="col offset-m3 m6 s12">
+                        <asp:Image ID="imgReceta" runat="server"/>
                      </div>
+                </div>
+                 <div class="row">
+                    <div class="col l10 s12">
+                        <i>
+                            <div id="receta_descripcion" runat="server"></div>
+                        </i>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col l10 s12">

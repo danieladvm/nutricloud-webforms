@@ -19,6 +19,15 @@ namespace nutricloud_webforms.Pages
 
             foreach (var r in list)
             {
+                if (r.imagen_receta != null && r.imagen_receta != "")
+                {
+                    r.imagen_receta = "../../content/img/recetas/" + r.imagen_receta;
+                }
+                else
+                {
+                    r.imagen_receta = null;
+                }
+
                 if (r.receta.Length > 100)
                 {
                     r.receta = r.receta.Substring(0, 100) + "...";

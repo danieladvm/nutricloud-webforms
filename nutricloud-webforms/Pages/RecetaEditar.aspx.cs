@@ -3,6 +3,7 @@ using nutricloud_webforms.Repositories;
 using nutricloud_webforms.DataBase;
 using nutricloud_webforms.Models;
 using System.IO;
+using System.Text;
 
 namespace nutricloud_webforms.Pages
 {
@@ -14,48 +15,58 @@ namespace nutricloud_webforms.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            int id = int.Parse(Request.QueryString["idReceta"]);
+            this.receta = recetaRepository.getReceta(id);
+
             if (!IsPostBack)
             {
-                int id = int.Parse(Request.QueryString["idReceta"]);
-                this.receta = recetaRepository.getReceta(id);
                 titulo_receta.Text = this.receta.titulo_receta;
                 descripcion_receta.Text = this.receta.descripcion_receta;
                 receta_texto.Text = this.receta.receta;
             }
+        }
 
+        protected void onload(object sender, EventArgs e)
+        {
+            string x = "hola";
         }
 
         protected void EditarReceta(object sender, EventArgs e)
         {
+            usuario_receta receta = new usuario_receta();
+            receta = this.receta;
+            UsuarioCompleto usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            if (imagenReceta.HasFile)
+            {
+                StringBuilder fileName = new StringBuilder();
+                fileName.Append(usuario.Usuario.id_usuario + "-");
+                fileName.Append(DateTime.Now.Year);
+                fileName.Append("." + DateTime.Now.Month);
+                fileName.Append("." + DateTime.Now.Day);
+                fileName.Append("." + DateTime.Now.Hour);
+                fileName.Append("." + DateTime.Now.Minute);
+                fileName.Append("." + DateTime.Now.Second);
+                fileName.Append("." + DateTime.Now.Millisecond);
+                fileName.Append(Path.GetExtension(imagenReceta.PostedFile.FileName));
+
+                string serverPath = Server.MapPath("~/Content/img/recetas/");
+                string path = Path.Combine(serverPath, fileName.ToString());
+                imagenReceta.SaveAs(path);
+                receta.imagen_receta = fileName.ToString();
+            }
+
+            receta.receta = receta_texto.Text;
+            receta.titulo_receta = titulo_receta.Text;
+            receta.descripcion_receta = descripcion_receta.Text;
+
             try
             {
-                usuario_receta receta = new usuario_receta();
-                receta = recetaRepository.getReceta(this.receta.id_usuario_receta);
-                UsuarioCompleto usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
-
-                string newFileName = null;
-
-                if (imagenReceta.HasFile)
-                {
-                    string dateTimeNow = SeguridadRepository.Encriptar(DateTime.Now.ToString());
-                    string fileExtension = Path.GetExtension(imagenReceta.PostedFile.FileName);
-                    newFileName = usuario.Usuario.id_usuario + "-" + dateTimeNow + fileExtension;
-                    string serverPath = Server.MapPath("~/Content/img/recetas/");
-                    string path = Path.Combine(serverPath, newFileName);
-                    imagenReceta.SaveAs(path);
-                    receta.imagen_receta = newFileName;
-                }
-
-                receta.receta = receta_texto.Text;
-                receta.titulo_receta = titulo_receta.Text;
-                receta.descripcion_receta = descripcion_receta.Text;
                 recetaRepository.updateReceta(receta);
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
-
-                //TODO mostrar mensaje de error
+                Console.WriteLine(ex.Message);
             }
 
         }

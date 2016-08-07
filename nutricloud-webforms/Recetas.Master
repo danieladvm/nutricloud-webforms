@@ -20,6 +20,8 @@
     <script src="../../scripts/modernizr.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300|Righteous' rel='stylesheet' type='text/css'>
+     <!-- Compiled and minified CSS -->
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">--%>
 
     <!-- Icon -->
     <link rel="apple-touch-icon" sizes="57x57" href="../../content/img/icon/apple-icon-57x57.png">
@@ -231,9 +233,7 @@
         });
     </script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script>tinymce.init({ selector: 'textarea' });</script>
-
-
+    <script>tinymce.init({ selector: 'textarea', plugins: "autoresize" });</script>
 
 </body>
 </html>
