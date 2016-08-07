@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using nutricloud_webforms.DataBase;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms.Repositories
 {
@@ -25,6 +26,21 @@ namespace nutricloud_webforms.Repositories
             usuario.nombre = u.nombre;
             usuario.sexo = u.sexo;
             usuario.f_nacimiento = u.f_nacimiento;
+
+            c.Entry(usuario);
+            c.SaveChanges();
+        }
+
+        public void ActualizarDatosUsuario(usuario_datos u)
+        {
+            var usuario = c.usuario_datos.Find(u.id_usuario);
+            usuario.id_usuario_datos = u.id_usuario_datos;
+            usuario.id_usuario = u.id_usuario;
+            usuario.altura_cm = u.altura_cm;
+            usuario.peso_kg = u.peso_kg;
+            usuario.id_usuario_objetivo = u.id_usuario_objetivo;
+            usuario.id_usuario_actividad = u.id_usuario_actividad;
+
 
             c.Entry(usuario);
             c.SaveChanges();
@@ -94,6 +110,99 @@ namespace nutricloud_webforms.Repositories
             u.f_ultimo_ingreso = DateTime.Now;
             return u;
         }
+
+        public int CalcularEdad (usuario u)
+        {
+            DateTime Hoy = DateTime.Today;
+            DateTime Bday = Convert.ToDateTime(u.f_nacimiento);
+            int edad = Hoy.Year - Bday.Year;
+
+            if (Bday > Hoy.AddYears(-edad))
+               edad--;
+
+            return edad;
+        }
+
+        public double CalcularIngesta (UsuarioCompleto u)
+        {
+            int edad = CalcularEdad(u.Usuario);
+            double tmb;
+            double tmb2;
+            double tmb3;
+            double tmbtot;
+            char sexo = Convert.ToChar(u.Usuario.sexo);
+            int actividad = Convert.ToInt32(u.UsuarioDatos.usuario_actividad.id_usuario_actividad);
+            double ingesta;
+
+            if (sexo == 'm')
+            {
+                tmb = (10 * Convert.ToDouble(u.UsuarioDatos.peso_kg));
+                tmb2 = (6.25 * u.UsuarioDatos.altura_cm);
+                tmb3 = (5 * edad);
+
+                tmbtot = tmb + tmb2 - tmb3 + 5;
+
+                switch (actividad)
+                {
+                    case 1:
+                        ingesta = tmbtot * 1.2;
+                        break;
+                    case 2:
+                        ingesta = tmbtot * 1.375;
+                        break;
+                    case 3:
+                        ingesta = tmbtot * 1.55;
+                        break;
+                    case 4:
+                        ingesta = tmbtot * 1.725;
+                        break;
+                    case 5:
+                        ingesta = tmbtot * 1.9;
+                        break;
+                    default:
+                        ingesta = 0;
+                        break;
+                }
+
+                return ingesta;
+            }
+
+            else
+            {
+                if (sexo == 'f')
+                {
+                    tmb = (10 * Convert.ToDouble(u.UsuarioDatos.peso_kg));
+                    tmb2 = (6.25 * u.UsuarioDatos.altura_cm);
+                    tmb3 = (5 * edad);
+
+                    tmbtot = tmb + tmb2 - tmb3 - 161;
+
+                    switch (actividad)
+                    {
+                        case 1:
+                            ingesta = tmbtot * 1.2;
+                            break;
+                        case 2:
+                            ingesta = tmbtot * 1.375;
+                            break;
+                        case 3:
+                            ingesta = tmbtot * 1.55;
+                            break;
+                        case 4:
+                            ingesta = tmbtot * 1.725;
+                            break;
+                        case 5:
+                            ingesta = tmbtot * 1.9;
+                            break;
+                        default:
+                            ingesta = 0;
+                            break;                            
+                    }
+                    return ingesta;
+                }
+                else return 0;
+            }
+          }
+        }
         #endregion
     }
-}

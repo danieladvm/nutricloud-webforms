@@ -103,6 +103,75 @@
             </div>
         </div>
         <%-- //Datos físicos --%>
+        <%-- Ingesta diaria --%>
+        <div class="row">
+            <div class="col l9 m9 s12 perfil">
+                <div class="divtop">
+                    <h4 class="listaHeader">Tu ingesta diaria recomendada</h4>
+                    <div class="row">
+                        <ul class="infogral datosp">
+                            <li>
+                                <h6>Carbohidratos: </h6>
+                                <asp:Label ID="CCarbo" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Proteinas: </h6>
+                                <asp:Label ID="CProt" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Grasas: </h6>
+                                <asp:Label ID="CGrasas" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Agua: </h6>
+                                <asp:Label ID="CAgua" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Fibra: </h6>
+                                <asp:Label ID="CFibra" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Vitamina B1: </h6>
+                                <asp:Label ID="CVB1" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Vitamina B2: </h6>
+                                <asp:Label ID="CVB2" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Vitamina B3: </h6>
+                                <asp:Label ID="CVB3" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Vitamina C: </h6>
+                                <asp:Label ID="CVitc" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Calcio: </h6>
+                                <asp:Label ID="CCalcio" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Hierro: </h6>
+                                <asp:Label ID="CHierro" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Fosforo: </h6>
+                                <asp:Label ID="CFosfo" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Zinc: </h6>
+                                <asp:Label ID="CZinc" runat="server"></asp:Label>
+                            </li>
+                            <li>
+                                <h6>Potasio: </h6>
+                                <asp:Label ID="CPot" runat="server"></asp:Label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%-- //Ingesta diaria --%>
 
         <div class="row">
             <div class="divtop">

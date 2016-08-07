@@ -200,6 +200,84 @@ namespace nutricloud_webforms
 
             return !errores;
         }
+
+        private void ActualizarIngesta()
+        {
+            UsuarioRepository ur = new UsuarioRepository();
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            double calorias;
+            char sexo = Convert.ToChar(UsuarioCompleto.Usuario.sexo);
+
+            calorias = ur.CalcularIngesta(UsuarioCompleto);
+
+            CCarbo.Text = Convert.ToString(((calorias * 45) / 100) / 4);
+            CProt.Text = Convert.ToString(((calorias * 35) / 100) / 9);
+            CGrasas.Text = Convert.ToString(((calorias * 25) / 100) / 4);
+
+            if (sexo == 'm')
+                CFibra.Text = "30";
+            else if (sexo == 'f')
+                CFibra.Text = "25";
+            else CFibra.Text = "0";
+
+            CPot.Text = "4700";
+
+            int edad = ur.CalcularEdad(UsuarioCompleto.Usuario);
+
+            if (edad < 18)
+            {
+                if (sexo == 'm')
+                {
+                    CVB1.Text = "1,4";
+                    CVB2.Text = "1,6";
+                    CVB3.Text = "18";
+                    CVitc.Text = "50";
+                    CCalcio.Text = "1200";
+                    CHierro.Text = "18";
+                    CFosfo.Text = "1200";
+                    CZinc.Text = "15";
+                }
+                else if (sexo == 'f')
+                {
+                    CVB1.Text = "1,1";
+                    CVB2.Text = "1,3";
+                    CVB3.Text = "15";
+                    CVitc.Text = "50";
+                    CCalcio.Text = "1200";
+                    CHierro.Text = "18";
+                    CFosfo.Text = "1200";
+                    CZinc.Text = "15";
+                }
+                else CFibra.Text = "0";
+            } else
+            {
+                if (sexo == 'm')
+                {
+                    CVB1.Text = "1,2";
+                    CVB2.Text = "1,4";
+                    CVB3.Text = "16";
+                    CVitc.Text = "60";
+                    CCalcio.Text = "800";
+                    CHierro.Text = "10";
+                    CFosfo.Text = "800";
+                    CZinc.Text = "15";
+                }
+                else if (sexo == 'f')
+                {
+                    CVB1.Text = "1";
+                    CVB2.Text = "1,2";
+                    CVB3.Text = "13";
+                    CVitc.Text = "60";
+                    CCalcio.Text = "800";
+                    CHierro.Text = "10";
+                    CFosfo.Text = "800";
+                    CZinc.Text = "15";
+                }
+                else CFibra.Text = "0";
+            }
+
+        }
+
         #endregion
 
         #region Eventos
@@ -217,6 +295,7 @@ namespace nutricloud_webforms
             {
                 UsuarioRepository ur = new UsuarioRepository();
                 ur.ActualizarUsuario(MapeaFormUsuarioInfoGral());
+                ActualizarIngesta();
             }
         }
 
@@ -225,9 +304,11 @@ namespace nutricloud_webforms
             if (ValidaDatosFisicos())
             {
                 UsuarioRepository ur = new UsuarioRepository();
-                ur.InsertarDatosUsuario(MapeaFormUsuarioDatosFisicos());
+                ur.ActualizarDatosUsuario(MapeaFormUsuarioDatosFisicos());
+                ActualizarIngesta();
             }
         }
+
         #endregion
     }
 }
