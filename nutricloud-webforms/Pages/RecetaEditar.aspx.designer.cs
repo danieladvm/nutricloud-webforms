@@ -7,36 +7,45 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nutricloud_webforms {
+namespace nutricloud_webforms.Pages {
     
     
-    public partial class HeaderFooter {
+    public partial class RecetaEditar {
         
         /// <summary>
-        /// formHeaderFooter control.
+        /// imagenReceta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formHeaderFooter;
+        protected global::System.Web.UI.WebControls.FileUpload imagenReceta;
         
         /// <summary>
-        /// logout control.
+        /// titulo_receta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton logout;
+        protected global::System.Web.UI.WebControls.TextBox titulo_receta;
         
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// descripcion_receta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.TextBox descripcion_receta;
+        
+        /// <summary>
+        /// receta_texto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox receta_texto;
     }
 }

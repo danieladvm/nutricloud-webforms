@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nutricloud_webforms {
+namespace nutricloud_webforms.Pages {
     
     
-    public partial class HeaderFooter {
+    public partial class Recetas {
         
         /// <summary>
-        /// formHeaderFooter control.
+        /// msjNoHayRecetas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formHeaderFooter;
+        protected global::System.Web.UI.WebControls.Label msjNoHayRecetas;
         
         /// <summary>
-        /// logout control.
+        /// RepeaterRecetas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton logout;
-        
-        /// <summary>
-        /// ContentPlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterRecetas;
     }
 }

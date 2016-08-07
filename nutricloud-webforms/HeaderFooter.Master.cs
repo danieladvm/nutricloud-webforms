@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using nutricloud_webforms.Repositories;
+using nutricloud_webforms.DataBase;
+using nutricloud_webforms.Models;
 
 namespace nutricloud_webforms
 {
@@ -11,9 +14,15 @@ namespace nutricloud_webforms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
             if (Session["UsuarioCompleto"] == null)
             {
                 Response.Redirect("~/Default.aspx");
+            }
+            else
+            {
+                LblNombre.Text = UsuarioCompleto.Usuario.nombre;
             }
         }
 

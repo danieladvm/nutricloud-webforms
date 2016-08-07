@@ -13,14 +13,14 @@
                     <div class="row nomargin nobottom">
                         <div class="row nomargin nobottom">
                             <div class="col s12">
-                                <asp:Label ID="LblMail" runat="server" Text="Email" CssClass="control-label"></asp:Label>
+                                <label for="TxtEmail">Email</label>
                                 <asp:TextBox ID="TxtEmail" runat="server"></asp:TextBox>
                             </div>
                             <!--/.col s12-->
                         </div>
                         <div class="row nomargin nobottom">
                             <div class="col s12">
-                                <asp:Label ID="LblPass" runat="server" Text="Contraseña" CssClass="control-label"></asp:Label>
+                                <label for="TxtPass">Contraseña</label>
                                 <asp:TextBox TextMode="Password" ID="TxtPass" runat="server"></asp:TextBox>
                             </div>
                             <!--/.col s12-->

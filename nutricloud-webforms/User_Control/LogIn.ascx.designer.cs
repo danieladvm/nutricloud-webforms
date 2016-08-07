@@ -22,15 +22,6 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.UpdatePanel UpdatePanelLogin;
         
         /// <summary>
-        /// LblMail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblMail;
-        
-        /// <summary>
         /// TxtEmail control.
         /// </summary>
         /// <remarks>
@@ -38,15 +29,6 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtEmail;
-        
-        /// <summary>
-        /// LblPass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblPass;
         
         /// <summary>
         /// TxtPass control.

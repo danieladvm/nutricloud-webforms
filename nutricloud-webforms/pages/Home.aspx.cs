@@ -53,7 +53,7 @@ namespace nutricloud_webforms
                 {
                     sb.Append("<div class='row item-alimento'>");
                     sb.Append("<div class='col s8'>");
-                    sb.Append("<span class='alimento'>" + comida.alimento + "</span>");
+                    sb.Append("<a class='alimento' href = 'Alimento.aspx?Idalimento=" + comida.id_alimento + "'>" + comida.alimento + "</a>");
                     sb.Append("</div>");
                     sb.Append("<div class='col s4'>");
                     sb.Append("<span class='calorias'>" + comida.energia_kcal + "kcal</span>");

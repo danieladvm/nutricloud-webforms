@@ -8,6 +8,7 @@ drop table comida_tipo
 drop table alimento
 drop table alimento_tipo
 drop table alimento_genero
+drop view v_usuario_muro
 drop table usuario_receta
 drop table usuario_muro
 drop table usuario_datos
@@ -231,14 +232,16 @@ CREATE TABLE [dbo].[usuario_alimento](
 	[id_alimento] [int] NOT NULL,
 	[id_comida_tipo] [int] NOT NULL,
 	[cantidad] [int] NOT NULL,
-	[id_unidad_medida] [int] NOT NULL,
-	[f_ingreso] [datetime] NOT NULL DEFAULT (getdate()),
+	[f_ingreso] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[id_usuario_alimento] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+ALTER TABLE [dbo].[usuario_alimento] ADD  DEFAULT (getdate()) FOR [f_ingreso]
 GO
 
 ALTER TABLE [dbo].[usuario_alimento]  WITH CHECK ADD  CONSTRAINT [FK_usuario_alimento_alimento] FOREIGN KEY([id_alimento])
@@ -260,7 +263,7 @@ REFERENCES [dbo].[usuario] ([id_usuario])
 GO
 
 ALTER TABLE [dbo].[usuario_alimento] CHECK CONSTRAINT [FK_usuario_alimento_usuario]
-
+GO
 
 CREATE TABLE [dbo].[blog_nota](
 	[id_blog_nota] [int] IDENTITY(1,1) NOT NULL,
@@ -395,3 +398,21 @@ ALTER TABLE [dbo].[usuario_idr]  WITH CHECK ADD  CONSTRAINT [FK_usuario_idr_usua
 REFERENCES [dbo].[usuario] ([id_usuario])
 GO
 ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
+
+GO
+
+CREATE VIEW [dbo].[v_usuario_muro]
+AS
+SELECT
+um.id_usuario AS id_usuario_seguido,
+CASE When us.nombre is null or ltrim(rtrim(us.nombre)) = '' Then 'Anónimo' Else us.nombre END AS nombre_usuario_seguido,
+um.estado,
+um.f_publicacion,
+us.sexo,
+uu.id_usuario_seguidor
+
+FROM dbo.usuario_muro AS um INNER JOIN
+dbo.usuario AS us ON us.id_usuario = um.id_usuario LEFT JOIN
+dbo.usuario_usuario AS uu ON uu.id_usuario_seguido = um.id_usuario
+
+GO
