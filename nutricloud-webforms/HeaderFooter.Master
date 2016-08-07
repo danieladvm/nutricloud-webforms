@@ -42,49 +42,58 @@
 <body id="top" class="scrollspy">
 
     <!-- Pre Loader -->
-    
-<form id="formHeaderFooter" runat="server">
-    <div id="loader-wrapper">
-        <div id="loader"></div>
 
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
+    <form id="formHeaderFooter" runat="server">
+        <div id="loader-wrapper">
+            <div id="loader"></div>
 
-    </div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
 
-    <div class="section no-pad-bot ptop">
-        <div class="navbar-fixed">
-            <nav id="nav_f" class="header-index" role="navigation">
-                <div class="container">
-                    <div class="nav-wrapper sticky">
-                        <a id="logo-container" href="Home.aspx" class="brand-logo">
-                            <img src="../../content/img/logo.png">nutricloud
-                        </a>
-                        <ul id="nav-mobile" class="right side-nav">
-                            <li><a href="Home.aspx">Diario</a></li>
-                            <li><a href="Buscador.aspx">Alimentos</a></li>
-                            <li><a href="Reportes.aspx">Reportes</a></li>
-                            <li><a href="Blog.aspx">Blog</a></li>
-                             <li><a href="Recetas.aspx">Recetas</a></li>
-                            <li><a href="Muro.aspx">Comunidad</a></li>
-                            <li><a href="Profesionales.aspx">Profesionales</a></li>
-                            <li><a href="Perfil.aspx">Perfil</a></li>
-                            <li><a href="Mensajes.aspx" class="relative">
-                                <i class="material-icons sobre">markunread</i>
-                                <div class="number">2</div>
-                            </a>
-                            </li>
-                            <li><ASP:LinkButton id="logout" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></ASP:LinkButton></li>
-                        </ul>
-                        <a href="#" data-activates="nav-mobile" class="button-collapse">
-                            <i class="material-icons">menu</i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
         </div>
-    </div>
-    <div>
+
+        <div class="section no-pad-bot ptop">
+            <div class="navbar-fixed">
+                <nav id="nav_f" class="header-index" role="navigation">
+                    <div class="container">
+                        <div class="nav-wrapper sticky">
+                            <a id="logo-container" href="Home.aspx" class="brand-logo">
+                                <img src="../../content/img/logo.png">nutricloud
+                            </a>
+                            <ul id="nav-mobile" class="right side-nav">
+                                <li><a href="Home.aspx">Diario</a></li>
+                                <li><a href="Buscador.aspx">Alimentos</a></li>
+                                <li><a href="Blog.aspx">Blog</a></li>
+                                <li><a href="Muro.aspx">Comunidad</a></li>
+                                <li><a href="Mensajes.aspx">Profesionales</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a href="javascript:void(0);" id="openMobileP" class="dropbtn"><asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
+                                        <div>
+                                            <ul class="menudown">
+                                                <li><a href="Perfil.aspx">Perfil</a></li>
+                                                <li><a href="Recetas.aspx">Recetas</a></li>
+                                                <li><a href="Reportes.aspx">Reportes</a></li>
+                                                <li><asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="Mensajes.aspx" class="relative">
+                                    <i class="material-icons">notifications</i>
+                                    <div class="number">2</div>
+                                </a>
+                                </li>
+                            </ul>
+                            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                                <i class="material-icons">menu</i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -180,7 +189,7 @@
     <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
 
@@ -254,6 +263,12 @@
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+        </script>
+    <script>
+        $('#openMobileP').on('click', function () {
+            event.preventDefault();
+            $(".menudown").slideToggle("slow");
         });
     </script>
 

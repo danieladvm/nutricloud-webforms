@@ -5,22 +5,25 @@
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <div class="col s6">
+                <div class="col l6 m6 s12 leftmsg">
+                    <h5>Mensajes con Profesionales</h5>
                     <%--Lista de conversaciones--%>
                     <ul>
                         <asp:Repeater ID="rConversaciones" runat="server">
                             <ItemTemplate>
                                 <li>
                                     <asp:LinkButton ID="LnkConv" CommandArgument='<%# Eval("id_consulta_conversacion") %>' runat="server" OnClick="lnkConversacion_Click"><%# Eval("asunto") %></asp:LinkButton>
+                                  <i class="material-icons">keyboard_arrow_right</i>
+
                                 </li>
                             </ItemTemplate>
                         </asp:Repeater>
                     </ul>
                 </div>
 
-                <div class="col s6">
+                <div class="col l6 m6 s12 rightmsj">
                     <%--Mensaje seleccionado / Nuevo--%>
-                    <div>
+                    <div class="btn-newc">
                         <asp:Button ID="btnNuevo" runat="server" Text="Nueva Consulta" OnClick="btnNuevo_Click" />
                     </div>
                     <div>
@@ -35,7 +38,7 @@
                         <asp:TextBox ID="TxtAsunto" runat="server"></asp:TextBox>
                         <label for="TxtMensaje">Mensaje</label>
                         <asp:TextBox ID="TxtMensaje" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnenviar" runat="server" Text="Enviar" CssClass="btn waves-effect green-nutri" OnClick="btnenviar_Click" AutoPostback="true" />
+                        <asp:Button ID="btnenviar" runat="server" Text="Enviar" CssClass="btn waves-effect enviarmsj" OnClick="btnenviar_Click" AutoPostback="true" />
                     </asp:Panel>
                 </div>
             </ContentTemplate>
