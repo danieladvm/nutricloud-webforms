@@ -290,6 +290,8 @@ CREATE TABLE [dbo].[usuario_receta](
 	[id_usuario_receta] [int] IDENTITY(1,1) NOT NULL,
 	[receta] [text] NOT NULL,
 	[titulo_receta] [varchar](50) NOT NULL,
+	[descripcion_receta] [varchar](100) NOT NULL,
+	[imagen_receta] [varchar](100),
 	[f_publicacion] [datetime] NOT NULL DEFAULT (getdate()),
 	[id_usuario] [int] NOT NULL,
  CONSTRAINT [PK_usuario_receta] PRIMARY KEY CLUSTERED 
