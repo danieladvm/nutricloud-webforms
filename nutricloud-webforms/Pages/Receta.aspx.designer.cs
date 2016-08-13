@@ -10,7 +10,7 @@
 namespace nutricloud_webforms.pages {
     
     
-    public partial class Nota {
+    public partial class Receta {
         
         /// <summary>
         /// receta_titulo control.
@@ -29,6 +29,15 @@ namespace nutricloud_webforms.pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgReceta;
+        
+        /// <summary>
+        /// receta_descripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl receta_descripcion;
         
         /// <summary>
         /// receta_texto control.
