@@ -120,6 +120,7 @@
     <Content Include="Pages\Blog.aspx" />
     <Content Include="Pages\Buscador.aspx" />
     <Content Include="Pages\Entrada.aspx" />
+    <Content Include="Pages\Mensajes.aspx" />
     <Content Include="Pages\Muro.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="packages.config" />
@@ -145,6 +146,7 @@
     <Content Include="DataBase\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Recetas.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,7 +212,13 @@
     <Content Include="Global.asax" />
     <Content Include="Pages\Nota.aspx" />
     <Content Include="Pages\Perfil.aspx" />
+    <Content Include="Pages\Receta.aspx" />
+    <Content Include="Pages\RecetaAlta.aspx" />
+    <Content Include="Pages\RecetaEditar.aspx" />
+    <Content Include="Pages\Recetas.aspx" />
     <Content Include="Pages\Reportes.aspx" />
+    <Content Include="Profesionales\Home.aspx" />
+    <Content Include="Profesionales\Mensajes.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\DateTimePicker.min.js" />
@@ -224,6 +232,7 @@
     <Content Include="scripts\styles.js" />
     <Content Include="scripts\tinymce.min.js" />
     <Content Include="User_Control\LogIn.ascx" />
+    <Content Include="User_Control\Mensajes.ascx" />
     <Content Include="User_Control\SignIn.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -304,6 +313,7 @@
     <Compile Include="MasterPro.Master.designer.cs">
       <DependentUpon>MasterPro.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mensaje.cs" />
     <Compile Include="Models\UsuarioCompleto.cs" />
     <Compile Include="Pages\Alimento.aspx.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
@@ -350,6 +360,13 @@
     <Compile Include="Pages\Entrada.aspx.designer.cs">
       <DependentUpon>Entrada.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Mensajes.aspx.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Mensajes.aspx.designer.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Muro.aspx.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -378,6 +395,48 @@
     <Compile Include="Pages\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Receta.aspx.cs">
+      <DependentUpon>Receta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Receta.aspx.designer.cs">
+      <DependentUpon>Receta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecetaAlta.aspx.cs">
+      <DependentUpon>RecetaAlta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\RecetaAlta.aspx.designer.cs">
+      <DependentUpon>RecetaAlta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecetaEditar.aspx.cs">
+      <DependentUpon>RecetaEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\RecetaEditar.aspx.designer.cs">
+      <DependentUpon>RecetaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Recetas.aspx.cs">
+      <DependentUpon>Recetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Recetas.aspx.designer.cs">
+      <DependentUpon>Recetas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profesionales\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profesionales\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profesionales\Mensajes.aspx.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profesionales\Mensajes.aspx.designer.cs">
+      <DependentUpon>Mensajes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\Reportes.aspx.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
@@ -386,8 +445,18 @@
     <Compile Include="Pages\Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Recetas.Master.cs">
+      <DependentUpon>Recetas.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Recetas.Master.designer.cs">
+      <DependentUpon>Recetas.Master</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AlimentoRepository.cs" />
+    <Compile Include="Repositories\ConversacionRepository.cs" />
     <Compile Include="Repositories\DiarioRepository.cs" />
+    <Compile Include="Repositories\MuroRepository.cs" />
+    <Compile Include="Repositories\RecetaRepository.cs" />
     <Compile Include="Repositories\SeguridadRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
     <Compile Include="Repositories\ValidRepository.cs" />
@@ -397,6 +466,13 @@
     </Compile>
     <Compile Include="User_Control\LogIn.ascx.designer.cs">
       <DependentUpon>LogIn.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="User_Control\Mensajes.ascx.cs">
+      <DependentUpon>Mensajes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User_Control\Mensajes.ascx.designer.cs">
+      <DependentUpon>Mensajes.ascx</DependentUpon>
     </Compile>
     <Compile Include="User_Control\SignIn.ascx.cs">
       <DependentUpon>SignIn.ascx</DependentUpon>
