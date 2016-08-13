@@ -295,9 +295,8 @@ namespace nutricloud_webforms
             {
                 UsuarioRepository ur = new UsuarioRepository();
                 ur.ActualizarUsuario(MapeaFormUsuarioInfoGral());
-<<<<<<< HEAD
+
                 ActualizarIngesta();
-=======
 
                 lblAviso.Visible = true;
                 lblAviso.Text = "¡Se ha actualizado la información correctamente!";
@@ -306,7 +305,6 @@ namespace nutricloud_webforms
             {
                 lblAviso.Visible = true;
                 lblAviso.Text = "Ha ocurrido un error, inténtalo nuevamente.";
->>>>>>> origin/master
             }
         }
 
