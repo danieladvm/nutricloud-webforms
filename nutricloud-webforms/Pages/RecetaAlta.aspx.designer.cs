@@ -10,7 +10,7 @@
 namespace nutricloud_webforms.pages {
     
     
-    public partial class Entrada {
+    public partial class RecetaAlta {
         
         /// <summary>
         /// imagenReceta control.
@@ -40,12 +40,12 @@ namespace nutricloud_webforms.pages {
         protected global::System.Web.UI.WebControls.TextBox descripcion_receta;
         
         /// <summary>
-        /// entrada control.
+        /// receta_texto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox entrada;
+        protected global::System.Web.UI.WebControls.TextBox receta_texto;
     }
 }
