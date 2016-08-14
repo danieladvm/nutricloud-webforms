@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace nutricloud_webforms
 {
-    public partial class RecetasMaster : System.Web.UI.MasterPage
+    public partial class Recetas : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
