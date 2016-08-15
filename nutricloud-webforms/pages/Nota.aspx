@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPro.Master" AutoEventWireup="true" CodeBehind="Nota.aspx.cs" Inherits="nutricloud_webforms.pages.Nota" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Nota.aspx.cs" Inherits="nutricloud_webforms.pages.Nota" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
 
     <div class="row seccionPro">
         <div class="container">
-            <h3>NutriBlog</h3>
+            <h3>Blog</h3>
         </div>
     </div>
 
@@ -13,24 +13,31 @@
             27 de Febrero 2017
         </div>
         <div class="row titlenota">
-            <h4>Los Vegetales y la inflación</h4>
+            <h4 runat="server" id="nota_titulo"></h4>
         </div>
         <div class="row">
             <div class="col l9 m12 s12">
                 <div class="row">
-                    <div class="col l6 s12">
-                        <img class="imgentrada responsive-img" src="../Content/img/imgnota.jpg">
-                        <span class="sharenote"><i class="material-icons">share</i></span>
+                    <div class="col offset-m3 m6 s12">
+                        <asp:Image ID="imagen" runat="server" CssClass="imgentrada responsive-img"/>
                      </div>
+                </div>
+                 <div class="row">
+                    <div class="col l10 s12">
+                        <i>
+                            <div id="descripcion" runat="server"></div>
+                        </i>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col l10 s12">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis eros pharetra sem tempus interdum id sit amet sem. Nullam bibendum neque eu purus ullamcorper mattis. Nullam sed leo finibus, rutrum elit quis, efficitur tellus. Aliquam feugiat mauris ante, vel placerat dolor posuere vitae. Phasellus vulputate sapien risus, sed volutpat nulla viverra nec. Morbi accumsan turpis sed nulla auctor tristique. Suspendisse volutpat non nulla quis congue. Nulla suscipit sollicitudin diam, dignissim maximus ipsum imperdiet non. Phasellus gravida ornare leo a accumsan. Vestibulum ac bibendum est. Etiam pellentesque neque et est elementum porttitor. Proin feugiat aliquet quam ac mollis.
-                        Praesent eget sem justo.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis eros pharetra sem tempus interdum id sit amet sem. Nullam bibendum neque eu purus ullamcorper mattis. Nullam sed leo finibus, rutrum elit quis, efficitur tellus. Aliquam feugiat mauris ante, vel placerat dolor posuere vitae. Phasellus vulputate sapien risus, sed volutpat nulla viverra nec. Morbi accumsan turpis sed nulla auctor tristique. Suspendisse volutpat non nulla quis congue. Nulla suscipit sollicitudin diam, dignissim maximus ipsum imperdiet non. Phasellus gravida ornare leo a accumsan. Vestibulum ac bibendum est. Etiam pellentesque neque et est elementum porttitor. Proin feugiat aliquet quam ac mollis.
-                        Praesent eget sem justo.</p>
+                        <div id="texto" runat="server"></div>
                     </div>
                 </div>
+                <form runat="server">
+                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Editar" Text="Editar"></asp:LinkButton>
+                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Eliminar" Text="Eliminar"></asp:LinkButton>  
+                </form>
             </div>
             <!--/col l9-->
             <div class="col l3 m12 s12">

@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPro.Master" AutoEventWireup="true" CodeBehind="Blog.aspx.cs" Inherits="nutricloud_webforms.Blog" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Blog.aspx.cs" Inherits="nutricloud_webforms.Pages.Blog" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+    
     <div class="row seccionPro">
         <div class="container">
-            <h3>NutriBlog</h3>
+            <h3>Blog</h3>
         </div>
     </div>
 
@@ -12,7 +11,7 @@
         <p style="font-size: 20px;">Encontrá los mejores consejos de nutrición de la mano de profesionales. </p>
         <div class="row">
             <div class="col l6 s12">
-                <a href="Entrada.aspx" class="button btn waves-effect orange btn-ingresar">Agregar entrada</a>
+                <a href="RecetaAlta.aspx" class="button btn waves-effect orange btn-ingresar">Agregar Receta</a>
             </div>
             <div class="col l6 s12 search-blog">
                 <div class="input-field">
@@ -22,72 +21,28 @@
             </div>
         </div>
         <div class="collection">
-            <a href="Nota.aspx" class="collection-item">
-                <div class="row">
-                    <div class="col l3 m3 s12 img-blog responsive-img">
-                        <!--<img src=""/>-->
-                    </div>
-                    <div class="col l9 m9 s12 note-blog">
-                        <h5>Título Nota Blog</h5>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod varius pretium. 
-                        Curabitur luctus condimentum laoreet. Ut egestas arcu imperdiet hendrerit consequat. Pellentesque convallis commodo blandit. 
-                        Praesent pharetra lectus at condimentum rutrum.
-                        </p>
-                        <span>Leer Más</span>
-                    </div>
-                </div>
-            </a>
-            <a href="Nota.aspx" class="collection-item">
-                <div class="row">
-                    <div class="col l3 m3 s12 img-blog responsive-img">
-                        <!--<img src=""/>-->
-                    </div>
-                    <div class="col l9 m9 s12 note-blog">
-                        <h5>Título Nota Blog</h5>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod varius pretium. 
-                        Curabitur luctus condimentum laoreet. Ut egestas arcu imperdiet hendrerit consequat. Pellentesque convallis commodo blandit. 
-                        Praesent pharetra lectus at condimentum rutrum.
-                        </p>
-                        <span>Leer Más</span>
-                    </div>
-                </div>
-            </a>
-            <a href="Nota.aspx" class="collection-item">
-                <div class="row">
-                    <div class="col l3 m3 s12 img-blog responsive-img">
-                        <!--<img src=""/>-->
-                    </div>
-                    <div class="col l9 m9 s12 note-blog">
-                        <h5>Título Nota Blog</h5>
-                        <p class="grey-text darken-1">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod varius pretium. 
-                        Curabitur luctus condimentum laoreet. Ut egestas arcu imperdiet hendrerit consequat. Pellentesque convallis commodo blandit. 
-                        Praesent pharetra lectus at condimentum rutrum.
-                        </p>
-                        <span>Leer Más</span>
-                    </div>
-                </div>
-            </a>
-            <a href="Nota.aspx" class="collection-item">
-                <div class="row">
-                    <div class="col l3 m3 s12 img-blog responsive-img">
-                        <!--<img src=""/>-->
-                    </div>
-                    <div class="col l9 m9 s12 note-blog">
-                        <h5>Título Nota Blog</h5>
-                        <p class="grey-text">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod varius pretium. 
-                        Curabitur luctus condimentum laoreet. Ut egestas arcu imperdiet hendrerit consequat. Pellentesque convallis commodo blandit. 
-                        Praesent pharetra lectus at condimentum rutrum.
-                        </p>
-                        <span>Leer Más</span>
-                    </div>
-                </div>
-            </a>
+            <form runat="server">
+                <asp:Label runat="server" ID="msjNoHayNotas"></asp:Label>
+                <asp:Repeater ID="RepeaterNotas" runat="server">
+                    <ItemTemplate>
+                        <asp:LinkButton CommandArgument=<%# Eval("id_blog_nota") %> class="collection-item" OnClick="Ver" runat="server">
+                            <div class="row">
+                                <asp:Image ImageUrl=<%# Eval("imagen_nota") %> CssClass="col l3 m3 s12 img-blog responsive-img" runat="server"/>
+                                <div class="col l9 m9 s12 note-blog">
+                                    <h5><%# Eval("titulo_nota") %></h5>
+                                    <p class="grey-text">
+                                        <%# Eval("descripcion_nota") %>
+                                    </p>                 
+                                    <span>Leer Más</span>
+                                </div>
+                            </div>
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </form>
         </div>
         <!--coleccion-->
+
         <ul class="paginador">
             <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
             <li class="active"><a href="#!">1</a></li>

@@ -7,19 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nutricloud_webforms.pages {
+namespace nutricloud_webforms.Pages {
     
     
-    public partial class Nota {
-        
-        /// <summary>
-        /// nota_titulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl nota_titulo;
+    public partial class NotaAlta {
         
         /// <summary>
         /// imagen control.
@@ -28,7 +19,16 @@ namespace nutricloud_webforms.pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imagen;
+        protected global::System.Web.UI.WebControls.FileUpload imagen;
+        
+        /// <summary>
+        /// titulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox titulo;
         
         /// <summary>
         /// descripcion control.
@@ -37,7 +37,7 @@ namespace nutricloud_webforms.pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl descripcion;
+        protected global::System.Web.UI.WebControls.TextBox descripcion;
         
         /// <summary>
         /// texto control.
@@ -46,6 +46,6 @@ namespace nutricloud_webforms.pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl texto;
+        protected global::System.Web.UI.WebControls.TextBox texto;
     }
 }

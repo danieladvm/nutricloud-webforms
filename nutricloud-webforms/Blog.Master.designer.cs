@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace nutricloud_webforms.Pages {
+namespace nutricloud_webforms {
     
     
-    public partial class Blog {
+    public partial class Blog1 {
         
         /// <summary>
-        /// msjNoHayNotas control.
+        /// ContentPlaceHolder2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label msjNoHayNotas;
-        
-        /// <summary>
-        /// RepeaterNotas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterNotas;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder2;
     }
 }
