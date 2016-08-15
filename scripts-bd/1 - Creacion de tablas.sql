@@ -272,6 +272,7 @@ CREATE TABLE [dbo].[blog_nota](
 	[f_publicacion] [datetime] NOT NULL DEFAULT (getdate()),
 	[id_usuario] [int] NOT NULL,
 	[descripcion_nota] [varchar](100) NOT NULL,
+	[imagen_nota] [varchar](100),
  CONSTRAINT [PK_blog_nota] PRIMARY KEY CLUSTERED 
 (
 	[id_blog_nota] ASC
