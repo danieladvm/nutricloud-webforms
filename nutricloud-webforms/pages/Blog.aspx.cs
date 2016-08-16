@@ -11,7 +11,7 @@ namespace nutricloud_webforms.Pages
 {
     public partial class Blog : System.Web.UI.Page
     {
-        private Repositories.BlogRepository repository = new BlogRepository();
+        private BlogRepository repository = new BlogRepository();
 
         protected void Page_Load(object sender, EventArgs e)
         {
