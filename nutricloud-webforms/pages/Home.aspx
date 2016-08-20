@@ -22,61 +22,8 @@
                     <input type="text" id="alternate" name="name" class="altercalendar" />
                 </div>
 
-                <%--<div class="list-food">
-                    <div class="row">
-                        <div class="col s12 m12">
-                            <div class="card">
-                                <div class="card-content orange-text text-darken-3">
-                                    <asp:Image ID="Image1" runat="server" CssClass="responsive-img icon-food" ImageUrl="../Content/img/healthy-breakfast.png" />
-                                    <h4>Almuerzo</h4>
-                                    <div class="row item-alimento">
-                                        <div class="col s8">
-                                            <asp:Label ID="Label7" runat="server" CssClass="alimento" Text="Pescado"></asp:Label>
-                                        </div>
-                                        <div class="col s4">
-                                            <asp:Label ID="Label8" runat="server" CssClass="calorias" Text="140kcal"></asp:Label>
-                                        </div>
-                                        <div class="col s12">
-                                            <asp:Label ID="Label9" runat="server" CssClass="cantidad" Text="50g"></asp:Label>
-                                        </div>
-                                    </div>
-                                    <div class="row item-alimento">
-                                        <div class="col s8">
-                                            <asp:Label ID="Label10" runat="server" CssClass="alimento" Text="Pescado"></asp:Label>
-                                        </div>
-                                        <div class="col s4">
-                                            <asp:Label ID="Label11" runat="server" CssClass="calorias" Text="140kcal"></asp:Label>
-                                        </div>
-                                        <div class="col s12">
-                                            <asp:Label ID="Label12" runat="server" CssClass="cantidad" Text="50g"></asp:Label>
-                                        </div>
-                                    </div>
-                                    <div class="row item-alimento">
-                                        <div class="col s8">
-                                            <asp:Label ID="Label13" runat="server" CssClass="alimento" Text="Pescado"></asp:Label>
-                                        </div>
-                                        <div class="col s4">
-                                            <asp:Label ID="Label14" runat="server" CssClass="calorias" Text="140kcal"></asp:Label>
-                                        </div>
-                                        <div class="col s12">
-                                            <asp:Label ID="Label15" runat="server" CssClass="cantidad" Text="50g"></asp:Label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-action action-home">
-                                    <a href="#">Editar</a>
-                                    <a href="#">Eliminar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/row-->
-                </div>
-                <!--/listfood-->--%>
-
                 <div id="lista-comidas" class="list-food">
                 </div>
-                <!--/listfood-->
             </div>
             <!--/col9-->
         </div>
@@ -93,4 +40,40 @@
         <!--/row-->
     </div>
     <!--/container-->
+
+    <script>
+        $(function () {
+            CargaComidas();
+
+            $("#datepicker").datepicker({
+                showOn: "button",
+                buttonImage: "../../content/img/calendario.png",
+                buttonImageOnly: true,
+                buttonText: "Seleccione la Fecha",
+                altField: "#alternate",
+                altFormat: "DD, d MM, yy",
+                onSelect: function () {
+                    CargaComidas();
+                }
+            });
+        });
+
+        function CargaComidas() {
+            var fechaSeleccionada = $("#alternate").val();
+
+            $.ajax({
+                type: "POST",
+                url: "Home.aspx/GetAlimentos",
+                data: "{fecha:'" + fechaSeleccionada + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    // How to return data here like a table???  
+                    $("#lista-comidas").html(msg.d);
+                    //alert(msg.d);
+                }
+            });
+        }
+    </script>
+
 </asp:Content>

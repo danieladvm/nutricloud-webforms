@@ -30,7 +30,7 @@ namespace nutricloud_webforms
 
                 if (u != null)
                 {
-                    ud = ur.Buscar(u.id_usuario);
+                    ud = ur.BuscarUsuarioDatos(u.id_usuario);
                     Sesion(u, ud);
 
                     if (u.id_usuario_tipo == 1) //Paciente

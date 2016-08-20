@@ -1,4 +1,5 @@
-
+use nutricloud
+go
 SET IDENTITY_INSERT [dbo].[usuario_alimento] ON 
 INSERT [dbo].[usuario_alimento] ([id_usuario_alimento], [id_usuario], [id_alimento], [id_comida_tipo], [cantidad], [f_ingreso]) VALUES (1, 1, 1, 1, 50, CAST(N'2016-08-03 20:00:00.000' AS DateTime))
 INSERT [dbo].[usuario_alimento] ([id_usuario_alimento], [id_usuario], [id_alimento], [id_comida_tipo], [cantidad], [f_ingreso]) VALUES (72, 1, 1, 1, 50, CAST(N'2016-03-08 20:00:00.000' AS DateTime))

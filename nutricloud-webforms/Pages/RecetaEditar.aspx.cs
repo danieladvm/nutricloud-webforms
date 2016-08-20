@@ -26,10 +26,10 @@ namespace nutricloud_webforms.Pages
             }
         }
 
-        protected void onload(object sender, EventArgs e)
-        {
-            string x = "hola";
-        }
+        //protected void onload(object sender, EventArgs e)
+        //{
+        //    string x = "hola";
+        //}
 
         protected void EditarReceta(object sender, EventArgs e)
         {

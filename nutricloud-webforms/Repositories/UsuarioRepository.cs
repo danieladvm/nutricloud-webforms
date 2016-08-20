@@ -80,10 +80,17 @@ namespace nutricloud_webforms.Repositories
             return (from u in c.usuario_actividad select u).ToList();
         }
 
-        public usuario_datos Buscar(int idUsuario)
+        public usuario BuscarUsuario(int id_usuario)
+        {
+            return (from u in c.usuario
+                    where u.id_usuario == id_usuario
+                    select u).FirstOrDefault();
+        }
+
+        public usuario_datos BuscarUsuarioDatos(int id_usuario)
         {
             return (from ud in c.usuario_datos
-                    where ud.id_usuario == idUsuario
+                    where ud.id_usuario == id_usuario
                     orderby ud.f_ingreso descending
                     select ud).FirstOrDefault();
         }
@@ -91,6 +98,14 @@ namespace nutricloud_webforms.Repositories
         public List<usuario_objetivo> ListarObjetivos()
         {
             return (from ob in c.usuario_objetivo select ob).ToList();
+        }
+
+        public List<usuario> ListarUsuarios(string nombre)
+        {
+            return (from us in c.usuario
+                    where us.nombre.Contains(nombre) ||
+                    us.email.Contains(nombre)
+                    select us).ToList();
         }
 
         #endregion

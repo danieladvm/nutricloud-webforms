@@ -41,7 +41,7 @@
                                             <img src="../Content/img/apple.png" class="responsive-img" />
                                         </div>
                                         <div class="col s10">
-                                            <a href="#">
+                                            <a href='PerfilSocial.aspx?id=<%# Eval("id_usuario_seguido") %>'>
                                                 <%# (String.IsNullOrEmpty(Eval("nombre_usuario_seguido").ToString()) ? "Anónimo" : Eval("nombre_usuario_seguido"))%>
                                             </a>
                                             <span><%# Eval("f_publicacion") %></span>
@@ -57,5 +57,27 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+
+    <script>
+        $(function () {
+            $("#ContentPlaceHolder1_busqueda").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "Muro.aspx/GetUsuarios",
+                        data: "{nombre:'" + request.term + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            response($.parseJSON(data.d));
+                        }
+                    });
+                },
+                minLength: 3,
+                //delay: 500,
+                //select: function (event, ui) { }
+            });
+        });
+    </script>
 
 </asp:Content>

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services;
+using System.Text;
+using System.Web.Script.Serialization;
 using nutricloud_webforms.Repositories;
 using nutricloud_webforms.Models;
 using nutricloud_webforms.DataBase;
@@ -41,8 +44,31 @@ namespace nutricloud_webforms
 
         private void CargaMuro()
         {
-            rMuro.DataSource = mr.ListarAlimento(usuario.Usuario.id_usuario);
+            rMuro.DataSource = mr.ListarMuro(usuario.Usuario.id_usuario);
             rMuro.DataBind();
+        }
+
+        [WebMethod]
+        public static string GetUsuarios(string nombre)
+        {
+            UsuarioRepository ur = new UsuarioRepository();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<string> lista = new List<string>();
+            string usuario_nombre = string.Empty;
+
+            foreach (var usuario in ur.ListarUsuarios(nombre))
+            {
+                usuario_nombre = usuario.nombre;
+
+                if (usuario_nombre == string.Empty || usuario_nombre == null)
+                {
+                    usuario_nombre = "Anónimo";
+                }
+
+                lista.Add(usuario_nombre + " - " + usuario.email);
+            }
+            
+            return serializer.Serialize(lista);
         }
     }
 }

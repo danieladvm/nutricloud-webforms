@@ -35,6 +35,8 @@
     <link rel="icon" type="image/png" sizes="96x96" href="../../content/img/icon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../content/img/icon/favicon-16x16.png">
     <link rel="manifest" href="../../content/img/icon/manifest.json">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="../../content/img/icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -68,13 +70,15 @@
                                 <li><a href="Mensajes.aspx">Profesionales</a></li>
                                 <li>
                                     <div class="dropdown">
-                                        <a href="javascript:void(0);" id="openMobileP" class="dropbtn"><asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
+                                        <a href="javascript:void(0);" id="openMobileP" class="dropbtn">
+                                            <asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
                                         <div>
                                             <ul class="menudown">
                                                 <li><a href="Perfil.aspx">Perfil</a></li>
                                                 <li><a href="Recetas.aspx">Recetas</a></li>
                                                 <li><a href="Reportes.aspx">Reportes</a></li>
-                                                <li><asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
+                                                <li>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -94,6 +98,17 @@
             </div>
         </div>
         <div>
+
+            <!--  Scripts-->
+            <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="../scripts/materialize.js"></script>
+            <!--<script src="../scripts/materialize.min.js"></script>-->
+            <script src="../scripts/init.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
+            <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -141,13 +156,6 @@
     </div>-->
     </footer>
 
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="../scripts/materialize.js"></script>
-    <!--<script src="../scripts/materialize.min.js"></script>-->
-    <script src="../scripts/init.js"></script>
-
     <!--script nav-->
     <script>
         $(window).scroll(function () {
@@ -166,74 +174,23 @@
             $('.modal-trigger').leanModal();
         });
     </script>
+
     <script type="text/javascript">
-
         $(document).ready(function () {
-
-            var options = [
-
-
-                      {
-                          selector: '#scrollf', offset: 10, callback: function ()
-
-                          { Materialize.showStaggeredList("#scrollf"); }
-                      },
-
-            ];
-
+            var options = [{
+                selector: '#scrollf', offset: 10, callback: function ()
+                { Materialize.showStaggeredList("#scrollf"); }
+            }];
             Materialize.scrollFire(options);
-
         });
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
 
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
-    <script>
-        $(function () {
-            CargaComidas();
-
-            $("#datepicker").datepicker({
-                showOn: "button",
-                buttonImage: "../../content/img/calendario.png",
-                buttonImageOnly: true,
-                buttonText: "Seleccione la Fecha",
-                altField: "#alternate",
-                altFormat: "DD, d MM, yy",
-                onSelect: function () {
-                    CargaComidas();
-                }
-            });
-        });
-
-        function CargaComidas() {
-            var fechaSeleccionada = $("#alternate").val();
-
-            $.ajax({
-                type: "POST",
-                url: "Home.aspx/GetAlimentos",
-                data: "{fecha:'" + fechaSeleccionada + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    // How to return data here like a table???  
-                    $("#lista-comidas").html(msg.d);
-                    //alert(msg.d);
-                }
-            });
-        }
-    </script>
     <script>
         $(document).ready(function () {
-
             $('#datepicker').datepicker().datepicker('setDate', 'today');
-
         });
     </script>
+
     <script>
         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
@@ -264,7 +221,8 @@
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
         });
-        </script>
+    </script>
+
     <script>
         $('#openMobileP').on('click', function () {
             event.preventDefault();
