@@ -53,8 +53,9 @@ namespace nutricloud_webforms
         {
             UsuarioRepository ur = new UsuarioRepository();
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            List<string> lista = new List<string>();
+            List<General> lista = new List<General>();
             string usuario_nombre = string.Empty;
+            General uds;
 
             foreach (var usuario in ur.ListarUsuarios(nombre))
             {
@@ -65,9 +66,13 @@ namespace nutricloud_webforms
                     usuario_nombre = "Anónimo";
                 }
 
-                lista.Add(usuario_nombre + " - " + usuario.email);
+                uds = new General();
+                uds.Detalle = usuario_nombre + " - " + usuario.email;
+                uds.Id = usuario.id_usuario.ToString();
+                
+                lista.Add(uds);
             }
-            
+
             return serializer.Serialize(lista);
         }
     }

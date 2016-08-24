@@ -69,13 +69,24 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            response($.parseJSON(data.d));
+                            //response($.parseJSON(data.d));
+                            response($.map($.parseJSON(data.d), function (item) {
+                                var o = new Object();
+                                
+                                o.label = item.Detalle;
+                                o.value = item.Id;
+
+                                return o;
+                            }));
                         }
                     });
                 },
                 minLength: 3,
                 //delay: 500,
-                //select: function (event, ui) { }
+                select: function (event, ui) {
+                    //$("#ContentPlaceHolder1_busqueda").val(ui.item.label);
+                    window.location.href = "PerfilSocial.aspx?id=" + ui.item.value;
+                }
             });
         });
     </script>
