@@ -151,6 +151,7 @@
     </Content>
     <Content Include="Pages\NotaAlta.aspx" />
     <Content Include="Pages\NotaEditar.aspx" />
+    <Content Include="Pages\PerfilSocial.aspx" />
     <Content Include="Recetas.Master" />
     <Content Include="Blog.Master" />
     <None Include="Web.Debug.config">
@@ -326,6 +327,7 @@
     <Compile Include="MasterPro.Master.designer.cs">
       <DependentUpon>MasterPro.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\General.cs" />
     <Compile Include="Models\Mensaje.cs" />
     <Compile Include="Models\UsuarioCompleto.cs" />
     <Compile Include="Pages\Alimento.aspx.cs">
@@ -421,6 +423,13 @@
     </Compile>
     <Compile Include="Pages\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PerfilSocial.aspx.cs">
+      <DependentUpon>PerfilSocial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\PerfilSocial.aspx.designer.cs">
+      <DependentUpon>PerfilSocial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Receta.aspx.cs">
       <DependentUpon>Receta.aspx</DependentUpon>
