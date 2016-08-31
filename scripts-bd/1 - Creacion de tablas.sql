@@ -349,6 +349,7 @@ CREATE TABLE [dbo].[consulta_mensaje](
 	[f_mensaje] [datetime] NOT NULL,
 	[id_consulta_conversacion] [int] NOT NULL,
 	[id_usuario_remitente] [int] NOT NULL,
+	leido bit
  CONSTRAINT [PK_consulta_mensaje] PRIMARY KEY CLUSTERED 
 (
 	[id_consulta_mensaje] ASC
