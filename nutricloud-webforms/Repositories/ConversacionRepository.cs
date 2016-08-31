@@ -52,6 +52,7 @@ namespace nutricloud_webforms.Repositories
             cm.f_mensaje = fecha;
             cm.id_consulta_conversacion = mensaje.id_conversacion;
             cm.id_usuario_remitente = mensaje.id_remitente;
+            cm.leido = false;
 
             c.consulta_mensaje.Add(cm);
             c.SaveChanges();
@@ -82,7 +83,7 @@ namespace nutricloud_webforms.Repositories
             }
         }
 
-        public List<consulta_mensaje> ListarMensajes(int id_consulta_conversacion, UsuarioCompleto usuario)
+        public List<consulta_mensaje> ListarMensajes(int id_consulta_conversacion)
         {
             return (from cm in c.consulta_mensaje
                     where cm.id_consulta_conversacion == id_consulta_conversacion
@@ -107,5 +108,26 @@ namespace nutricloud_webforms.Repositories
             c.Entry(cc);
             c.SaveChanges();
         }
+
+        public int MensajesNoLeidos(UsuarioCompleto usuario)
+        {
+            return (from cm in c.consulta_mensaje
+                    where cm.leido == false
+                    select cm).Count();
+        }
+
+        public int ConversacionSinLeer(int id_consulta_conversacion)
+        {
+            return (from cc in c.consulta_conversacion
+                    join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
+                    where cm.leido == false &&
+                    cc.id_consulta_conversacion == id_consulta_conversacion
+                    select cm).Count();
+        }
+
+        //public void ConversacionLeida(int id_consulta_conversacion)
+        //{
+
+        //}
     }
 }

@@ -12,6 +12,8 @@ namespace nutricloud_webforms
 {
     public partial class HeaderFooter : System.Web.UI.MasterPage
     {
+        ConversacionRepository cr = new ConversacionRepository();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
@@ -23,6 +25,18 @@ namespace nutricloud_webforms
             else
             {
                 LblNombre.Text = UsuarioCompleto.Usuario.nombre;
+
+                int msjs = cr.MensajesNoLeidos(UsuarioCompleto);
+
+                if (msjs > 0)
+                {
+                    lblNotificaciones.Visible = true;
+                    lblNotificaciones.Text = msjs.ToString();
+                }
+                else
+                {
+                    lblNotificaciones.Visible = false;
+                }
             }
         }
 

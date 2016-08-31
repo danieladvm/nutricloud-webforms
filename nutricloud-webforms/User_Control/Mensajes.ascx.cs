@@ -68,7 +68,7 @@ namespace nutricloud_webforms.User_Control
             TxtAsunto.Text = cc.asunto;
             TxtAsunto.Enabled = false;
 
-            foreach (var item in cr.ListarMensajes(id_conversacion, this.usuario))
+            foreach (var item in cr.ListarMensajes(id_conversacion))
             {
                 pnlMensaje = new Panel();
                 pnlMensaje.CssClass = "msj";
@@ -174,6 +174,23 @@ namespace nutricloud_webforms.User_Control
             int id_conversacion = (int)Session["id_conversacion"];
             cr.CerrarConversacion(id_conversacion);
             Actualiza(id_conversacion);
+        }
+
+        protected void rConversaciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            int id_conv = int.Parse(((LinkButton)e.Item.FindControl("LnkConv")).CommandArgument);
+            int cant = cr.ConversacionSinLeer(id_conv);
+            Label lbl = (Label)e.Item.FindControl("lblMsjsNoLeidos");
+
+            if (cant > 0)
+            {
+                lbl.Visible = true;
+                lbl.Text = cant.ToString();
+            }
+            else
+            {
+                lbl.Visible = false;
+            }
         }
     }
 }

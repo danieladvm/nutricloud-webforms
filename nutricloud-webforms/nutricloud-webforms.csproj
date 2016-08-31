@@ -124,7 +124,7 @@
     <Content Include="Pages\Buscador.aspx" />
     <Content Include="Pages\Entrada.aspx" />
     <Content Include="Pages\Mensajes.aspx" />
-    <Content Include="Pages\Muro.aspx" />
+    <Content Include="Social\Muro.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -142,6 +142,11 @@
     <Content Include="Content\img\icon\manifest.json" />
     <Content Include="HeaderFooter.Master" />
     <Content Include="MasterPro.Master" />
+    <Content Include="Pages\NotaAlta.aspx" />
+    <Content Include="Pages\NotaEditar.aspx" />
+    <Content Include="Social\PerfilSocial.aspx" />
+    <Content Include="Recetas.Master" />
+    <Content Include="Blog.Master" />
     <EntityDeploy Include="DataBase\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
@@ -149,11 +154,6 @@
     <Content Include="DataBase\DataBaseModel.edmx.diagram">
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Pages\NotaAlta.aspx" />
-    <Content Include="Pages\NotaEditar.aspx" />
-    <Content Include="Pages\PerfilSocial.aspx" />
-    <Content Include="Recetas.Master" />
-    <Content Include="Blog.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,7 +287,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\estilo_vida.cs">
+    <Compile Include="DataBase\sp_alimento_diario_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sysdiagrams.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario.cs">
@@ -318,6 +327,9 @@
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario_usuario.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\v_usuario_muro.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MasterPro.Master.cs">
@@ -382,11 +394,11 @@
     <Compile Include="Pages\Mensajes.aspx.designer.cs">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Muro.aspx.cs">
+    <Compile Include="Social\Muro.aspx.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Muro.aspx.designer.cs">
+    <Compile Include="Social\Muro.aspx.designer.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Home.aspx.cs">
@@ -424,11 +436,11 @@
     <Compile Include="Pages\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PerfilSocial.aspx.cs">
+    <Compile Include="Social\PerfilSocial.aspx.cs">
       <DependentUpon>PerfilSocial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\PerfilSocial.aspx.designer.cs">
+    <Compile Include="Social\PerfilSocial.aspx.designer.cs">
       <DependentUpon>PerfilSocial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Receta.aspx.cs">

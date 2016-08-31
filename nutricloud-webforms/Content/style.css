@@ -1364,12 +1364,13 @@ input#ContentPlaceHolder1_ucMensajes_btnenviar {
     }
 
 .leftmsg li a {
-    width: 90%;
+    width: 70%;
     height: 100%;
     display: inline-block;
 }
 
-.leftmsg i {
+.leftmsg i,
+.leftmsg span {
     float: right;
 }
 

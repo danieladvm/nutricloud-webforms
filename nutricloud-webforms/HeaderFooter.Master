@@ -63,20 +63,20 @@
                                 <img src="../../content/img/logo.png">nutricloud
                             </a>
                             <ul id="nav-mobile" class="right side-nav">
-                                <li><a href="Home.aspx">Diario</a></li>
-                                <li><a href="Buscador.aspx">Alimentos</a></li>
-                                <li><a href="Blog.aspx">Blog</a></li>
-                                <li><a href="Muro.aspx">Comunidad</a></li>
-                                <li><a href="Mensajes.aspx">Profesionales</a></li>
+                                <li><a href="/Pages/Home.aspx">Diario</a></li>
+                                <li><a href="/Pages/Buscador.aspx">Alimentos</a></li>
+                                <li><a href="/Pages/Blog.aspx">Blog</a></li>
+                                <li><a href="/Pages/Social/Muro.aspx">Comunidad</a></li>
+                                <li><a href="/Pages/Mensajes.aspx">Profesionales</a></li>
                                 <li>
                                     <div class="dropdown">
                                         <a href="javascript:void(0);" id="openMobileP" class="dropbtn">
                                             <asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
                                         <div>
                                             <ul class="menudown">
-                                                <li><a href="Perfil.aspx">Perfil</a></li>
-                                                <li><a href="Recetas.aspx">Recetas</a></li>
-                                                <li><a href="Reportes.aspx">Reportes</a></li>
+                                                <li><a href="/Pages/Perfil.aspx">Perfil</a></li>
+                                                <li><a href="/Pages/Recetas.aspx">Recetas</a></li>
+                                                <li><a href="/Pages/Reportes.aspx">Reportes</a></li>
                                                 <li>
                                                     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
                                             </ul>
@@ -84,8 +84,9 @@
                                     </div>
                                 </li>
                                 <li><a href="Mensajes.aspx" class="relative">
-                                    <i class="material-icons">notifications</i>
-                                    <div class="number">2</div>
+                                    <i class="material-icons">message</i>
+                                    <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                    <%--<div class="number">2</div>--%>
                                 </a>
                                 </li>
                             </ul>

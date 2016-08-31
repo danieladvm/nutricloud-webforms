@@ -9,12 +9,12 @@
                     <h5>Mensajes con Profesionales</h5>
                     <%--Lista de conversaciones--%>
                     <ul>
-                        <asp:Repeater ID="rConversaciones" runat="server">
+                        <asp:Repeater ID="rConversaciones" runat="server" OnItemDataBound="rConversaciones_ItemDataBound">
                             <ItemTemplate>
                                 <li>
                                     <asp:LinkButton ID="LnkConv" CommandArgument='<%# Eval("id_consulta_conversacion") %>' runat="server" OnClick="lnkConversacion_Click"><%# Eval("asunto") %></asp:LinkButton>
-                                  <i class="material-icons">keyboard_arrow_right</i>
-
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                    <asp:Label ID="lblMsjsNoLeidos" runat="server" CssClass="new badge green-nutri" Visible="false"></asp:Label>
                                 </li>
                             </ItemTemplate>
                         </asp:Repeater>
