@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="Nota.aspx.cs" Inherits="nutricloud_webforms.pages.Nota" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="Nota.aspx.cs" Inherits="nutricloud_webforms.pages.Nota" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="row seccionPro">
+    <div class="row seccionPerfil">
         <div class="container">
             <h3>Blog</h3>
         </div>
@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="row fechanota grey-text">
-            27 de Febrero 2017
+           <asp:Label ID="fechanota" runat="server"></asp:Label>
         </div>
         <div class="row titlenota">
             <h4 runat="server" id="nota_titulo"></h4>
@@ -34,11 +34,9 @@
                         <div id="texto" runat="server"></div>
                     </div>
                 </div>
-                <form runat="server">
-                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Editar" Text="Editar"></asp:LinkButton>
-                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Eliminar" Text="Eliminar"></asp:LinkButton>  
-                </form>
-            </div>
+                   <asp:LinkButton ID="LiEditar" runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Editar" Text="Editar"></asp:LinkButton>
+                    <asp:LinkButton ID="LiEliminar" runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Eliminar" Text="Eliminar"></asp:LinkButton>  
+           </div>
             <!--/col l9-->
             <div class="col l3 m12 s12">
                 <div class="note-blog relacionados">

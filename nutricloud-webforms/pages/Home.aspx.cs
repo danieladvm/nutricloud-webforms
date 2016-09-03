@@ -16,6 +16,22 @@ namespace nutricloud_webforms
     {
         AlimentoRepository ar = new AlimentoRepository();
 
+        void Page_PreInit(object sender, EventArgs e)
+        {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            if (UsuarioCompleto == null)
+                Response.Redirect("../Default.aspx");
+            else
+            {
+                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
+                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                    Response.Redirect("blog.aspx");
+            }
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -25,57 +41,59 @@ namespace nutricloud_webforms
         public static string GetAlimentos(string fecha)
         {
             UsuarioCompleto usuario = (UsuarioCompleto)HttpContext.Current.Session["UsuarioCompleto"];
-            int idUsuario = usuario.Usuario.id_usuario;
-
             AlimentoRepository ar = new AlimentoRepository();
             StringBuilder sb = new StringBuilder();
             DateTime f;
 
-            try
+            if (usuario != null)
             {
-                f = DateTime.Parse(fecha);
-            }
-            catch (Exception)
-            {
-                f = DateTime.Now;
-            }
+                int idUsuario = usuario.Usuario.id_usuario;
 
-            foreach (var tipoComida in ar.ListarTipoComida())
-            {
-                sb.Append("<div class='row'>");
-                sb.Append("<div class='col s12 m12'>");
-                sb.Append("<div class='card'>");
-                sb.Append("<div class='card-content orange-text text-darken-3'>");
-                sb.Append("<img src='../Content/img/" + tipoComida.imagen + "' class='responsive-img icon-food' />");
-                sb.Append("<h4>" + tipoComida.comida_tipo1 + "</h4>");
-
-                foreach (var comida in ar.ListarDiario(idUsuario, tipoComida.id_comida_tipo, f))
+                try
                 {
-                    sb.Append("<div class='row item-alimento'>");
-                    sb.Append("<div class='col s8'>");
-                    sb.Append("<a class='alimento' href = 'Alimento.aspx?Idalimento=" + comida.id_alimento + "'>" + comida.alimento + "</a>");
-                    sb.Append("</div>");
-                    sb.Append("<div class='col s4'>");
-                    sb.Append("<span class='calorias'>" + comida.energia_kcal + "kcal</span>");
-                    sb.Append("</div>");
-                    sb.Append("<div class='col s12'>");
-                    sb.Append("<span class='cantidad'>" + comida.cantidad + comida.unidad_medida + "</span>");
-                    sb.Append("</div>");
-                    sb.Append("</div>");
+                    f = DateTime.Parse(fecha);
+                }
+                catch (Exception)
+                {
+                    f = DateTime.Now;
                 }
 
-                sb.Append("</div>");
-                sb.Append("<div class='card-action action-home'>");
-                sb.Append("<a href='#'>Editar</a>");
-                sb.Append("<a href='#'>Eliminar</a>");
-                sb.Append("</div>");
-                sb.Append("</div>");
-                sb.Append("</div>");
-                sb.Append("</div>");
-                //sb.Append("");                          
-            }
+                foreach (var tipoComida in ar.ListarTipoComida())
+                {
+                    sb.Append("<div class='row'>");
+                    sb.Append("<div class='col s12 m12'>");
+                    sb.Append("<div class='card'>");
+                    sb.Append("<div class='card-content orange-text text-darken-3'>");
+                    sb.Append("<img src='../Content/img/" + tipoComida.imagen + "' class='responsive-img icon-food' />");
+                    sb.Append("<h4>" + tipoComida.comida_tipo1 + "</h4>");
 
-            return sb.ToString();
+                    foreach (var comida in ar.ListarDiario(idUsuario, tipoComida.id_comida_tipo, f))
+                    {
+                        sb.Append("<div class='row item-alimento'>");
+                        sb.Append("<div class='col s8'>");
+                        sb.Append("<a class='alimento' href = 'Alimento.aspx?Idalimento=" + comida.id_alimento + "'>" + comida.alimento + "</a>");
+                        sb.Append("</div>");
+                        sb.Append("<div class='col s4'>");
+                        sb.Append("<span class='calorias'>" + comida.energia_kcal + "kcal</span>");
+                        sb.Append("</div>");
+                        sb.Append("<div class='col s12'>");
+                        sb.Append("<span class='cantidad'>" + comida.cantidad + comida.unidad_medida + "</span>");
+                        sb.Append("</div>");
+                        sb.Append("</div>");
+                    }
+
+                    sb.Append("</div>");
+                    sb.Append("<div class='card-action action-home'>");
+                    sb.Append("<a href='#'>Editar</a>");
+                    sb.Append("<a href='#'>Eliminar</a>");
+                    sb.Append("</div>");
+                    sb.Append("</div>");
+                    sb.Append("</div>");
+                    sb.Append("</div>");
+                    //sb.Append("");                          
+                }
+                return sb.ToString();
+            } else return "0";
         }
     }
 }

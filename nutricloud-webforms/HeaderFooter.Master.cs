@@ -14,21 +14,34 @@ namespace nutricloud_webforms
     {
         ConversacionRepository cr = new ConversacionRepository();
 
-        protected void Page_Load(object sender, EventArgs e)
+        void Page_PreInit(object sender, EventArgs e)
         {
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
 
             if (Session["UsuarioCompleto"] == null)
             {
-                Response.Redirect("~/Default.aspx");
+                //Response.Redirect("~/Default.aspx");
+                this.Page.MasterPageFile = "~/Anon.Master";
             }
             else
             {
                 LblNombre.Text = UsuarioCompleto.Usuario.nombre;
+                
+            }
+        }
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            int msjs = cr.MensajesNoLeidos(UsuarioCompleto);
 
-                int msjs = cr.MensajesNoLeidos(UsuarioCompleto);
-
-                if (msjs > 0)
+            if (UsuarioCompleto == null)
+            {
+                msjs = 0;
+            }
+            else
+            { 
+            if (msjs > 0)
                 {
                     lblNotificaciones.Visible = true;
                     lblNotificaciones.Text = msjs.ToString();

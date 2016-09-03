@@ -12,6 +12,20 @@ namespace nutricloud_webforms.Pages
         private RecetaRepository recetaRepository = new RecetaRepository();
         private usuario_receta receta;
 
+        void Page_PreInit(object sender, EventArgs e)
+        {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            if (UsuarioCompleto == null)
+                Response.Redirect("../Default.aspx");
+            else
+            {
+                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
+                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                    Response.Redirect("Profesionales/Home.aspx");
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,10 +40,11 @@ namespace nutricloud_webforms.Pages
             }
         }
 
-        //protected void onload(object sender, EventArgs e)
-        //{
-        //    string x = "hola";
-        //}
+        protected void onload(object sender, EventArgs e)
+        {
+            // no se para que se usa tdv 
+            //string x = "hola";
+        }
 
         protected void EditarReceta(object sender, EventArgs e)
         {

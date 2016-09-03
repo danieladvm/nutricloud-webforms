@@ -94,6 +94,15 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.Button btnActualizarInfoGral;
         
         /// <summary>
+        /// LblAviso2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblAviso2;
+        
+        /// <summary>
         /// TxtPeso control.
         /// </summary>
         /// <remarks>

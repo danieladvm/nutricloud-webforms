@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Recetas.master.cs" Inherits="nutricloud_webforms.Recetas" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HeaderFooter.master.cs" Inherits="nutricloud_webforms.HeaderFooter" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,6 @@
     <link href="../../content/materialize.css" type="text/css" rel="stylesheet">
     <link href="../../content/style.css" type="text/css" rel="stylesheet">
     <link href="../../content/LayoutStyle.css" type="text/css" rel="stylesheet">
-    <link href="../../content/stylepro.css" type="text/css" rel="stylesheet">
     <link href="../../content/responsive.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../scripts/jquery.min.js">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,8 +19,6 @@
     <script src="../../scripts/modernizr.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300|Righteous' rel='stylesheet' type='text/css'>
-     <!-- Compiled and minified CSS -->
-    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">--%>
 
     <!-- Icon -->
     <link rel="apple-touch-icon" sizes="57x57" href="../../content/img/icon/apple-icon-57x57.png">
@@ -45,48 +42,41 @@
 <body id="top" class="scrollspy">
 
     <!-- Pre Loader -->
-    <div id="loader-wrapper">
-        <div id="loader"></div>
 
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
+    <form id="formHeaderFooter" runat="server">
+        <div id="loader-wrapper">
+            <div id="loader"></div>
 
-    </div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
 
-    <div class="section no-pad-bot ptop">
-        <div class="navbar-fixed">
-            <nav id="nav_f" class="header-index" role="navigation">
-                <div class="container">
-                    <div class="nav-wrapper sticky">
-                        <a id="logo-container" href="Home.aspx" class="brand-logo">
-                            <img src="../../content/img/logo.png">nutricloud
-                        </a>
-                        <ul id="nav-mobile" class="right side-nav">
-                            <li><a href="Recetas.aspx">Recetas</a></li>
-                            <li><a href="Entrada.aspx">Nueva Receta</a></li>
-                            <li><a href="Perfil.aspx">Perfil</a></li>
-                            <li><a href="#" class="relative">
-                                <i class="material-icons sobre">markunread</i>
-                                <div class="number">2</div>
-                            </a>
-                            </li>
-                            <li><a href="pages/logout.aspx">Cerrar Sesión</a></li>
-                        </ul>
-                        <a href="#" data-activates="nav-mobile" class="button-collapse">
-                            <i class="material-icons">menu</i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
         </div>
-    </div>
 
-
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
-
+        <div class="section no-pad-bot ptop">
+            <div class="navbar-fixed">
+                <nav id="nav_f" class="header-index" role="navigation">
+                    <div class="container">
+                        <div class="nav-wrapper sticky">
+                            <a id="logo-container" href="../Default.aspx" class="brand-logo">
+                                <img src="../../content/img/logo.png">nutricloud
+                            </a>
+                            <ul id="nav-mobile" class="right side-nav">
+                               <li><a href="Buscador.aspx">Alimentos</a></li>
+                               <li><a href="Blog.aspx">Blog</a></li>
+                            </ul>
+                            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                                <i class="material-icons">menu</i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
 
     <footer id="contact" class="page-footer scrollspy">
         <div class="container">
@@ -176,23 +166,45 @@
     </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
-    <script type="text/javascript" src="../../scripts/nutricloud.js"></script>
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
 
     <script>
         $(function () {
+            CargaComidas();
+
             $("#datepicker").datepicker({
                 showOn: "button",
                 buttonImage: "../../content/img/calendario.png",
                 buttonImageOnly: true,
                 buttonText: "Seleccione la Fecha",
                 altField: "#alternate",
-                altFormat: "DD, d MM, yy"
+                altFormat: "DD, d MM, yy",
+                onSelect: function () {
+                    CargaComidas();
+                }
             });
         });
+
+        function CargaComidas() {
+            var fechaSeleccionada = $("#alternate").val();
+
+            $.ajax({
+                type: "POST",
+                url: "Home.aspx/GetAlimentos",
+                data: "{fecha:'" + fechaSeleccionada + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    // How to return data here like a table???  
+                    $("#lista-comidas").html(msg.d);
+                    //alert(msg.d);
+                }
+            });
+        }
     </script>
     <script>
         $(document).ready(function () {
@@ -231,9 +243,13 @@
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
         });
+        </script>
+    <script>
+        $('#openMobileP').on('click', function (event) {
+            event.preventDefault();
+            $(".menudown").slideToggle("slow");
+        });
     </script>
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script>tinymce.init({ selector: 'textarea', plugins: "autoresize" });</script>
 
 </body>
 </html>

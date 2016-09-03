@@ -58,6 +58,15 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.Label LblGrasa;
         
         /// <summary>
+        /// agregar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl agregar;
+        
+        /// <summary>
         /// Lbllista control.
         /// </summary>
         /// <remarks>
@@ -83,15 +92,6 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox porcion;
-        
-        /// <summary>
-        /// tipo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tipo;
         
         /// <summary>
         /// Hidden1 control.

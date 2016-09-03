@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Recetas.Master" AutoEventWireup="true" CodeBehind="Recetas.aspx.cs" Inherits="nutricloud_webforms.Pages.Recetas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="Recetas.aspx.cs" Inherits="nutricloud_webforms.Pages.Recetas" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row seccionPro">
+    
+    <div class="row seccionPerfil">
         <div class="container">
             <h3>Recetas</h3>
         </div>
@@ -20,8 +21,7 @@
             </div>
         </div>
         <div class="collection">
-            <form runat="server">
-                <asp:Label runat="server" ID="msjNoHayRecetas"></asp:Label>
+               <asp:Label runat="server" ID="msjNoHayRecetas"></asp:Label>
                 <asp:Repeater ID="RepeaterRecetas" runat="server">
                     <ItemTemplate>
                         <asp:LinkButton CommandArgument=<%# Eval("id_usuario_receta") %> class="collection-item" OnClick="VerReceta" runat="server">
@@ -39,7 +39,6 @@
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:Repeater>
-            </form>
         </div>
         <!--coleccion-->
 

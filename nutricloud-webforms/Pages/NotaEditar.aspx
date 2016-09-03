@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Blog.Master" AutoEventWireup="true" CodeBehind="NotaEditar.aspx.cs" Inherits="nutricloud_webforms.Pages.NotaEditar" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div class="row seccionPro">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masterpro.Master" AutoEventWireup="true" CodeBehind="NotaEditar.aspx.cs" Inherits="nutricloud_webforms.Pages.NotaEditar" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div class="row seccionPerfil">
         <div class="container">
             <h3>Editar Nota</h3>
         </div>
@@ -9,7 +10,6 @@
     <div class="container">
         <div class="row">
              
-            <form runat="server">
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Imagen</span>
@@ -26,7 +26,6 @@
                 <h6 style="padding-bottom: 20px;">Nota</h6>
                 <asp:TextBox ID="texto" TextMode="MultiLine" runat="server" ValidateRequestMode="Disabled"></asp:TextBox>
                 <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="Editar" Text="Guardar"></asp:LinkButton> 
-            </form>    
         </div>
     </div>
     <!--/container-->

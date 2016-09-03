@@ -13,6 +13,24 @@ namespace nutricloud_webforms.Pages {
     public partial class Blog {
         
         /// <summary>
+        /// receta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor receta;
+        
+        /// <summary>
+        /// nota control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor nota;
+        
+        /// <summary>
         /// msjNoHayNotas control.
         /// </summary>
         /// <remarks>

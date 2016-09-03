@@ -1,16 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Recetas.Master" AutoEventWireup="true" CodeBehind="Receta.aspx.cs" Inherits="nutricloud_webforms.pages.Receta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="Receta.aspx.cs" Inherits="nutricloud_webforms.pages.Receta" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="row seccionPro">
+     <div class="row seccionPerfil">
         <div class="container">
-            <h3>NutriRecetas</h3>
+            <h3>Receta</h3>
         </div>
     </div>
 
+
     <div class="container">
         <div class="row fechanota grey-text">
-            27 de Febrero 2017
+            <asp:Label ID="fechanota" runat="server"></asp:Label>
         </div>
         <div class="row titlenota">
             <h4 runat="server" id="receta_titulo"></h4>
@@ -34,10 +35,8 @@
                         <div id="receta_texto" runat="server"></div>
                     </div>
                 </div>
-                <form runat="server">
-                    <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EditarReceta" Text="Editar"></asp:LinkButton>
+               <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EditarReceta" Text="Editar"></asp:LinkButton>
                     <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EliminarReceta" Text="Eliminar"></asp:LinkButton>  
-                </form>
             </div>
             <!--/col l9-->
             <div class="col l3 m12 s12">

@@ -63,9 +63,9 @@
                                 <img src="Content/img/logo.png" />nutricloud
                             </a>
                             <ul id="nav-mobile" class="right side-nav">
-                                <li><a href="#intro">Diario</a></li>
-                                <li><a href="#work">Comunidad</a></li>
-                                <li><a href="#contact">Nosotros</a></li>
+                                <li><a href="Pages/Blog.aspx">Blog</a></li>
+                                <li><a href="Pages/Buscador.aspx">Alimentos</a></li>
+                                <li><a href="#intro">Nosotros</a></li>
                                 <li><%--Formulario LogIn--%>
                                     <uc1:LogIn runat="server" ID="LogIn" />
                                 </li>
@@ -157,7 +157,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="Content/img/card3.jpg">
+                                <img class="activator" src="Content/img/card3.jpg"/>
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Base de datos
@@ -177,7 +177,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="Content/img/card2.jpg">
+                                <img class="activator" src="Content/img/card2.jpg"/>
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Estadísticas
@@ -197,7 +197,7 @@
                     <div class="col s12 m4 l4">
                         <div class="card">
                             <div class="card-image waves-effect waves-block waves-light">
-                                <img class="activator" src="Content/img/card4.jpg">
+                                <img class="activator" src="Content/img/card4.jpg"/>
                             </div>
                             <div class="card-content green-nutri">
                                 <span class="card-title activator white-text">Blog de nutrición

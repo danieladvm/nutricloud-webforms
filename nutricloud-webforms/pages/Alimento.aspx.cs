@@ -16,13 +16,28 @@ namespace nutricloud_webforms
         DiarioRepository dr = new DiarioRepository();
         UsuarioCompleto ur = new UsuarioCompleto();
 
+        void Page_PreInit(object sender, EventArgs e)
+        {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            if (UsuarioCompleto == null)
+                this.Page.MasterPageFile = "~/Anon.Master";
+            else
+            {
+                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
+                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                    this.Page.MasterPageFile = "~/MasterPro.Master";
+            }
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
             string idalimento = Server.UrlDecode(Request.QueryString["Idalimento"].ToString());
-
-
             alimento a = ar.BuscarAlimentoId(idalimento);
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
 
             LblNombre.Text = a.alimento1;
             LblCalo.Text = Convert.ToString(a.energia_kcal);
@@ -42,8 +57,15 @@ namespace nutricloud_webforms
             LblB2.Text = Convert.ToString(a.rivoflavina_mg);
             LblB3.Text = Convert.ToString(a.niacina_mg);
             Hidden1.Value = Convert.ToString(a.id_alimento);
-
             tipo.Text = a.alimento_tipo.unidad_medida;
+
+            if (Session["UsuarioCompleto"] == null)
+                agregar.Visible = false;
+            else
+            {
+                if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                    agregar.Visible = false;
+            }
         }
 
         protected void ingresar_Click(object sender, EventArgs e)

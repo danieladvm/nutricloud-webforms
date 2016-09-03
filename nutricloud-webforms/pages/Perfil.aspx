@@ -13,7 +13,7 @@
             <div class="col l9 m9 s12 perfil">
                 <div class="divtop">
                     <h4 class="listaHeader">Información General</h4>
-                    <asp:Label ID="lblAviso" runat="server" Text="" Font-Bold="true" CssClass="btn-link btn-lg aviso" Style="text-decoration: none"></asp:Label>
+                    <asp:Label ID="lblAviso" runat="server" Text="" Font-Bold="true" Cssclass="btn-link btn-lg aviso" style="text-decoration:none" ></asp:Label>
                     <div class="row">
                         <ul class="infogral datosp">
                             <li>
@@ -63,7 +63,7 @@
                             <asp:Panel ID="pnlErroresInfoGral" runat="server" CssClass="panel-errores"></asp:Panel>
                             <li class="row btn-registro nomargin">
                                 <asp:Button ID="btnActualizarInfoGral" runat="server" CssClass="btn waves-effect orange waves-input-wrapper" Text="Actualizar Información General" OnClick="btnActualizarInfoGral_Click" />
-
+                                
                             </li>
                         </ul>
                     </div>
@@ -77,6 +77,7 @@
             <div class="col l9 m9 s12 perfil">
                 <div class="divtop">
                     <h4 class="listaHeader">Datos Físicos</h4>
+                    <asp:Label ID="LblAviso2" runat="server" Text="" Font-Bold="true" Cssclass="btn-link btn-lg aviso" style="text-decoration:none" ></asp:Label>
                     <div class="row">
                         <ul class="infogral datosp">
                             <li>

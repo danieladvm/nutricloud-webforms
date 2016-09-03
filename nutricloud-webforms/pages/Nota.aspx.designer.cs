@@ -13,6 +13,15 @@ namespace nutricloud_webforms.pages {
     public partial class Nota {
         
         /// <summary>
+        /// fechanota control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label fechanota;
+        
+        /// <summary>
         /// nota_titulo control.
         /// </summary>
         /// <remarks>
@@ -47,5 +56,23 @@ namespace nutricloud_webforms.pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl texto;
+        
+        /// <summary>
+        /// LiEditar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LiEditar;
+        
+        /// <summary>
+        /// LiEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LiEliminar;
     }
 }

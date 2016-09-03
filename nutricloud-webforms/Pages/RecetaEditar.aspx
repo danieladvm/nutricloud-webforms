@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Recetas.Master" AutoEventWireup="true" CodeBehind="RecetaEditar.aspx.cs" Inherits="nutricloud_webforms.Pages.RecetaEditar" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="RecetaEditar.aspx.cs" Inherits="nutricloud_webforms.Pages.RecetaEditar" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row seccionPro">
+    <div class="row seccionPerfil">
         <div class="container">
             <h3>Editar Receta</h3>
         </div>
@@ -9,7 +9,6 @@
     <div class="container">
         <div class="row">
              
-            <form runat="server">
                 <div class="file-field input-field">
                     <div class="btn">
                         <span>Imagen</span>
@@ -26,7 +25,6 @@
                 <h6 style="padding-bottom: 20px;">Receta</h6>
                 <asp:TextBox ID="receta_texto" TextMode="MultiLine" runat="server" ValidateRequestMode="Disabled"></asp:TextBox>
                 <asp:LinkButton runat="server" CssClass="button btn waves-effect orange btn-ingresar" OnClick="EditarReceta" Text="Guardar"></asp:LinkButton> 
-            </form>    
         </div>
     </div>
     <!--/container-->
