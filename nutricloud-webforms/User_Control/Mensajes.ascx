@@ -44,4 +44,12 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+
+    <script>
+        $("#lblNotificaciones").change(function () {
+            if ($(this).text() == "0") {
+                $(this).style("display", "none");
+            }
+        });
+    </script>
 </div>

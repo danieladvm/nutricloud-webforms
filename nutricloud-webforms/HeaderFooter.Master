@@ -63,34 +63,35 @@
                                 <img src="../../content/img/logo.png">nutricloud
                             </a>
                             <ul id="nav-mobile" class="right side-nav">
-                                <li><a href="../Pages/Home.aspx">Diario</a></li>
-                                <li><a href="../Pages/Buscador.aspx">Alimentos</a></li>
-                                <li><a href="../Pages/Blog.aspx">Blog</a></li>
-                                <li><a href="../Social/Muro.aspx">Comunidad</a></li>
-                                <li><a href="Mensajes.aspx">Profesionales</a></li>
+                                <li><a href="/Pages/Home.aspx">Diario</a></li>
+                                <li><a href="/Pages/Buscador.aspx">Alimentos</a></li>
+                                <li><a href="/Pages/Blog.aspx">Blog</a></li>
+                                <li><a href="/Social/Muro.aspx">Comunidad</a></li>
+                                <li><a href="/Pages/Mensajes.aspx">Profesionales</a></li>
                                 <li>
                                     <div class="dropdown">
                                         <a href="javascript:void(0);" id="openMobileP" class="dropbtn">
-                                        <asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
+                                            <asp:Label ID="LblNombre" runat="server"></asp:Label><i class="material-icons">arrow_drop_down</i></a>
                                         <div>
                                             <ul class="menudown">
-                                                <li><a href="../Pages/Perfil.aspx">Perfil</a></li>
-                                                <li><a href="../Pages/Recetas.aspx">Recetas</a></li>
-                                                <li><a href="../Pages/Reportes.aspx">Reportes</a></li>
-                                                <li><asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
+                                                <li><a href="/Pages/Perfil.aspx">Perfil</a></li>
+                                                <li><a href="/Pages/Recetas.aspx">Recetas</a></li>
+                                                <li><a href="/Pages/Reportes.aspx">Reportes</a></li>
+                                                <li>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="logout_Click" Text="Cerrar Sesión"></asp:LinkButton></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="../Pages/Notificaciones.aspx" class="relative">
+                                <li><a href="/Pages/Notificaciones.aspx" class="relative">
                                     <i class="material-icons">notifications</i>
                                     <div class="number">2</div>
                                 </a>
                                 </li>
-                                <li><a href="Mensajes.aspx" class="relative">
-                                    <i class="material-icons">message</i>
+                                <li><a href="/Pages/Mensajes.aspx" class="relative">
+                                    <%--<i class="material-icons">message</i>--%>
+                                    <i class="material-icons sobre">markunread</i>
                                     <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
-                                    <%--<div class="number">2</div>--%>
                                 </a>
                                 </li>
                             </ul>
@@ -104,7 +105,7 @@
         </div>
         <div>
 
-                        <!--  Scripts-->
+            <!--  Scripts-->
             <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
             <script src="../scripts/materialize.js"></script>
             <!--<script src="../scripts/materialize.min.js"></script>-->
@@ -161,21 +162,6 @@
     </div>-->
     </footer>
 
-
-    <!--  Scripts-->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    
-    <script src="../scripts/materialize.js"></script>
-    <!--<script src="../scripts/materialize.min.js"></script>-->
-    <script src="../scripts/init.js"></script>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    
-    <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
-    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
-    
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <!--script nav-->
     <script>
         $(window).scroll(function () {
@@ -197,66 +183,20 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-            var options = [
-                      {selector: '#scrollf', offset: 10, callback: function ()
-                          { Materialize.showStaggeredList("#scrollf"); }
-                      },
-            ];
+            var options = [{
+                selector: '#scrollf', offset: 10, callback: function ()
+                { Materialize.showStaggeredList("#scrollf"); }
+            }];
             Materialize.scrollFire(options);
         });
     </script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../../scripts/DateTimePicker.min.js"></script>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
-    <script>
-        $(function () {
-            CargaComidas();
-
-            $("#datepicker").datepicker({
-                showOn: "button",
-                buttonImage: "../../content/img/calendario.png",
-                buttonImageOnly: true,
-                buttonText: "Seleccione la Fecha",
-                altField: "#alternate",
-                altFormat: "DD, d MM, yy",
-                onSelect: function () {
-                    CargaComidas();
-                }
-            });
-        });
-
-        function CargaComidas() {
-            var fechaSeleccionada = $("#alternate").val();
-
-            $.ajax({
-                type: "POST",
-                url: "Home.aspx/GetAlimentos",
-                data: "{fecha:'" + fechaSeleccionada + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    // How to return data here like a table???  
-                    $("#lista-comidas").html(msg.d);
-                    //alert(msg.d);
-                }
-            });
-        }
-    </script>
     <script>
         $(document).ready(function () {
-
             $('#datepicker').datepicker().datepicker('setDate', 'today');
-
         });
     </script>
-    
+
     <script>
         $.datepicker.regional['es'] = {
             closeText: 'Cerrar',
@@ -287,9 +227,10 @@
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
         });
-        </script>
+    </script>
+
     <script>
-        $('#openMobileP').on('click', function (event) {
+        $('#openMobileP').on('click', function () {
             event.preventDefault();
             $(".menudown").slideToggle("slow");
         });

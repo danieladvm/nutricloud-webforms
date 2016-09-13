@@ -57,7 +57,7 @@ namespace nutricloud_webforms
             LblB2.Text = Convert.ToString(a.rivoflavina_mg);
             LblB3.Text = Convert.ToString(a.niacina_mg);
             Hidden1.Value = Convert.ToString(a.id_alimento);
-            tipo.Text = a.alimento_tipo.unidad_medida;
+            LblTipo.Text = a.alimento_tipo.unidad_medida;
 
             if (Session["UsuarioCompleto"] == null)
                 agregar.Visible = false;

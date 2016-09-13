@@ -22,6 +22,15 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.HtmlControls.HtmlForm formHeaderFooter;
         
         /// <summary>
+        /// lblNotificaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNotificaciones;
+        
+        /// <summary>
         /// logout control.
         /// </summary>
         /// <remarks>
