@@ -46,6 +46,7 @@
     <!-- Pre Loader -->
 
     <form id="formHeaderFooter" runat="server">
+        <asp:ScriptManager ID="smHeaderFooter" runat="server"></asp:ScriptManager>
         <div id="loader-wrapper">
             <div id="loader"></div>
 
@@ -89,9 +90,12 @@
                                 </a>
                                 </li>
                                 <li><a href="/Pages/Mensajes.aspx" class="relative">
-                                    <%--<i class="material-icons">message</i>--%>
-                                    <i class="material-icons sobre">markunread</i>
-                                    <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                    <asp:UpdatePanel ID="upNotificaciones" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <i class="material-icons sobre">markunread</i>
+                                            <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </a>
                                 </li>
                             </ul>

@@ -43,6 +43,7 @@
 <body id="top" class="scrollspy">
 
     <form id="formHeaderFooter" runat="server">
+        <asp:ScriptManager ID="smHeaderFooter" runat="server"></asp:ScriptManager>
         <!-- Pre Loader -->
         <div id="loader-wrapper">
             <div id="loader"></div>
@@ -64,8 +65,12 @@
                                 <li><a href="/Pages/Buscador.aspx">Alimentos</a></li>
                                 <li><a href="/Pages/Blog.aspx">Blog</a></li>
                                 <li><a href="/Profesionales/Mensajes.aspx" class="relative">
-                                    <i class="material-icons sobre">markunread</i>
-                                    <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                    <asp:UpdatePanel ID="upNotificaciones" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <i class="material-icons sobre">markunread</i>
+                                            <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </a>
                                 </li>
 

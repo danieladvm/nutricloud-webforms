@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Mensajes.ascx.cs" Inherits="nutricloud_webforms.User_Control.Mensajes" %>
 <div class="container mensajes">
     <div class="row">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div class="col l6 m6 s12 leftmsg">
@@ -44,12 +42,4 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
-    <script>
-        $("#lblNotificaciones").change(function () {
-            if ($(this).text() == "0") {
-                $(this).style("display", "none");
-            }
-        });
-    </script>
 </div>

@@ -197,7 +197,8 @@ namespace nutricloud_webforms.User_Control
 
         private void CargaNotificacionesMensajes()
         {
-            Label lblNotificaciones = (Label)Page.Master.FindControl("lblNotificaciones");
+            Label lblNotificaciones;
+            UpdatePanel upNotificaciones;
             int msjs;
 
             if (usuario == null)
@@ -207,18 +208,9 @@ namespace nutricloud_webforms.User_Control
             else
             {
                 msjs = cr.MensajesNoLeidos(usuario);
+                upNotificaciones = (UpdatePanel)Page.Master.FindControl("upNotificaciones");
+                lblNotificaciones = (Label)Page.Master.FindControl("lblNotificaciones");
 
-                if (ScriptManager1.IsInAsyncPostBack)
-                {
-                    if (msjs > 0)
-                    {
-                        ScriptManager1.RegisterDataItem(lblNotificaciones, msjs.ToString());
-                    }
-                    else
-                    {
-                        ScriptManager1.RegisterDataItem(lblNotificaciones, "");
-                    }
-                }
                 if (msjs > 0)
                 {
                     lblNotificaciones.Text = msjs.ToString();
@@ -228,6 +220,8 @@ namespace nutricloud_webforms.User_Control
                 {
                     lblNotificaciones.Visible = false;
                 }
+
+                upNotificaciones.Update();
             }
         }
     }
