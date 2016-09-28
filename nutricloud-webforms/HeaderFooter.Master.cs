@@ -26,8 +26,8 @@ namespace nutricloud_webforms
             else
             {
                 LblNombre.Text = UsuarioCompleto.Usuario.nombre;
-                
             }
+       
         }
         
         protected void Page_Load(object sender, EventArgs e)
@@ -51,12 +51,28 @@ namespace nutricloud_webforms
                     lblNotificaciones.Visible = false;
                 }
             }
+
+            this.getCantidadNotificaciones();
         }
 
         protected void logout_Click(object sender, EventArgs e)
         {
             Session.Abandon();
             Response.Redirect("~/Default.aspx");
+        }
+
+
+        protected void getCantidadNotificaciones()
+        {
+            NotificacionRepository notificacionRepository = new NotificacionRepository();
+            var cantidad =  notificacionRepository.getCantidadNotificacionesNoLeidas(1);
+
+            if (cantidad > 0)
+            {
+                cantidadNotificaciones.Visible = true;
+                cantidadNotificaciones.Text = cantidad.ToString();
+            }
+            
         }
 
     }

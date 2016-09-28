@@ -83,8 +83,8 @@
                                     </div>
                                 </li>
                                 <li><a href="../Pages/Notificaciones.aspx" class="relative">
+                                    <asp:Label ID="cantidadNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
                                     <i class="material-icons">notifications</i>
-                                    <div class="number">2</div>
                                 </a>
                                 </li>
                                 <li><a href="Mensajes.aspx" class="relative">
