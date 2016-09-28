@@ -39,6 +39,7 @@ namespace nutricloud_webforms.User_Control
         {
             rConversaciones.DataSource = cr.ListarConversaciones(this.usuario);
             rConversaciones.DataBind();
+            CargaNotificacionesMensajes();
         }
 
         protected void btnenviar_Click(object sender, EventArgs e)
@@ -68,7 +69,7 @@ namespace nutricloud_webforms.User_Control
             TxtAsunto.Text = cc.asunto;
             TxtAsunto.Enabled = false;
 
-            foreach (var item in cr.ListarMensajes(id_conversacion))
+            foreach (var item in cr.ListarMensajes(id_conversacion, usuario))
             {
                 pnlMensaje = new Panel();
                 pnlMensaje.CssClass = "msj";
@@ -119,6 +120,7 @@ namespace nutricloud_webforms.User_Control
             }
 
             SetSessionIdConversacion(id_conversacion);
+            CargaConversaciones();
         }
 
         private Mensaje MapeaMensajeEnviado()
@@ -133,7 +135,7 @@ namespace nutricloud_webforms.User_Control
 
         private void Actualiza(int id_conversacion)
         {
-            CargaConversaciones();
+            //CargaConversaciones();
             CargaMensajes(id_conversacion);
             TxtMensaje.Text = string.Empty;
         }
@@ -179,17 +181,47 @@ namespace nutricloud_webforms.User_Control
         protected void rConversaciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             int id_conv = int.Parse(((LinkButton)e.Item.FindControl("LnkConv")).CommandArgument);
-            int cant = cr.ConversacionSinLeer(id_conv);
-            Label lbl = (Label)e.Item.FindControl("lblMsjsNoLeidos");
+            int cant = cr.ConversacionSinLeer(id_conv, usuario);
+            Label lblMsjsNoLeidos = (Label)e.Item.FindControl("lblMsjsNoLeidos");
 
             if (cant > 0)
             {
-                lbl.Visible = true;
-                lbl.Text = cant.ToString();
+                lblMsjsNoLeidos.Visible = true;
+                lblMsjsNoLeidos.Text = cant.ToString();
             }
             else
             {
-                lbl.Visible = false;
+                lblMsjsNoLeidos.Visible = false;
+            }
+        }
+
+        private void CargaNotificacionesMensajes()
+        {
+            Label lblNotificaciones;
+            UpdatePanel upNotificaciones;
+            int msjs;
+
+            if (usuario == null)
+            {
+                msjs = 0;
+            }
+            else
+            {
+                msjs = cr.MensajesNoLeidos(usuario);
+                upNotificaciones = (UpdatePanel)Page.Master.FindControl("upNotificaciones");
+                lblNotificaciones = (Label)Page.Master.FindControl("lblNotificaciones");
+
+                if (msjs > 0)
+                {
+                    lblNotificaciones.Text = msjs.ToString();
+                    lblNotificaciones.Visible = true;
+                }
+                else
+                {
+                    lblNotificaciones.Visible = false;
+                }
+
+                upNotificaciones.Update();
             }
         }
     }
