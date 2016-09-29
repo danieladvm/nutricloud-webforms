@@ -124,6 +124,12 @@
     <Content Include="Pages\Buscador.aspx" />
     <Content Include="Pages\Entrada.aspx" />
     <Content Include="Pages\Mensajes.aspx" />
+    <Content Include="Pages\Notificaciones.aspx" />
+    <Content Include="scripts\Chart.js" />
+    <Content Include="scripts\Chart.min.js" />
+    <Content Include="scripts\JavaScript.js" />
+    <Content Include="scripts\Notificaciones.js" />
+    <Content Include="scripts\Reportes.js" />
     <Content Include="Social\Muro.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="packages.config" />
@@ -145,8 +151,6 @@
     <Content Include="Pages\NotaAlta.aspx" />
     <Content Include="Pages\NotaEditar.aspx" />
     <Content Include="Social\PerfilSocial.aspx" />
-    <Content Include="Recetas.Master" />
-    <Content Include="Blog.Master" />
     <EntityDeploy Include="DataBase\DataBaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DataBaseModel.Designer.cs</LastGenOutput>
@@ -241,16 +245,11 @@
     <Content Include="User_Control\LogIn.ascx" />
     <Content Include="User_Control\Mensajes.ascx" />
     <Content Include="User_Control\SignIn.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blog.Master.cs">
-      <DependentUpon>Blog.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Blog.Master.designer.cs">
-      <DependentUpon>Blog.Master</DependentUpon>
-    </Compile>
     <Compile Include="DataBase\alimento.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
@@ -287,16 +286,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\estilo_vida.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\notificacion_blog_nota.cs">
+      <DependentUpon>DataBaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\sp_alimento_diario_Result.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="DataBase\sp_notificacion_blog_nota_obtener_Result.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataBaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\sysdiagrams.cs">
+    <Compile Include="DataBase\Table_1.cs">
       <DependentUpon>DataBaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\usuario.cs">
@@ -341,6 +343,8 @@
     </Compile>
     <Compile Include="Models\General.cs" />
     <Compile Include="Models\Mensaje.cs" />
+    <Compile Include="Models\Notificacion.cs" />
+    <Compile Include="Models\NotificacionRequest.cs" />
     <Compile Include="Models\UsuarioCompleto.cs" />
     <Compile Include="Pages\Alimento.aspx.cs">
       <DependentUpon>Alimento.aspx</DependentUpon>
@@ -394,6 +398,14 @@
     <Compile Include="Pages\Mensajes.aspx.designer.cs">
       <DependentUpon>Mensajes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\NotificacionRepository.cs" />
     <Compile Include="Social\Muro.aspx.cs">
       <DependentUpon>Muro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -492,13 +504,6 @@
     </Compile>
     <Compile Include="Pages\Reportes.aspx.designer.cs">
       <DependentUpon>Reportes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Recetas.Master.cs">
-      <DependentUpon>Recetas.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Recetas.Master.designer.cs">
-      <DependentUpon>Recetas.Master</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AlimentoRepository.cs" />
     <Compile Include="Repositories\BlogRepository.cs" />

@@ -66,8 +66,8 @@
                         <div class="row nobottom">
                             <div class="input-field col s12">
                                 <asp:TextBox ID="porcion" class="validate altercalendar porcion" runat="server"></asp:TextBox>
-                                <label for="porcion">Cantidad:</label>
-                                <asp:Label ID="LblTipo" runat="server"></asp:Label>
+                                <label for="porcion">Porción:</label>
+                                <asp:Label ID="tipo" runat="server"></asp:Label>
                             </div>
                         </div>
                         <input type="hidden" id="Hidden1" runat="server" />

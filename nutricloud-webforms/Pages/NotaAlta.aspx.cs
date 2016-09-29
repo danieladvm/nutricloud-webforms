@@ -14,7 +14,8 @@ namespace nutricloud_webforms.Pages
 {
     public partial class NotaAlta : System.Web.UI.Page
     {
-        private BlogRepository repository = new BlogRepository();
+        private BlogRepository blogRepository = new BlogRepository();
+        private NotificacionRepository notificacionRepository = new NotificacionRepository();
 
         void Page_PreInit(object sender, EventArgs e)
         {
@@ -68,7 +69,7 @@ namespace nutricloud_webforms.Pages
             nota.id_usuario = usuario.Usuario.id_usuario;
             nota.f_publicacion = DateTime.Now;
 
-            repository.add(nota);
+            blogRepository.add(nota);
 
             //TODO mostar mensaje de exito y redirigir hacia atras
         }
