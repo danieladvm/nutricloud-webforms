@@ -22,6 +22,15 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.HtmlControls.HtmlForm formHeaderFooter;
         
         /// <summary>
+        /// smHeaderFooter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager smHeaderFooter;
+        
+        /// <summary>
         /// LblNombre control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label cantidadNotificaciones;
+        
+        /// <summary>
+        /// upNotificaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upNotificaciones;
         
         /// <summary>
         /// lblNotificaciones control.
