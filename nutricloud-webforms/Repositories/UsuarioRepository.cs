@@ -15,103 +15,187 @@ namespace nutricloud_webforms.Repositories
         #region Interaccion con la base
         public void Insertar(usuario u)
         {
-            c.usuario.Add(PreparaUsuarioNuevo(u));
-            c.SaveChanges();
+            try
+            {
+                c.usuario.Add(PreparaUsuarioNuevo(u));
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void ActualizarUsuario(usuario u)
         {
-            var usuario = c.usuario.Find(u.id_usuario);
-            usuario.clave = u.clave;
-            usuario.nombre = u.nombre;
-            usuario.sexo = u.sexo;
-            usuario.f_nacimiento = u.f_nacimiento;
+            try
+            {
+                var usuario = c.usuario.Find(u.id_usuario);
+                usuario.clave = u.clave;
+                usuario.nombre = u.nombre;
+                usuario.sexo = u.sexo;
+                usuario.f_nacimiento = u.f_nacimiento;
 
-            c.Entry(usuario);
-            c.SaveChanges();
+                c.Entry(usuario);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void ActualizarDatosUsuario(usuario_datos u)
         {
-            var usuariod = c.usuario_datos.Find(u.id_usuario_datos);
-            usuariod.altura_cm = u.altura_cm;
-            usuariod.peso_kg = u.peso_kg;
-            usuariod.id_usuario_objetivo = u.id_usuario_objetivo;
-            usuariod.id_usuario_actividad = u.id_usuario_actividad;
+            try
+            {
+                var usuariod = c.usuario_datos.Find(u.id_usuario_datos);
+                usuariod.altura_cm = u.altura_cm;
+                usuariod.peso_kg = u.peso_kg;
+                usuariod.id_usuario_objetivo = u.id_usuario_objetivo;
+                usuariod.id_usuario_actividad = u.id_usuario_actividad;
 
 
-            c.Entry(usuariod);
-            c.SaveChanges();
+                c.Entry(usuariod);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void InsertarDatosUsuario(usuario_datos ud)
         {
-            c.usuario_datos.Add(ud);
-            c.SaveChanges();
+            try
+            {
+                c.usuario_datos.Add(ud);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public usuario BuscarUsuarioLogIn(usuario usuario)
         {
-            string claveEncriptada = SeguridadRepository.Encriptar(usuario.clave);
-
-            usuario u = (from us in c.usuario
-                         where us.email == usuario.email && us.clave == claveEncriptada
-                         select us).FirstOrDefault();
-
-            if (u != null)
+            try
             {
-                c.Entry(PraparaUsuarioUpdate(u));
-                c.SaveChanges();
-            }
+                string claveEncriptada = SeguridadRepository.Encriptar(usuario.clave);
 
-            return u;
+                usuario u = (from us in c.usuario
+                             where us.email == usuario.email && us.clave == claveEncriptada
+                             select us).FirstOrDefault();
+
+                if (u != null)
+                {
+                    c.Entry(PraparaUsuarioUpdate(u));
+                    c.SaveChanges();
+                }
+
+                return u;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<usuario_tipo> ListarTipoUsuario()
         {
-            List<usuario_tipo> tu = (from u in c.usuario_tipo select u).ToList();
-            return tu;
+            try
+            {
+                return (from u in c.usuario_tipo select u).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<usuario_actividad> ListarActividades()
         {
-            return (from u in c.usuario_actividad select u).ToList();
+            try
+            {
+                return (from u in c.usuario_actividad select u).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public usuario_datos Buscar(int idUsuario)
         {
-            return (from ud in c.usuario_datos
-                    where ud.id_usuario == idUsuario
-                    orderby ud.f_ingreso descending
-                    select ud).FirstOrDefault();
+            try
+            {
+                return (from ud in c.usuario_datos
+                        where ud.id_usuario == idUsuario
+                        orderby ud.f_ingreso descending
+                        select ud).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public usuario BuscarUsuario(int id_usuario)
         {
-            return (from u in c.usuario
-                    where u.id_usuario == id_usuario
-                    select u).FirstOrDefault();
+            try
+            {
+                return (from u in c.usuario
+                        where u.id_usuario == id_usuario
+                        select u).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public usuario_datos BuscarUsuarioDatos(int id_usuario)
         {
-            return (from ud in c.usuario_datos
-                    where ud.id_usuario == id_usuario
-                    orderby ud.f_ingreso descending
-                    select ud).FirstOrDefault();
+            try
+            {
+                return (from ud in c.usuario_datos
+                        where ud.id_usuario == id_usuario
+                        orderby ud.f_ingreso descending
+                        select ud).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<usuario_objetivo> ListarObjetivos()
         {
-            return (from ob in c.usuario_objetivo select ob).ToList();
+            try
+            {
+                return (from ob in c.usuario_objetivo select ob).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<usuario> ListarUsuarios(string nombre)
         {
-            return (from us in c.usuario
-                    where us.nombre.Contains(nombre) ||
-                    us.email.Contains(nombre)
-                    select us).ToList();
+            try
+            {
+                return (from us in c.usuario
+                        where us.nombre.Contains(nombre) ||
+                        us.email.Contains(nombre)
+                        select us).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion
@@ -119,33 +203,56 @@ namespace nutricloud_webforms.Repositories
         #region Metodos
         private usuario PreparaUsuarioNuevo(usuario u)
         {
-            string claveEncriptada = SeguridadRepository.Encriptar(u.clave);
-            u.clave = claveEncriptada;
-            u.f_registro = DateTime.Now;
+            try
+            {
+                string claveEncriptada = SeguridadRepository.Encriptar(u.clave);
+                u.clave = claveEncriptada;
+                u.f_registro = DateTime.Now;
 
-            return u;
+                return u;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private usuario PraparaUsuarioUpdate(usuario u)
         {
-            u.f_ultimo_ingreso = DateTime.Now;
-            return u;
+            try
+            {
+                u.f_ultimo_ingreso = DateTime.Now;
+                return u;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public int CalcularEdad (usuario u)
+        public int CalcularEdad(usuario u)
         {
-            DateTime Hoy = DateTime.Today;
-            DateTime Bday = Convert.ToDateTime(u.f_nacimiento);
-            int edad = Hoy.Year - Bday.Year;
+            try
+            {
+                DateTime Hoy = DateTime.Today;
+                DateTime Bday = Convert.ToDateTime(u.f_nacimiento);
+                int edad = Hoy.Year - Bday.Year;
 
-            if (Bday > Hoy.AddYears(-edad))
-               edad--;
+                if (Bday > Hoy.AddYears(-edad))
+                    edad--;
 
-            return edad;
+                return edad;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public double CalcularIngesta(UsuarioCompleto u)
         {
+            try
+            {
                 int edad = CalcularEdad(u.Usuario);
                 double tmb;
                 double tmb2;
@@ -223,7 +330,12 @@ namespace nutricloud_webforms.Repositories
                     }
                     else return 0;
                 }
-            } 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        #endregion
     }
+    #endregion
+}

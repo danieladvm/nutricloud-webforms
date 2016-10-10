@@ -17,176 +17,225 @@ namespace nutricloud_webforms.Repositories
             consulta_conversacion cc;
             DateTime fecha = DateTime.Now;
 
-            if (mensaje.id_conversacion == 0)
+            try
             {
-                cc = new consulta_conversacion();
-                cc.asunto = mensaje.Asunto;
-                cc.id_usuario_remitente = mensaje.id_remitente;
-                cc.f_ultimo_mensaje = fecha;
-                cc.cerrada = false;
-
-                c.consulta_conversacion.Add(cc);
-                c.SaveChanges();
-
-                mensaje.id_conversacion = cc.id_consulta_conversacion;
-            }
-            else
-            {
-                cc = (from co in c.consulta_conversacion
-                      where co.id_consulta_conversacion == mensaje.id_conversacion
-                      select co).FirstOrDefault();
-
-                if (cc.id_usuario_destinatario == null && cc.id_usuario_remitente != mensaje.id_remitente)
+                if (mensaje.id_conversacion == 0)
                 {
-                    cc.id_usuario_destinatario = mensaje.id_remitente;
+                    cc = new consulta_conversacion();
+                    cc.asunto = mensaje.Asunto;
+                    cc.id_usuario_remitente = mensaje.id_remitente;
+                    cc.f_ultimo_mensaje = fecha;
+                    cc.cerrada = false;
+
+                    c.consulta_conversacion.Add(cc);
+                    c.SaveChanges();
+
+                    mensaje.id_conversacion = cc.id_consulta_conversacion;
+                }
+                else
+                {
+                    cc = (from co in c.consulta_conversacion
+                          where co.id_consulta_conversacion == mensaje.id_conversacion
+                          select co).FirstOrDefault();
+
+                    if (cc.id_usuario_destinatario == null && cc.id_usuario_remitente != mensaje.id_remitente)
+                    {
+                        cc.id_usuario_destinatario = mensaje.id_remitente;
+                    }
+
+                    cc.f_ultimo_mensaje = fecha;
+
+                    c.Entry(cc);
+                    c.SaveChanges();
                 }
 
-                cc.f_ultimo_mensaje = fecha;
+                consulta_mensaje cm = new consulta_mensaje();
+                cm.mensaje = mensaje.Texto;
+                cm.f_mensaje = fecha;
+                cm.id_consulta_conversacion = mensaje.id_conversacion;
+                cm.id_usuario_remitente = mensaje.id_remitente;
+                cm.leido = false;
 
-                c.Entry(cc);
+                c.consulta_mensaje.Add(cm);
                 c.SaveChanges();
+
+                return mensaje.id_conversacion;
             }
-
-            consulta_mensaje cm = new consulta_mensaje();
-            cm.mensaje = mensaje.Texto;
-            cm.f_mensaje = fecha;
-            cm.id_consulta_conversacion = mensaje.id_conversacion;
-            cm.id_usuario_remitente = mensaje.id_remitente;
-            cm.leido = false;
-
-            c.consulta_mensaje.Add(cm);
-            c.SaveChanges();
-
-            return mensaje.id_conversacion;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<consulta_conversacion> ListarConversaciones(UsuarioCompleto usuario)
         {
-            if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+            try
             {
-                return (from co in c.consulta_conversacion
-                        where co.id_usuario_remitente == usuario.Usuario.id_usuario
-                        orderby co.f_ultimo_mensaje descending
-                        select co).ToList();
+                if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+                {
+                    return (from co in c.consulta_conversacion
+                            where co.id_usuario_remitente == usuario.Usuario.id_usuario
+                            orderby co.f_ultimo_mensaje descending
+                            select co).ToList();
+                }
+                if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+                {
+                    return (from co in c.consulta_conversacion
+                            where (co.id_usuario_destinatario == null && !co.cerrada) ||
+                            co.id_usuario_destinatario == usuario.Usuario.id_usuario
+                            orderby co.f_ultimo_mensaje descending
+                            select co).ToList();
+                }
+                else
+                {
+                    return null;
+                }
             }
-            if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+            catch (Exception)
             {
-                return (from co in c.consulta_conversacion
-                        where (co.id_usuario_destinatario == null && !co.cerrada) ||
-                        co.id_usuario_destinatario == usuario.Usuario.id_usuario
-                        orderby co.f_ultimo_mensaje descending
-                        select co).ToList();
-            }
-            else
-            {
-                return null;
+                throw;
             }
         }
 
         public List<consulta_mensaje> ListarMensajes(int id_consulta_conversacion, UsuarioCompleto usuario)
         {
-            bool proDes = false;
-
-            if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+            try
             {
-                consulta_conversacion co = (from cc in c.consulta_conversacion
-                                            where cc.id_consulta_conversacion == id_consulta_conversacion
-                                            select cc).FirstOrDefault();
-                proDes = (co.id_usuario_destinatario == usuario.Usuario.id_usuario);
-            }
+                bool proDes = false;
 
-
-            var query = (from cm in c.consulta_mensaje
-                         where cm.id_consulta_conversacion == id_consulta_conversacion
-                         orderby cm.f_mensaje ascending
-                         select cm).ToList();
-
-            if (proDes || usuario.Usuario.id_usuario_tipo == 1) //Paciente
-            {
-                foreach (var mensaje in query)
+                if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
                 {
-                    if (mensaje.id_usuario_remitente != usuario.Usuario.id_usuario)
+                    consulta_conversacion co = (from cc in c.consulta_conversacion
+                                                where cc.id_consulta_conversacion == id_consulta_conversacion
+                                                select cc).FirstOrDefault();
+                    proDes = (co.id_usuario_destinatario == usuario.Usuario.id_usuario);
+                }
+
+
+                var query = (from cm in c.consulta_mensaje
+                             where cm.id_consulta_conversacion == id_consulta_conversacion
+                             orderby cm.f_mensaje ascending
+                             select cm).ToList();
+
+                if (proDes || usuario.Usuario.id_usuario_tipo == 1) //Paciente
+                {
+                    foreach (var mensaje in query)
                     {
-                        mensaje.leido = true;
-                        c.Entry(mensaje);
-                        c.SaveChanges();
+                        if (mensaje.id_usuario_remitente != usuario.Usuario.id_usuario)
+                        {
+                            mensaje.leido = true;
+                            c.Entry(mensaje);
+                            c.SaveChanges();
+                        }
                     }
                 }
-            }
 
-            return query;
+                return query;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public consulta_conversacion GetConversacion(int id_consulta_conversacion)
         {
-            return (from cc in c.consulta_conversacion
-                    where cc.id_consulta_conversacion == id_consulta_conversacion
-                    select cc).FirstOrDefault();
+            try
+            {
+                return (from cc in c.consulta_conversacion
+                        where cc.id_consulta_conversacion == id_consulta_conversacion
+                        select cc).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void CerrarConversacion(int id_consulta_conversacion)
         {
-            consulta_conversacion cc = (from co in c.consulta_conversacion
-                                        where co.id_consulta_conversacion == id_consulta_conversacion
-                                        select co).FirstOrDefault();
-            cc.cerrada = true;
+            try
+            {
+                consulta_conversacion cc = (from co in c.consulta_conversacion
+                                            where co.id_consulta_conversacion == id_consulta_conversacion
+                                            select co).FirstOrDefault();
+                cc.cerrada = true;
 
-            c.Entry(cc);
-            c.SaveChanges();
+                c.Entry(cc);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public int MensajesNoLeidos(UsuarioCompleto usuario)
         {
-            if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+            try
             {
-                return (from cc in c.consulta_conversacion
-                        join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
-                        where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario ||
-                        cc.id_usuario_remitente == usuario.Usuario.id_usuario)
-                        && cm.leido == false
-                        && cm.id_usuario_remitente != usuario.Usuario.id_usuario
-                        select cm).Count();
+                if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+                {
+                    return (from cc in c.consulta_conversacion
+                            join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
+                            where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario ||
+                            cc.id_usuario_remitente == usuario.Usuario.id_usuario)
+                            && cm.leido == false
+                            && cm.id_usuario_remitente != usuario.Usuario.id_usuario
+                            select cm).Count();
+                }
+                if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+                {
+                    return (from cc in c.consulta_conversacion
+                            join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
+                            where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario || cc.id_usuario_destinatario == null)
+                            && cm.leido == false
+                            && cm.id_usuario_remitente != usuario.Usuario.id_usuario
+                            select cm).Count();
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+            catch (Exception)
             {
-                return (from cc in c.consulta_conversacion
-                        join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
-                        where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario || cc.id_usuario_destinatario == null)
-                        && cm.leido == false
-                        && cm.id_usuario_remitente != usuario.Usuario.id_usuario
-                        select cm).Count();
-            }
-            else
-            {
-                return 0;
+                throw;
             }
         }
 
         public int ConversacionSinLeer(int id_consulta_conversacion, UsuarioCompleto usuario)
         {
-            if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+            try
             {
-                return (from cc in c.consulta_conversacion
-                        join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
-                        where cc.id_usuario_remitente == usuario.Usuario.id_usuario
-                        && cc.id_consulta_conversacion == id_consulta_conversacion
-                        && cm.leido == false
-                        && cm.id_usuario_remitente != usuario.Usuario.id_usuario
-                        select cm).Count();
+                if (usuario.Usuario.id_usuario_tipo == 1) //Paciente
+                {
+                    return (from cc in c.consulta_conversacion
+                            join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
+                            where cc.id_usuario_remitente == usuario.Usuario.id_usuario
+                            && cc.id_consulta_conversacion == id_consulta_conversacion
+                            && cm.leido == false
+                            && cm.id_usuario_remitente != usuario.Usuario.id_usuario
+                            select cm).Count();
+                }
+                if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+                {
+                    return (from cc in c.consulta_conversacion
+                            join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
+                            where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario || cc.id_usuario_destinatario == null)
+                            && cc.id_consulta_conversacion == id_consulta_conversacion
+                            && cm.leido == false
+                            && cm.id_usuario_remitente != usuario.Usuario.id_usuario
+                            select cm).Count();
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            if (usuario.Usuario.id_usuario_tipo == 2) //Profesional
+            catch (Exception)
             {
-                return (from cc in c.consulta_conversacion
-                        join cm in c.consulta_mensaje on cc.id_consulta_conversacion equals cm.id_consulta_conversacion
-                        where (cc.id_usuario_destinatario == usuario.Usuario.id_usuario || cc.id_usuario_destinatario == null)
-                        && cc.id_consulta_conversacion == id_consulta_conversacion
-                        && cm.leido == false
-                        && cm.id_usuario_remitente != usuario.Usuario.id_usuario
-                        select cm).Count();
-            }
-            else
-            {
-                return 0;
+                throw;
             }
         }
     }

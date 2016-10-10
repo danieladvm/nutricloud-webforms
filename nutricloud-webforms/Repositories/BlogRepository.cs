@@ -15,14 +15,12 @@ namespace nutricloud_webforms.Repositories
         {
             try
             {
-                var list = (from bn in c.blog_nota select bn).ToList();
-                return list;
+                return (from bn in c.blog_nota select bn).ToList();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public blog_nota get(int id)
@@ -31,11 +29,10 @@ namespace nutricloud_webforms.Repositories
             {
                 return c.blog_nota.Find(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void add(blog_nota nota)
@@ -47,11 +44,10 @@ namespace nutricloud_webforms.Repositories
                 // Nota: EF setea id autoincrementado de la nota luego del SaveChanges()
                 notificacionRepository.notificarNotaAPacientes(nota.id_blog_nota);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void update(blog_nota nota)
@@ -61,11 +57,10 @@ namespace nutricloud_webforms.Repositories
                 c.Entry(nota);
                 c.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void delete(blog_nota nota)
@@ -75,9 +70,9 @@ namespace nutricloud_webforms.Repositories
                 c.blog_nota.Remove(nota);
                 c.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
         }
 
@@ -85,15 +80,13 @@ namespace nutricloud_webforms.Repositories
         {
             try
             {
-                var id = (from bn in c.blog_nota
+                return (from bn in c.blog_nota
                     where bn.f_publicacion == nota.f_publicacion && bn.id_usuario == nota.id_usuario
                     select bn.id_blog_nota).FirstOrDefault();
-
-                return id;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
         }
     }

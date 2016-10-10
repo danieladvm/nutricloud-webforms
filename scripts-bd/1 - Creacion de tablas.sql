@@ -18,6 +18,7 @@ drop table usuario_idr
 drop table usuario
 drop table usuario_tipo
 drop table usuario_actividad
+drop table notificacion_blog_nota
 go
 --Opciones como: liquidos (litros), solidos (gr)
 create table alimento_tipo (
@@ -420,4 +421,28 @@ FROM dbo.usuario_muro AS um INNER JOIN
 dbo.usuario AS us ON us.id_usuario = um.id_usuario LEFT JOIN
 dbo.usuario_usuario AS uu ON uu.id_usuario_seguido = um.id_usuario
 
+GO
+CREATE TABLE [dbo].[notificacion_blog_nota](
+	[id_notificacion_blog_nota] [int] IDENTITY(1,1) NOT NULL,
+	[leido] [bit] NOT NULL CONSTRAINT [DF_notificacion_blog_nota_leido]  DEFAULT ((0)),
+	[descripcion] [varchar](100) NULL CONSTRAINT [DF_notificacion_blog_nota_descripcion]  DEFAULT (NULL),
+	[id_blog_nota] [int] NOT NULL,
+	[id_usuario] [int] NOT NULL,
+	[notificacion_fecha] [datetime] NOT NULL CONSTRAINT [DF_notificacion_blog_nota_notificacion_fecha]  DEFAULT (getdate()),
+ CONSTRAINT [PK_notificacion_blog_nota] PRIMARY KEY CLUSTERED 
+(
+	[id_notificacion_blog_nota] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[notificacion_blog_nota]  WITH CHECK ADD  CONSTRAINT [FK_notificacion_blog_nota_blog_nota] FOREIGN KEY([id_blog_nota])
+REFERENCES [dbo].[blog_nota] ([id_blog_nota])
+GO
+ALTER TABLE [dbo].[notificacion_blog_nota] CHECK CONSTRAINT [FK_notificacion_blog_nota_blog_nota]
+GO
+ALTER TABLE [dbo].[notificacion_blog_nota]  WITH CHECK ADD  CONSTRAINT [FK_notificacion_blog_nota_usuario] FOREIGN KEY([id_usuario])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+ALTER TABLE [dbo].[notificacion_blog_nota] CHECK CONSTRAINT [FK_notificacion_blog_nota_usuario]
 GO
