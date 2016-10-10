@@ -18,6 +18,7 @@ drop table usuario_idr
 drop table usuario
 drop table usuario_tipo
 drop table usuario_actividad
+drop table usuario_alimento_favorito
 go
 --Opciones como: liquidos (litros), solidos (gr)
 create table alimento_tipo (
@@ -420,4 +421,31 @@ FROM dbo.usuario_muro AS um INNER JOIN
 dbo.usuario AS us ON us.id_usuario = um.id_usuario LEFT JOIN
 dbo.usuario_usuario AS uu ON uu.id_usuario_seguido = um.id_usuario
 
+GO
+
+CREATE TABLE [dbo].[usuario_alimento_favorito](
+	[id_favorito] [int] IDENTITY(1,1) NOT NULL,
+	[id_usuario] [int] NOT NULL,
+	[id_alimento] [int] NOT NULL,
+ CONSTRAINT [PK_usuario_alimento_favorito] PRIMARY KEY CLUSTERED 
+(
+	[id_usuario] ASC,
+	[id_alimento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[usuario_alimento_favorito]  WITH CHECK ADD  CONSTRAINT [FK_usuario_alimento_favorito_alimento1] FOREIGN KEY([id_alimento])
+REFERENCES [dbo].[alimento] ([id_alimento])
+GO
+
+ALTER TABLE [dbo].[usuario_alimento_favorito] CHECK CONSTRAINT [FK_usuario_alimento_favorito_alimento1]
+GO
+
+ALTER TABLE [dbo].[usuario_alimento_favorito]  WITH CHECK ADD  CONSTRAINT [FK_usuario_alimento_favorito_usuario] FOREIGN KEY([id_usuario])
+REFERENCES [dbo].[usuario] ([id_usuario])
+GO
+
+ALTER TABLE [dbo].[usuario_alimento_favorito] CHECK CONSTRAINT [FK_usuario_alimento_favorito_usuario]
 GO

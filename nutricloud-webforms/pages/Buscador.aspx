@@ -13,10 +13,19 @@
         <div class="row">
             <div class="col l3 m3 s12 menu-left">
                 <h5>Mis Alimentos</h5>
-                <ul>
-                    <li><a href="#"><i class="material-icons orange-text text-darken-3 left-i">mode_edit</i>Editar</a></li>
-                    <li><a href="#"><i class="material-icons orange-text text-darken-3 left-i">clear</i>Eliminar</a></li>
-                    <li><a href="#"><i class="material-icons orange-text text-darken-3 left-i">add</i>Agregar</a></li>
+                 <ul>
+                    <li>
+                        <a class="waves-effect waves-light btn orange lighten-1" href="buscador.aspx">
+                            <i class="material-icons left-i">add</i>
+                            Agregar
+                        </a>
+                    </li>
+                      <li>
+                        <a class="waves-effect waves-light btn orange lighten-1" href="buscador.aspx">
+                            <i class="material-icons left-i">star</i>
+                            Carga Rápida
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -52,6 +61,27 @@
         <!--/row-->
     </div>
     <!--/container-->
+      <span class="ir-arriba icon-arrow-up2"><i class="material-icons">keyboard_arrow_up</i></span>
+
+     <script>
+        $(document).ready(function () {
+
+            $('.ir-arriba').click(function () {
+                $('body, html').animate({
+                    scrollTop: '0px'
+                }, 300);
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 0) {
+                    $('.ir-arriba').slideDown(300);
+                } else {
+                    $('.ir-arriba').slideUp(300);
+                }
+            });
+
+        });
+    </script>
 
 
 

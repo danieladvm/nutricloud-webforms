@@ -15,8 +15,9 @@ namespace nutricloud_webforms
         AlimentoRepository ar = new AlimentoRepository();
         DiarioRepository dr = new DiarioRepository();
         UsuarioCompleto ur = new UsuarioCompleto();
+        FavoritosRepository fr = new FavoritosRepository();
 
-        void Page_PreInit(object sender, EventArgs e)
+       void Page_PreInit(object sender, EventArgs e)
         {
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
 
@@ -34,11 +35,27 @@ namespace nutricloud_webforms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            usuario_alimento_favorito uaf = new usuario_alimento_favorito();
             string idalimento = Server.UrlDecode(Request.QueryString["Idalimento"].ToString());
-            alimento a = ar.BuscarAlimentoId(idalimento);
-            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
 
+            int idaliment = Convert.ToInt32(Server.UrlDecode(Request.QueryString["Idalimento"].ToString()));
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            int idusuario = UsuarioCompleto.Usuario.id_usuario;
+
+            uaf = fr.BuscarAliFav(idaliment, idusuario);
+
+            if (uaf != null)
+            {
+                add_fav.Visible = false;
+                del_fav.Visible = true;
+            }
+            else
+            {
+                add_fav.Visible = true;
+                del_fav.Visible = false;
+            }
+
+            alimento a = ar.BuscarAlimentoId(idalimento);
             LblNombre.Text = a.alimento1;
             LblCalo.Text = Convert.ToString(a.energia_kcal);
             LblCalo2.Text = Convert.ToString(a.energia_kcal);
@@ -57,7 +74,8 @@ namespace nutricloud_webforms
             LblB2.Text = Convert.ToString(a.rivoflavina_mg);
             LblB3.Text = Convert.ToString(a.niacina_mg);
             Hidden1.Value = Convert.ToString(a.id_alimento);
-            LblTipo.Text = a.alimento_tipo.unidad_medida;
+
+              LblTipo.Text = a.alimento_tipo.unidad_medida;
 
             if (Session["UsuarioCompleto"] == null)
                 agregar.Visible = false;
@@ -91,5 +109,41 @@ namespace nutricloud_webforms
 
         }
 
+        protected void add_fav_Click(object sender, EventArgs e)
+        {
+
+            usuario_alimento_favorito uaf = new usuario_alimento_favorito();
+            int idalimento = Convert.ToInt32(Server.UrlDecode(Request.QueryString["Idalimento"].ToString()));
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            int idusuario = UsuarioCompleto.Usuario.id_usuario;
+
+            uaf.id_alimento = idalimento;
+            uaf.id_usuario = idusuario;
+
+            fr.add(uaf);
+
+            add_fav.Visible = false;
+            del_fav.Visible = true;
+
+        }
+        protected void del_fav_Click(object sender, EventArgs e)
+        {
+            usuario_alimento_favorito uaf = new usuario_alimento_favorito();
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            int idalimento = Convert.ToInt32(Server.UrlDecode(Request.QueryString["Idalimento"].ToString()));
+            int idusuario = UsuarioCompleto.Usuario.id_usuario;
+
+            uaf = fr.BuscarAliFav(idalimento, idusuario);
+
+            if (uaf != null)
+            {
+                fr.delete(uaf);
+
+                add_fav.Visible = true;
+                del_fav.Visible = false;
+            }
+            else infor.Text = "Error. Intente mas tarde.";
+        }
     }
 }
