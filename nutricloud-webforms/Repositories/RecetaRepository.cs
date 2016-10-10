@@ -13,12 +13,11 @@ namespace nutricloud_webforms.Repositories
         {
             try
             {
-                var list = (from ur in c.usuario_receta select ur).ToList();
-                return list;
+                return (from ur in c.usuario_receta select ur).ToList();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
 
         }
@@ -29,11 +28,10 @@ namespace nutricloud_webforms.Repositories
             {
                 return c.usuario_receta.Find(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void addReceta(usuario_receta receta)
@@ -43,11 +41,10 @@ namespace nutricloud_webforms.Repositories
                 c.usuario_receta.Add(receta);
                 c.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void updateReceta(usuario_receta receta)
@@ -57,11 +54,10 @@ namespace nutricloud_webforms.Repositories
                 c.Entry(receta);
                 c.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
-
         }
 
         public void deleteReceta(usuario_receta receta)
@@ -71,11 +67,10 @@ namespace nutricloud_webforms.Repositories
                 c.usuario_receta.Remove(receta);
                 c.SaveChanges();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw (e);
+                throw;
             }
         }
-
     }
 }

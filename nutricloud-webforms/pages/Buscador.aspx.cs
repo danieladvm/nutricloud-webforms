@@ -11,6 +11,7 @@ namespace nutricloud_webforms
     {
         UsuarioCompleto ur = new UsuarioCompleto();
 
+
         void Page_PreInit(object sender, EventArgs e)
         {
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];

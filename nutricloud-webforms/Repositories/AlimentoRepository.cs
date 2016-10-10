@@ -13,43 +13,78 @@ namespace nutricloud_webforms.Repositories
         //mostrar todos los alimentos
         public List<alimento> ListarAlimento()
         {
-            List<alimento> al = (from a in c.alimento select a).ToList();
-            return al;
+            try
+            {
+                return (from a in c.alimento select a).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //muestra un solo alimento
         public alimento ListarUnAlimento(int idali)
         {
-            alimento al = (from a in c.alimento where a.id_alimento == idali select a).FirstOrDefault();
-            return al;
+            try
+            {
+                return (from a in c.alimento where a.id_alimento == idali select a).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public ObjectResult<sp_alimento_diario_Result> ListarDiario(int id_usuario, int id_comida_tipo, DateTime fecha)
         {
-            return c.sp_alimento_diario(id_usuario, id_comida_tipo, fecha);
+            try
+            {
+                return c.sp_alimento_diario(id_usuario, id_comida_tipo, fecha);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<comida_tipo> ListarTipoComida()
         {
-            return (from ct in c.comida_tipo
-                    select ct).ToList();
+            try
+            {
+                return (from ct in c.comida_tipo
+                        select ct).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         //buscar y listar alimentos por nombre ingresado
         public List<alimento> BuscarAlimento(string parametro)
         {
-            var resultado = (from a in c.alimento where a.alimento1.Contains(parametro) select a).ToList();
-
-            return resultado;
+            try
+            {
+                return (from a in c.alimento where a.alimento1.Contains(parametro) select a).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public alimento BuscarAlimentoId(string parametro)
         {
-            int param = Convert.ToInt32(parametro);
-            var resultado = (from a in c.alimento where a.id_alimento == param select a).First();
-
-            
-            return resultado;
+            try
+            {
+                int param = Convert.ToInt32(parametro);
+                return (from a in c.alimento where a.id_alimento == param select a).First();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

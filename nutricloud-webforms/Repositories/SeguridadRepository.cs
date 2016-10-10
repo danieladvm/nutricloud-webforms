@@ -12,12 +12,19 @@ namespace nutricloud_webforms.Repositories
         /// Encripta una cadena
         public static string Encriptar(string originalPassword)
         {
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            try
+            {
+                SHA1 sha1 = new SHA1CryptoServiceProvider();
 
-            byte[] inputBytes = (new UnicodeEncoding()).GetBytes(originalPassword);
-            byte[] hash = sha1.ComputeHash(inputBytes);
+                byte[] inputBytes = (new UnicodeEncoding()).GetBytes(originalPassword);
+                byte[] hash = sha1.ComputeHash(inputBytes);
 
-            return Convert.ToBase64String(hash);
+                return Convert.ToBase64String(hash);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

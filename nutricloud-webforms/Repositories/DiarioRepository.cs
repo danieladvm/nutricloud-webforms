@@ -13,12 +13,15 @@ namespace nutricloud_webforms.Repositories
 
         public void IngresarAlimentoDiario (DataBase.usuario_alimento diario)
         {
-
-            c.usuario_alimento.Add(diario);
-            c.SaveChanges();
-            
+            try
+            {
+                c.usuario_alimento.Add(diario);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
-
     }
 }

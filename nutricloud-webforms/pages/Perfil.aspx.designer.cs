@@ -58,15 +58,6 @@ namespace nutricloud_webforms {
         protected global::System.Web.UI.WebControls.TextBox TxtNombre;
         
         /// <summary>
-        /// rblGenero control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblGenero;
-        
-        /// <summary>
         /// TxtFechaNacimiento control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtFechaNacimiento;
+        
+        /// <summary>
+        /// rblGenero control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblGenero;
         
         /// <summary>
         /// pnlErroresInfoGral control.
@@ -92,15 +92,6 @@ namespace nutricloud_webforms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnActualizarInfoGral;
-        
-        /// <summary>
-        /// LblAviso2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblAviso2;
         
         /// <summary>
         /// TxtPeso control.

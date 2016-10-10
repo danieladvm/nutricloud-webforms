@@ -20,45 +20,52 @@ namespace nutricloud_webforms
 
         protected void Button_Aceptar_Click(object sender, EventArgs e)
         {
-            pnlErrores.Controls.Clear();
+            UsuarioRepository ur = new UsuarioRepository();
+            usuario_datos ud = new usuario_datos();
 
-            if (ValidaForm())
+            try
             {
-                UsuarioRepository ur = new UsuarioRepository();
-                usuario u = ur.BuscarUsuarioLogIn(MapeaFormUsuario());
-                usuario_datos ud = new usuario_datos();
+                pnlErrores.Controls.Clear();
 
-                if (u != null)
+                if (ValidaForm())
                 {
-                    ud = ur.BuscarUsuarioDatos(u.id_usuario);
-                    Sesion(u, ud);
+                    usuario u = ur.BuscarUsuarioLogIn(MapeaFormUsuario());
 
-                    if (u.id_usuario_tipo == 1) //Paciente
+                    if (u != null)
                     {
-                        if (ud == null)
+                        ud = ur.BuscarUsuarioDatos(u.id_usuario);
+                        Sesion(u, ud);
+
+                        if (u.id_usuario_tipo == 1) //Paciente
                         {
-                            Response.Redirect("Pages/Perfil.aspx");
+                            if (ud == null)
+                            {
+                                Response.Redirect("~/Pages/Perfil.aspx");
+                            }
+                            else
+                            {
+                                Response.Redirect("~/Pages/Home.aspx");
+                            }
                         }
-                        else
+                        if (u.id_usuario_tipo == 2) //Profesional
                         {
-                            Response.Redirect("Pages/Home.aspx");
+                            Response.Redirect("~/Profesionales/Home.aspx");
                         }
+
                     }
-                    if (u.id_usuario_tipo == 2) //Profesional
+
+                    else
                     {
-                        Response.Redirect("Profesionales/Home.aspx");
+                        Label lblError = new Label();
+                        lblError.Text = "* Email/Contraseña Incorrectos";
+                        lblError.CssClass = "text-error";
+                        pnlErrores.Controls.Add(lblError);
                     }
-
                 }
-
-                else
-                {
-                    Label lblError = new Label();
-                    lblError.Text = "* Email/Contraseña Incorrectos";
-                    lblError.CssClass = "text-error";
-                    pnlErrores.Controls.Add(lblError);
-                }
-
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
             }
         }
         #endregion
@@ -66,10 +73,17 @@ namespace nutricloud_webforms
         #region Metodos propios
         public usuario MapeaFormUsuario()
         {
-            usuario u = new usuario();
-            u.email = TxtEmail.Text;
-            u.clave = TxtPass.Text;
-            return u;
+            try
+            {
+                usuario u = new usuario();
+                u.email = TxtEmail.Text;
+                u.clave = TxtPass.Text;
+                return u;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private bool ValidaForm()
@@ -77,37 +91,53 @@ namespace nutricloud_webforms
             bool errores = false;
             Label lblError;
             ValidRepository vr = new ValidRepository();
-            pnlErrores.Controls.Clear();
 
-            //Valida vacios
-            if (!vr.ValidaVacio(TxtEmail.Text))
+            try
             {
-                lblError = new Label();
-                lblError.Text = "* El email no puede estar vacío";
-                lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
-                errores = true;
-            }
+                pnlErrores.Controls.Clear();
 
-            if (!vr.ValidaVacio(TxtPass.Text))
+                //Valida vacios
+                if (!vr.ValidaVacio(TxtEmail.Text))
+                {
+                    lblError = new Label();
+                    lblError.Text = "* El email no puede estar vacío";
+                    lblError.CssClass = "text-error";
+                    pnlErrores.Controls.Add(lblError);
+                    errores = true;
+                }
+
+                if (!vr.ValidaVacio(TxtPass.Text))
+                {
+                    lblError = new Label();
+                    lblError.Text = "* La contraseña no puede estar vacía";
+                    lblError.CssClass = "text-error";
+                    pnlErrores.Controls.Add(lblError);
+                    errores = true;
+                }
+
+                return !errores;
+            }
+            catch (Exception)
             {
-                lblError = new Label();
-                lblError.Text = "* La contraseña no puede estar vacía";
-                lblError.CssClass = "text-error";
-                pnlErrores.Controls.Add(lblError);
-                errores = true;
+                throw;
             }
-
-            return !errores;
         }
 
         private void Sesion(usuario u, usuario_datos ud)
         {
             UsuarioCompleto uc = new UsuarioCompleto();
-            uc.Usuario = u;
-            uc.UsuarioDatos = ud;
 
-            Session.Add("UsuarioCompleto", uc);
+            try
+            {
+                uc.Usuario = u;
+                uc.UsuarioDatos = ud;
+
+                Session.Add("UsuarioCompleto", uc);
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
         #endregion
     }

@@ -106,7 +106,7 @@ namespace nutricloud_webforms
                 UsuarioCompleto.UsuarioDatos = new usuario_datos();
             }
 
-            //UsuarioCompleto.UsuarioDatos.id_usuario = UsuarioCompleto.UsuarioDatos.id_usuario;
+            UsuarioCompleto.UsuarioDatos.id_usuario = UsuarioCompleto.Usuario.id_usuario;
             UsuarioCompleto.UsuarioDatos.peso_kg = decimal.Parse(TxtPeso.Text);
             UsuarioCompleto.UsuarioDatos.altura_cm = int.Parse(TxtAltura.Text);
             UsuarioCompleto.UsuarioDatos.id_usuario_actividad = int.Parse(rblActividad.SelectedValue);
@@ -281,44 +281,23 @@ namespace nutricloud_webforms
         #endregion
 
         #region Eventos
-
-        void Page_PreInit(object sender, EventArgs e)
-        {
-            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
-
-            if (UsuarioCompleto == null)
-                Response.Redirect("../Default.aspx");
-            else
-            {
-                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
-                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
-                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
-                    Response.Redirect("Profesionales/Home.aspx");
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargaForm();
             }
-
         }
 
         protected void btnActualizarInfoGral_Click(object sender, EventArgs e)
         {
-            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
-            
-
             if (ValidaInfoGral())
             {
                 UsuarioRepository ur = new UsuarioRepository();
                 ur.ActualizarUsuario(MapeaFormUsuarioInfoGral());
-                if (ValidaDatosFisicos()) //validacion para calculo de ingesta
-                {
-                    ActualizarIngesta();
-                }
+
+                ActualizarIngesta();
+
                 lblAviso.Visible = true;
                 lblAviso.Text = "¡Se ha actualizado la información correctamente!";
             }
@@ -331,28 +310,12 @@ namespace nutricloud_webforms
 
         protected void btnActualizarDatosFisicos_Click(object sender, EventArgs e)
         {
-            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
             if (ValidaDatosFisicos())
             {
                 UsuarioRepository ur = new UsuarioRepository();
-                if (UsuarioCompleto.UsuarioDatos == null)
-                    ur.InsertarDatosUsuario(MapeaFormUsuarioDatosFisicos());
-                else
-                    ur.ActualizarDatosUsuario(MapeaFormUsuarioDatosFisicos());
-                if (ValidaInfoGral())
-                {
-                    ActualizarIngesta();
-                }
-                LblAviso2.Visible = true;
-                LblAviso2.Text = "¡Se ha actualizado la información correctamente!";
+                ur.ActualizarDatosUsuario(MapeaFormUsuarioDatosFisicos());
+                ActualizarIngesta();
             }
-            else
-            {
-                LblAviso2.Visible = true;
-                LblAviso2.Text = "Ha ocurrido un error, inténtalo nuevamente.";
-            }
-
-
         }
 
         #endregion

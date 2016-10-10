@@ -104,7 +104,7 @@ namespace nutricloud_webforms
             if (diario != null)
             {
                 dr.IngresarAlimentoDiario(diario);
-                Response.Redirect("Pages/Home.aspx");
+                Response.Redirect("Home.aspx");
             }
 
         }
