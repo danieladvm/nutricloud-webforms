@@ -20,47 +20,75 @@ namespace nutricloud_webforms
 
         void Page_PreInit(object sender, EventArgs e)
         {
-            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
-
-            if (UsuarioCompleto == null)
-                Response.Redirect("../Default.aspx");
-            else
+            try
             {
-                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
-                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
-                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
-                    Response.Redirect("Profesionales/Home.aspx");
+                UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+                if (UsuarioCompleto == null)
+                    Response.Redirect("~/Default.aspx");
+                else
+                {
+                    if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
+                        this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                    else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                        Response.Redirect("~/Profesionales/Home.aspx");
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
-
-            if (!IsPostBack)
+            try
             {
-                CargaMuro();
+                this.usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+                if (!IsPostBack)
+                {
+                    CargaMuro();
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
             }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            usuario_muro um = new usuario_muro();
-            um.id_usuario = this.usuario.Usuario.id_usuario;
-            um.estado = TxtEstado.Text;
-            um.f_publicacion = DateTime.Now;
+            try
+            {
+                usuario_muro um = new usuario_muro();
+                um.id_usuario = this.usuario.Usuario.id_usuario;
+                um.estado = TxtEstado.Text;
+                um.f_publicacion = DateTime.Now;
 
-            mr.InsertarEstado(um);
+                mr.InsertarEstado(um);
 
-            TxtEstado.Text = string.Empty;
+                TxtEstado.Text = string.Empty;
 
-            CargaMuro();
+                CargaMuro();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         private void CargaMuro()
         {
-            rMuro.DataSource = mr.ListarMuro(usuario.Usuario.id_usuario);
-            rMuro.DataBind();
+            try
+            {
+                rMuro.DataSource = mr.ListarMuro(usuario.Usuario.id_usuario);
+                rMuro.DataBind();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         [WebMethod]
@@ -72,23 +100,30 @@ namespace nutricloud_webforms
             string usuario_nombre = string.Empty;
             General uds;
 
-            foreach (var usuario in ur.ListarUsuarios(nombre))
+            try
             {
-                usuario_nombre = usuario.nombre;
-
-                if (usuario_nombre == string.Empty || usuario_nombre == null)
+                foreach (var usuario in ur.ListarUsuarios(nombre))
                 {
-                    usuario_nombre = "Anónimo";
+                    usuario_nombre = usuario.nombre;
+
+                    if (usuario_nombre == string.Empty || usuario_nombre == null)
+                    {
+                        usuario_nombre = "Anónimo";
+                    }
+
+                    uds = new General();
+                    uds.Detalle = usuario_nombre + " - " + usuario.email;
+                    uds.Id = usuario.id_usuario.ToString();
+
+                    lista.Add(uds);
                 }
 
-                uds = new General();
-                uds.Detalle = usuario_nombre + " - " + usuario.email;
-                uds.Id = usuario.id_usuario.ToString();
-                
-                lista.Add(uds);
+                return serializer.Serialize(lista);
             }
-
-            return serializer.Serialize(lista);
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
