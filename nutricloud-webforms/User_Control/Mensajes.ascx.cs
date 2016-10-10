@@ -18,180 +18,271 @@ namespace nutricloud_webforms.User_Control
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
+            try
+            {
+                this.usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
 
-            if (usuario.Usuario.id_usuario_tipo == 1)
-            {
-                btnNuevo.Visible = true;
-            }
-            if (usuario.Usuario.id_usuario_tipo == 2)
-            {
-                btnNuevo.Visible = false;
-            }
+                if (usuario.Usuario.id_usuario_tipo == 1)
+                {
+                    btnNuevo.Visible = true;
+                }
+                if (usuario.Usuario.id_usuario_tipo == 2)
+                {
+                    btnNuevo.Visible = false;
+                }
 
-            if (!IsPostBack)
+                if (!IsPostBack)
+                {
+                    CargaConversaciones();
+                }
+            }
+            catch (Exception)
             {
-                CargaConversaciones();
+                Response.Redirect("~/Error.aspx");
             }
         }
 
         private void CargaConversaciones()
         {
-            rConversaciones.DataSource = cr.ListarConversaciones(this.usuario);
-            rConversaciones.DataBind();
-            CargaNotificacionesMensajes();
+            try
+            {
+                rConversaciones.DataSource = cr.ListarConversaciones(this.usuario);
+                rConversaciones.DataBind();
+                CargaNotificacionesMensajes();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         protected void btnenviar_Click(object sender, EventArgs e)
         {
-            if (vr.ValidaVacio(TxtAsunto.Text) && vr.ValidaVacio(TxtMensaje.Text))
+            try
             {
-                int id_conversacion = cr.Insertar(MapeaMensajeEnviado(), this.usuario);
-                Actualiza(id_conversacion);
+                if (vr.ValidaVacio(TxtAsunto.Text) && vr.ValidaVacio(TxtMensaje.Text))
+                {
+                    int id_conversacion = cr.Insertar(MapeaMensajeEnviado(), this.usuario);
+                    Actualiza(id_conversacion);
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
             }
         }
 
         protected void lnkConversacion_Click(object sender, EventArgs e)
         {
-            LinkButton convSelec = sender as LinkButton;
-
-            CargaMensajes(int.Parse(convSelec.CommandArgument));
+            try
+            {
+                LinkButton convSelec = sender as LinkButton;
+                CargaMensajes(int.Parse(convSelec.CommandArgument));
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         private void CargaMensajes(int id_conversacion)
         {
-            consulta_conversacion cc = cr.GetConversacion(id_conversacion);
-
-            Panel pnlMensaje;
-            Label lblMensaje;
-            Label lblFecha;
-
-            TxtAsunto.Text = cc.asunto;
-            TxtAsunto.Enabled = false;
-
-            foreach (var item in cr.ListarMensajes(id_conversacion, usuario))
+            try
             {
-                pnlMensaje = new Panel();
-                pnlMensaje.CssClass = "msj";
+                consulta_conversacion cc = cr.GetConversacion(id_conversacion);
 
-                if (this.usuario.Usuario.id_usuario == item.id_usuario_remitente)
+                Panel pnlMensaje;
+                Label lblMensaje;
+                Label lblFecha;
+
+                TxtAsunto.Text = cc.asunto;
+                TxtAsunto.Enabled = false;
+
+                foreach (var item in cr.ListarMensajes(id_conversacion, usuario))
                 {
-                    pnlMensaje.CssClass += " msj-enviado";
+                    pnlMensaje = new Panel();
+                    pnlMensaje.CssClass = "msj";
+
+                    if (this.usuario.Usuario.id_usuario == item.id_usuario_remitente)
+                    {
+                        pnlMensaje.CssClass += " msj-enviado";
+                    }
+                    else
+                    {
+                        pnlMensaje.CssClass += " msj-recibido";
+                    }
+
+                    lblMensaje = new Label();
+                    lblMensaje.Text = item.mensaje;
+
+                    lblFecha = new Label();
+                    lblFecha.Text = item.f_mensaje.ToString();
+                    lblFecha.CssClass = "msj-fecha";
+
+                    pnlMensaje.Controls.Add(lblMensaje);
+                    pnlMensaje.Controls.Add(lblFecha);
+
+                    pnlMsjs.Controls.Add(pnlMensaje);
                 }
-                else
+
+                if (cc.cerrada)
                 {
-                    pnlMensaje.CssClass += " msj-recibido";
-                }
-
-                lblMensaje = new Label();
-                lblMensaje.Text = item.mensaje;
-
-                lblFecha = new Label();
-                lblFecha.Text = item.f_mensaje.ToString();
-                lblFecha.CssClass = "msj-fecha";
-
-                pnlMensaje.Controls.Add(lblMensaje);
-                pnlMensaje.Controls.Add(lblFecha);
-
-                pnlMsjs.Controls.Add(pnlMensaje);
-            }
-
-            if (cc.cerrada)
-            {
-                lblCerrada.Visible = true;
-                btnCerrar.Visible = false;
-                pnlNuevoMsj.Visible = false;
-            }
-            else
-            {
-                if (this.usuario.Usuario.id_usuario == cc.id_usuario_destinatario ||
-                    this.usuario.Usuario.id_usuario == cc.id_usuario_remitente)
-                {
-                    lblCerrada.Visible = false;
-                    btnCerrar.Visible = true;
-                    pnlNuevoMsj.Visible = true;
-                }
-                else
-                {
-                    lblCerrada.Visible = false;
+                    lblCerrada.Visible = true;
                     btnCerrar.Visible = false;
-                    pnlNuevoMsj.Visible = true;
+                    pnlNuevoMsj.Visible = false;
                 }
-            }
+                else
+                {
+                    if (this.usuario.Usuario.id_usuario == cc.id_usuario_destinatario ||
+                        this.usuario.Usuario.id_usuario == cc.id_usuario_remitente)
+                    {
+                        lblCerrada.Visible = false;
+                        btnCerrar.Visible = true;
+                        pnlNuevoMsj.Visible = true;
+                    }
+                    else
+                    {
+                        lblCerrada.Visible = false;
+                        btnCerrar.Visible = false;
+                        pnlNuevoMsj.Visible = true;
+                    }
+                }
 
-            SetSessionIdConversacion(id_conversacion);
-            CargaConversaciones();
+                SetSessionIdConversacion(id_conversacion);
+                CargaConversaciones();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         private Mensaje MapeaMensajeEnviado()
         {
             Mensaje msj = new Mensaje();
-            msj.id_conversacion = GetSessionIdConversacion();
-            msj.Asunto = TxtAsunto.Text;
-            msj.Texto = TxtMensaje.Text;
-            msj.id_remitente = usuario.Usuario.id_usuario;
-            return msj;
+
+            try
+            {
+                msj.id_conversacion = GetSessionIdConversacion();
+                msj.Asunto = TxtAsunto.Text;
+                msj.Texto = TxtMensaje.Text;
+                msj.id_remitente = usuario.Usuario.id_usuario;
+                return msj;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void Actualiza(int id_conversacion)
         {
-            //CargaConversaciones();
-            CargaMensajes(id_conversacion);
-            TxtMensaje.Text = string.Empty;
+            try
+            {
+                //CargaConversaciones();
+                CargaMensajes(id_conversacion);
+                TxtMensaje.Text = string.Empty;
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         private void LimpiaControles()
         {
-            pnlMsjs.Controls.Clear();
-            TxtAsunto.Text = string.Empty;
-            TxtAsunto.Enabled = true;
-            TxtMensaje.Text = string.Empty;
+            try
+            {
+                pnlMsjs.Controls.Clear();
+                TxtAsunto.Text = string.Empty;
+                TxtAsunto.Enabled = true;
+                TxtMensaje.Text = string.Empty;
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
-            Session.Add("id_conversacion", null);
-            LimpiaControles();
+            try
+            {
+                Session.Add("id_conversacion", null);
+                LimpiaControles();
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         private int GetSessionIdConversacion()
         {
-            return Session["id_conversacion"] != null ? int.Parse(Session["id_conversacion"].ToString()) : 0;
+            try
+            {
+                return Session["id_conversacion"] != null ? int.Parse(Session["id_conversacion"].ToString()) : 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void SetSessionIdConversacion(int id_conversacion)
         {
-            if (Session["id_conversacion"] == null)
+            try
             {
-                Session.Add("id_conversacion", id_conversacion);
+                if (Session["id_conversacion"] == null)
+                {
+                    Session.Add("id_conversacion", id_conversacion);
+                }
+                else
+                {
+                    Session["id_conversacion"] = id_conversacion;
+                }
             }
-            else
+            catch (Exception)
             {
-                Session["id_conversacion"] = id_conversacion;
+                Response.Redirect("~/Error.aspx");
             }
         }
 
         protected void btnCerrar_Click1(object sender, EventArgs e)
         {
-            int id_conversacion = (int)Session["id_conversacion"];
-            cr.CerrarConversacion(id_conversacion);
-            Actualiza(id_conversacion);
+            try
+            {
+                int id_conversacion = (int)Session["id_conversacion"];
+                cr.CerrarConversacion(id_conversacion);
+                Actualiza(id_conversacion);
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
 
         protected void rConversaciones_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            int id_conv = int.Parse(((LinkButton)e.Item.FindControl("LnkConv")).CommandArgument);
-            int cant = cr.ConversacionSinLeer(id_conv, usuario);
-            Label lblMsjsNoLeidos = (Label)e.Item.FindControl("lblMsjsNoLeidos");
+            try
+            {
+                int id_conv = int.Parse(((LinkButton)e.Item.FindControl("LnkConv")).CommandArgument);
+                int cant = cr.ConversacionSinLeer(id_conv, usuario);
+                Label lblMsjsNoLeidos = (Label)e.Item.FindControl("lblMsjsNoLeidos");
 
-            if (cant > 0)
-            {
-                lblMsjsNoLeidos.Visible = true;
-                lblMsjsNoLeidos.Text = cant.ToString();
+                if (cant > 0)
+                {
+                    lblMsjsNoLeidos.Visible = true;
+                    lblMsjsNoLeidos.Text = cant.ToString();
+                }
+                else
+                {
+                    lblMsjsNoLeidos.Visible = false;
+                }
             }
-            else
+            catch (Exception)
             {
-                lblMsjsNoLeidos.Visible = false;
+                Response.Redirect("~/Error.aspx");
             }
         }
 
@@ -201,27 +292,34 @@ namespace nutricloud_webforms.User_Control
             UpdatePanel upNotificaciones;
             int msjs;
 
-            if (usuario == null)
+            try
             {
-                msjs = 0;
-            }
-            else
-            {
-                msjs = cr.MensajesNoLeidos(usuario);
-                upNotificaciones = (UpdatePanel)Page.Master.FindControl("upNotificaciones");
-                lblNotificaciones = (Label)Page.Master.FindControl("lblNotificaciones");
-
-                if (msjs > 0)
+                if (usuario == null)
                 {
-                    lblNotificaciones.Text = msjs.ToString();
-                    lblNotificaciones.Visible = true;
+                    msjs = 0;
                 }
                 else
                 {
-                    lblNotificaciones.Visible = false;
-                }
+                    msjs = cr.MensajesNoLeidos(usuario);
+                    upNotificaciones = (UpdatePanel)Page.Master.FindControl("upNotificaciones");
+                    lblNotificaciones = (Label)Page.Master.FindControl("lblNotificaciones");
 
-                upNotificaciones.Update();
+                    if (msjs > 0)
+                    {
+                        lblNotificaciones.Text = msjs.ToString();
+                        lblNotificaciones.Visible = true;
+                    }
+                    else
+                    {
+                        lblNotificaciones.Visible = false;
+                    }
+
+                    upNotificaciones.Update();
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/Error.aspx");
             }
         }
     }
