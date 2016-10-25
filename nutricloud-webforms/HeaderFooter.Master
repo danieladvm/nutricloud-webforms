@@ -46,6 +46,7 @@
     <!-- Pre Loader -->
 
     <form id="formHeaderFooter" runat="server">
+        <asp:ScriptManager ID="smHeaderFooter" runat="server"></asp:ScriptManager>
         <div id="loader-wrapper">
             <div id="loader"></div>
 
@@ -59,18 +60,22 @@
                 <nav id="nav_f" class="header-index" role="navigation">
                     <div class="container">
                         <div class="nav-wrapper sticky">
-                            <a id="logo-container" href="Home.aspx" class="brand-logo">
+                            <a id="logo-container" href="../Pages/Home.aspx" class="brand-logo">
                                 <img src="../../content/img/logo.png">nutricloud
                             </a>
                             <ul id="nav-mobile" class="right side-nav">
-                                <li><a href="Home.aspx">Diario</a></li>
-                                <li><a href="Buscador.aspx">Alimentos</a></li>
-                                <li><a href="Blog.aspx">Blog</a></li>
-                                <li><a href="Muro.aspx">Comunidad</a></li>
-                                <li><a href="Mensajes.aspx">Profesionales</a></li>
-                                <li><a href="Mensajes.aspx" class="relative">
-                                    <i class="material-icons">notifications</i>
-                                    <div class="number">2</div>
+                                <li><a href="../Pages/Home.aspx">Diario</a></li>
+                                <li><a href="../Pages/Buscador.aspx">Alimentos</a></li>
+                                <li><a href="../Pages/Blog.aspx">Blog</a></li>
+                                <li><a href="../Social/Muro.aspx">Comunidad</a></li>
+                                <li><a href="../Pages/Mensajes.aspx">Profesionales</a></li>
+                                <li><a href="../Pages/Mensajes.aspx" class="relative">
+                                    <asp:UpdatePanel ID="upNotificaciones" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <i class="material-icons sobre">markunread</i>
+                                            <asp:Label ID="lblNotificaciones" runat="server" CssClass="number" Visible="false"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </a>
                                 </li>
                                 <li>
@@ -215,6 +220,9 @@
         });
     </script>
    
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+    <script>tinymce.init({ selector: 'textarea' });</script>
 
 
 </body>

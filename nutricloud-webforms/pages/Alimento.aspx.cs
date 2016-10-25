@@ -40,18 +40,26 @@ namespace nutricloud_webforms
 
             int idaliment = Convert.ToInt32(Server.UrlDecode(Request.QueryString["Idalimento"].ToString()));
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
-            int idusuario = UsuarioCompleto.Usuario.id_usuario;
 
-            uaf = fr.BuscarAliFav(idaliment, idusuario);
-
-            if (uaf != null)
+            if (UsuarioCompleto != null)
             {
-                add_fav.Visible = false;
-                del_fav.Visible = true;
+                int idusuario = UsuarioCompleto.Usuario.id_usuario;
+                uaf = fr.BuscarAliFav(idaliment, idusuario);
+
+                if (uaf != null)
+                {
+                    add_fav.Visible = false;
+                    del_fav.Visible = true;
+                }
+                else
+                {
+                    add_fav.Visible = true;
+                    del_fav.Visible = false;
+                }
             }
             else
             {
-                add_fav.Visible = true;
+                add_fav.Visible = false;
                 del_fav.Visible = false;
             }
 

@@ -31,7 +31,7 @@
 
             <div class="col l9 m9 s12 home">
                 <div class="divtop">
-                    <asp:Button class="btn waves-effect orange btn-buscar" OnClick="Buscar_Click" runat="server"></asp:Button>
+                    <asp:Button class="btn waves-effect orange btn-buscar" OnClick="Buscar_Click" runat="server" Text="Buscar"></asp:Button>
                     <asp:TextBox ID="TxtBuscar" type="text" size="30" class="altercalendar" runat="server" placeholder="Buscar alimentos" />
                 </div>
                 <div class="list-food buscador-food">

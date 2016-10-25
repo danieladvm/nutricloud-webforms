@@ -41,7 +41,6 @@ namespace nutricloud_webforms
         public static string GetAlimentos(string fecha)
         {
             UsuarioCompleto usuario = (UsuarioCompleto)HttpContext.Current.Session["UsuarioCompleto"];
-            int idUsuario = usuario.Usuario.id_usuario;
 
             AlimentoRepository ar = new AlimentoRepository();
             StringBuilder sb = new StringBuilder();
@@ -55,7 +54,7 @@ namespace nutricloud_webforms
                {
                 f = DateTime.Parse(fecha);
             }
-            catch (Exception)
+                catch (Exception)
             {
                 f = DateTime.Now;
             }

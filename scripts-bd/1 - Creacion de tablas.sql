@@ -378,35 +378,43 @@ ALTER TABLE [dbo].[consulta_mensaje] CHECK CONSTRAINT [FK_consulta_mensaje_usuar
 GO
 
 CREATE TABLE [dbo].[usuario_idr](
-    [id_valores] [int] identity(1,1) NOT NULL,
+    [id_valores] [int] IDENTITY(1,1) NOT NULL,
     [id_usuario] [int] NOT NULL,
-    [energia_kj] [decimal](10, 3) NOT NULL,
-    [energia_kcal] [decimal](10, 3) NOT NULL,
-    [sodio_mg] [decimal](10, 3) NOT NULL,
-    [potasio_mg] [decimal](10, 3) NOT NULL,
-    [calcio_mg] [decimal](10, 3) NOT NULL,
-    [fosforo_mg] [decimal](10, 3) NOT NULL,
-    [hierro_mg] [decimal](10, 3) NOT NULL,
-    [zinc_mg] [decimal](10, 3) NOT NULL,
-    [vitamina_c_mg] [decimal](10, 3) NOT NULL,
-    [colesterol_mg] [decimal](10, 3) NOT NULL,
-    [agua_g] [decimal](10, 3) NOT NULL,
-    [grasa_total_g] [decimal](10, 3) NOT NULL,
-    [carbohidratos_totales_g] [decimal](10, 3) NOT NULL,
-    [carbohidratos_disponibles_g] [decimal](10, 3) NOT NULL,
-    [proteinas_g] [decimal](10, 3) NOT NULL,
+    [energia_kj] [decimal](10, 3) NULL,
+    [energia_kcal] [decimal](10, 3) NULL,
+    [sodio_mg] [decimal](10, 3) NULL,
+    [potasio_mg] [decimal](10, 3) NULL,
+    [calcio_mg] [decimal](10, 3) NULL,
+    [fosforo_mg] [decimal](10, 3) NULL,
+    [hierro_mg] [decimal](10, 3) NULL,
+    [zinc_mg] [decimal](10, 3) NULL,
+    [vitamina_c_mg] [decimal](10, 3) NULL,
+    [colesterol_mg] [decimal](10, 3) NULL,
+    [agua_g] [decimal](10, 3) NULL,
+    [grasa_total_g] [decimal](10, 3) NULL,
+    [carbohidratos_totales_g] [decimal](10, 3) NULL,
+    [carbohidratos_disponibles_g] [decimal](10, 3) NULL,
+    [proteinas_g] [decimal](10, 3) NULL,
+    [fibra_dietetica_g] [decimal](10, 3) NULL,
+    [tiamina_mg] [decimal](10, 3) NULL,
+    [riboflavina_mg] [decimal](10, 3) NULL,
+    [niacina_mg] [decimal](10, 3) NULL,
  CONSTRAINT [PK_usuario_idr] PRIMARY KEY CLUSTERED 
 (
-    [id_valores] ASC
+    [id_valores] ASC,
+    [id_usuario] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
 GO
+
 ALTER TABLE [dbo].[usuario_idr]  WITH CHECK ADD  CONSTRAINT [FK_usuario_idr_usuario] FOREIGN KEY([id_usuario])
 REFERENCES [dbo].[usuario] ([id_usuario])
 GO
-ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
 
+ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
 GO
+
 
 CREATE VIEW [dbo].[v_usuario_muro]
 AS

@@ -100,6 +100,7 @@
                         <h4>Datos Físicos </h4>
                         <i class="material-icons arrowp">keyboard_arrow_down</i>
                     </a>
+                    <asp:Label ID="LblAviso2" runat="server" Text="" Font-Bold="true" CssClass="btn-link btn-lg aviso" Style="text-decoration: none"></asp:Label>
                     <div class="row mostrarrow">
                         <ul class="infogral datosp nobottom">
                             <li>

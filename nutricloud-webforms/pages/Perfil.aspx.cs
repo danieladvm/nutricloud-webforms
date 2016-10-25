@@ -61,6 +61,8 @@ namespace nutricloud_webforms
         private void CargaForm()
         {
             UsuarioCompleto usuario = (UsuarioCompleto)Session["UsuarioCompleto"];
+            usuario_idr idr = new usuario_idr();
+            IngestaRepository IdrPersist = new IngestaRepository();
 
             CargaGeneros();
             CargaActividades();
@@ -81,6 +83,42 @@ namespace nutricloud_webforms
                 TxtAltura.Text = usuario.UsuarioDatos.altura_cm.ToString();
                 rblActividad.SelectedValue = usuario.UsuarioDatos.id_usuario_actividad.ToString();
                 rblObjetivo.SelectedValue = usuario.UsuarioDatos.id_usuario_objetivo.ToString();
+            }
+
+            idr = IdrPersist.GetIDR(usuario.Usuario.id_usuario);
+
+            //Ingesta diaria recomendada
+            if (idr != null)
+            {
+                CCarbo.Text = Convert.ToString(idr.carbohidratos_totales_g);
+                CProt.Text = Convert.ToString(idr.proteinas_g);
+                CGrasas.Text = Convert.ToString(idr.grasa_total_g);
+                CFibra.Text = Convert.ToString(idr.fibra_dietetica_g);
+                CPot.Text = Convert.ToString(idr.potasio_mg);
+                CVB1.Text = Convert.ToString(idr.tiamina_mg);
+                CVB2.Text = Convert.ToString(idr.riboflavina_mg);
+                CVB3.Text = Convert.ToString(idr.niacina_mg);
+                CVitc.Text = Convert.ToString(idr.vitamina_c_mg);
+                CCalcio.Text = Convert.ToString(idr.calcio_mg);
+                CHierro.Text = Convert.ToString(idr.hierro_mg);
+                CFosfo.Text = Convert.ToString(idr.fosforo_mg);
+                CZinc.Text = Convert.ToString(idr.zinc_mg);
+            }
+            else
+            { 
+                CCarbo.Text = "0";
+            CProt.Text = "0";
+            CGrasas.Text = "0";
+            CFibra.Text = "0";
+            CPot.Text = "0";
+            CVB1.Text = "0";
+            CVB2.Text = "0";
+            CVB3.Text = "0";
+            CVitc.Text = "0";
+            CCalcio.Text = "0";
+            CHierro.Text = "0";
+            CFosfo.Text = "0";
+            CZinc.Text = "0";
             }
         }
 
@@ -205,6 +243,8 @@ namespace nutricloud_webforms
         {
             UsuarioRepository ur = new UsuarioRepository();
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            usuario_idr idr = new usuario_idr();
+            IngestaRepository IdrPersist = new IngestaRepository();
             double calorias;
             char sexo = Convert.ToChar(UsuarioCompleto.Usuario.sexo);
 
@@ -276,11 +316,47 @@ namespace nutricloud_webforms
                 else CFibra.Text = "0";
             }
 
+            idr.id_usuario = Convert.ToInt32(UsuarioCompleto.Usuario.id_usuario);
+            idr.energia_kcal = Convert.ToDecimal(calorias);
+            idr.carbohidratos_totales_g = Convert.ToDecimal(CCarbo.Text);
+            idr.proteinas_g = Convert.ToDecimal(CProt.Text);
+            idr.grasa_total_g = Convert.ToDecimal(CGrasas.Text);
+            idr.fibra_dietetica_g = Convert.ToDecimal(CFibra.Text);
+            idr.potasio_mg = Convert.ToDecimal(CPot.Text);
+            idr.tiamina_mg = Convert.ToDecimal(CVB1.Text);
+            idr.riboflavina_mg = Convert.ToDecimal(CVB2.Text);
+            idr.niacina_mg = Convert.ToDecimal(CVB3.Text);
+            idr.vitamina_c_mg = Convert.ToDecimal(CVitc.Text);
+            idr.calcio_mg = Convert.ToDecimal(CCalcio.Text);
+            idr.hierro_mg = Convert.ToDecimal(CHierro.Text);
+            idr.fosforo_mg = Convert.ToDecimal(CFosfo.Text);
+            idr.zinc_mg = Convert.ToDecimal(CZinc.Text);
+
+            if (IdrPersist.GetIDR(UsuarioCompleto.Usuario.id_usuario) == null)
+                IdrPersist.InsertarIngesta(idr);
+            else
+                IdrPersist.ActualizarIngesta(idr);
         }
 
         #endregion
 
         #region Eventos
+
+        void Page_PreInit(object sender, EventArgs e)
+        {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+            if (UsuarioCompleto == null)
+                Response.Redirect("../Default.aspx");
+            else
+            {
+                if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
+                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
+                    Response.Redirect("Profesionales/Home.aspx");
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -291,13 +367,17 @@ namespace nutricloud_webforms
 
         protected void btnActualizarInfoGral_Click(object sender, EventArgs e)
         {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+
+
             if (ValidaInfoGral())
             {
                 UsuarioRepository ur = new UsuarioRepository();
                 ur.ActualizarUsuario(MapeaFormUsuarioInfoGral());
-
-                ActualizarIngesta();
-
+                if (ValidaDatosFisicos()) //validacion para calculo de ingesta
+                {
+                    ActualizarIngesta();
+                }
                 lblAviso.Visible = true;
                 lblAviso.Text = "¡Se ha actualizado la información correctamente!";
             }
@@ -310,12 +390,28 @@ namespace nutricloud_webforms
 
         protected void btnActualizarDatosFisicos_Click(object sender, EventArgs e)
         {
+            UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
             if (ValidaDatosFisicos())
             {
                 UsuarioRepository ur = new UsuarioRepository();
-                ur.ActualizarDatosUsuario(MapeaFormUsuarioDatosFisicos());
-                ActualizarIngesta();
+                if (UsuarioCompleto.UsuarioDatos == null)
+                    ur.InsertarDatosUsuario(MapeaFormUsuarioDatosFisicos());
+                else
+                    ur.ActualizarDatosUsuario(MapeaFormUsuarioDatosFisicos());
+                if (ValidaInfoGral())
+                {
+                    ActualizarIngesta();
+                }
+                LblAviso2.Visible = true;
+                LblAviso2.Text = "¡Se ha actualizado la información correctamente!";
             }
+            else
+            {
+                LblAviso2.Visible = true;
+                LblAviso2.Text = "Ha ocurrido un error, inténtalo nuevamente.";
+            }
+
+
         }
 
         #endregion

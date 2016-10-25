@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HeaderFooter.master.cs" Inherits="nutricloud_webforms.HeaderFooter" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Anon.master.cs" Inherits="nutricloud_webforms.Anon" %>
 
 <!DOCTYPE html>
 

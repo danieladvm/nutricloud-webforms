@@ -62,7 +62,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="row mtop">
+                    <div class="row mtop" id="agregar" runat="server">
                         <div class="col s12 ingresos-food">
                             <div class="row nobottom">
                                 <div class="input-field col l3 m12 s12">
@@ -79,14 +79,12 @@
                                 </div>
                             </div>
                             <div class="row nobottom">
-                                <div class="input-field col l3 m12 s12">
-                                    <label for="porcion">Porción:</label>
-                                </div>
-                                <div class="col col l9 m12 s12">
-                                    <asp:TextBox ID="porcion" class="validate altercalendar porcion" runat="server">
+                                <div class="input-field col s12">
+                                    <asp:TextBox ID="porcion" class="validate altercalendar porcion" runat="server"></asp:TextBox>
+                                <label for="porcion">Cantidad:</label>
+                                <asp:Label ID="LblTipo" runat="server"></asp:Label>
+                            </div>
 
-                                    </asp:TextBox>
-                                </div>
                             </div>
 
 
