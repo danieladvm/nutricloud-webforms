@@ -16,8 +16,7 @@ namespace nutricloud_webforms.Repositories
             try
             {
                 return (from vum in c.v_usuario_muro
-                        where vum.id_usuario_seguidor == id_usuario_seguidor ||
-                        vum.id_usuario_seguido == id_usuario_seguidor
+                        where vum.id_usuario_seguidor == id_usuario_seguidor
                         orderby vum.f_publicacion descending
                         select vum).ToList();
             }

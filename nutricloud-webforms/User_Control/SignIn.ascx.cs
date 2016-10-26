@@ -39,7 +39,7 @@ namespace nutricloud_webforms
 
                     Sesion(u);
 
-                    Response.Redirect("~/Pages/Registro.aspx");
+                    Response.Redirect("~/Pages/Registro.aspx", false);
                 }
             }
             catch (Exception)
@@ -147,7 +147,7 @@ namespace nutricloud_webforms
             }
             catch (Exception)
             {
-                Response.Redirect("~/Error.aspx");
+                throw;
             }
         }
 
@@ -165,7 +165,7 @@ namespace nutricloud_webforms
             }
             catch (Exception)
             {
-                Response.Redirect("~/Error.aspx");
+                throw;
             }
         }
 
@@ -180,7 +180,7 @@ namespace nutricloud_webforms
             }
             catch (Exception)
             {
-                Response.Redirect("~/Error.aspx");
+                throw;
             }
         }
         #endregion

@@ -1,13 +1,9 @@
 use nutricloud
 go
-drop table blog_nota
 drop table consulta_mensaje
 drop table consulta_conversacion
 drop table usuario_alimento
 drop table comida_tipo
-drop table alimento
-drop table alimento_tipo
-drop table alimento_genero
 drop view v_usuario_muro
 drop table usuario_receta
 drop table usuario_muro
@@ -15,11 +11,15 @@ drop table usuario_datos
 drop table usuario_objetivo
 drop table usuario_usuario
 drop table usuario_idr
+drop table notificacion_blog_nota
+drop table blog_nota
+drop table usuario_alimento_favorito
 drop table usuario
 drop table usuario_tipo
 drop table usuario_actividad
-drop table notificacion_blog_nota
-drop table usuario_alimento_favorito
+drop table alimento
+drop table alimento_tipo
+drop table alimento_genero
 go
 --Opciones como: liquidos (litros), solidos (gr)
 create table alimento_tipo (
@@ -415,20 +415,28 @@ GO
 ALTER TABLE [dbo].[usuario_idr] CHECK CONSTRAINT [FK_usuario_idr_usuario]
 GO
 
-
 CREATE VIEW [dbo].[v_usuario_muro]
 AS
 SELECT
 um.id_usuario AS id_usuario_seguido,
 CASE When us.nombre is null or ltrim(rtrim(us.nombre)) = '' Then 'Anónimo' Else us.nombre END AS nombre_usuario_seguido,
-um.estado,
+convert(varchar(5000),um.estado) estado,
 um.f_publicacion,
 us.sexo,
-uu.id_usuario_seguidor
-
+uu.id_usuario_seguidor id_usuario_seguidor
 FROM dbo.usuario_muro AS um INNER JOIN
-dbo.usuario AS us ON us.id_usuario = um.id_usuario LEFT JOIN
+dbo.usuario AS us ON us.id_usuario = um.id_usuario INNER JOIN
 dbo.usuario_usuario AS uu ON uu.id_usuario_seguido = um.id_usuario
+UNION
+SELECT
+um.id_usuario AS id_usuario_seguido,
+CASE When us.nombre is null or ltrim(rtrim(us.nombre)) = '' Then 'Anónimo' Else us.nombre END AS nombre_usuario_seguido,
+convert(varchar(5000),um.estado) estado,
+um.f_publicacion,
+us.sexo,
+us.id_usuario id_usuario_seguidor
+FROM dbo.usuario_muro AS um INNER JOIN
+dbo.usuario AS us ON us.id_usuario = um.id_usuario
 
 GO
 CREATE TABLE [dbo].[notificacion_blog_nota](

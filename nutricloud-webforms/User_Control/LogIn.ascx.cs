@@ -40,16 +40,16 @@ namespace nutricloud_webforms
                         {
                             if (ud == null)
                             {
-                                Response.Redirect("~/Pages/Perfil.aspx");
+                                Response.Redirect("~/Pages/Perfil.aspx", false);
                             }
                             else
                             {
-                                Response.Redirect("~/Pages/Home.aspx");
+                                Response.Redirect("~/Pages/Home.aspx", false);
                             }
                         }
                         if (u.id_usuario_tipo == 2) //Profesional
                         {
-                            Response.Redirect("~/Profesionales/Home.aspx");
+                            Response.Redirect("~/Profesionales/Home.aspx", false);
                         }
 
                     }
