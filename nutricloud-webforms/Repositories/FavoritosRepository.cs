@@ -87,13 +87,22 @@ namespace nutricloud_webforms.Repositories
             return resultado;
         }
 
-        public List<alimento> ListarFavoritos(int idusu)
+        public List<Favorito> ListarFavoritos(int idusu)
         {
             var resultado = (from a in c.usuario_alimento_favorito join b in c.alimento on a.id_alimento equals b.id_alimento where a.id_usuario == idusu select b).ToList();
 
-            return resultado;
+            List<Favorito> favoritos = new List<Favorito>();
+
+            foreach (alimento r in resultado)
+            {
+                Favorito favorito = new Favorito();
+                favorito.nombre = r.alimento1;
+                favorito.id = r.id_alimento;
+                favorito.kcal = r.energia_kcal;
+                favoritos.Add(favorito);
+            }
+
+            return favoritos;
         }
-
-
     }
 }
