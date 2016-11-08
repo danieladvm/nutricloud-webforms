@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HeaderFooter.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="nutricloud_webforms.Home" %>
-
 <%@ Register Src="~/User_Control/Carga_rapida.ascx" TagPrefix="uc1" TagName="Carga_rapida" %>
 
 
@@ -23,7 +22,7 @@
                             </a>
                         </li>
                         <li>
-                            <uc1:Carga_rapida runat="server" ID="Carga_rapida" />
+                            <%--<uc1:Carga_rapida runat="server" ID="Carga_rapida" />--%>
                         </li>
                     </ul>
                 </div>
@@ -55,67 +54,21 @@
     <!--/container-->
     <span class="ir-arriba icon-arrow-up2"><i class="material-icons">keyboard_arrow_up</i></span>
 
+    <!-- Modal Favoritos -->
+    <div id="modal_fav" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h5>Mis Favoritos</h5>
+            <div class="row item-alimento fav-modal">
+                <div id="alimentos" class="container">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+             <div id="agregarCargaRapida"></div>
+        </div>
+    </div>
 
-    <script>
-        $(function () {
-
-            CargaComidas();
-
-            $("#datepicker").datepicker({
-                showOn: "button",
-                buttonImage: "../../content/img/calendario.png",
-                buttonImageOnly: true,
-                buttonText: "Seleccione la Fecha",
-                altField: "#alternate",
-                altFormat: "DD, d MM, yy",
-                onSelect: function () {
-                    CargaComidas();
-                }
-            });
-        });
-
-        function CargaComidas() {
-            var fechaSeleccionada = $("#alternate").val();
-
-            $.ajax({
-                type: "POST",
-                url: "Home.aspx/GetAlimentos",
-                data: "{fecha:'" + fechaSeleccionada + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    // How to return data here like a table???  
-                    $("#lista-comidas").html(msg.d);
-                    //alert(msg.d);
-                }
-            });
-        }
-    </script>
     <script src="../scripts/materialize.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.modal-trigger').leanModal();
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-
-            $('.ir-arriba').click(function () {
-                $('body, html').animate({
-                    scrollTop: '0px'
-                }, 300);
-            });
-
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 0) {
-                    $('.ir-arriba').slideDown(300);
-                } else {
-                    $('.ir-arriba').slideUp(300);
-                }
-            });
-
-        });
-    </script>
-
+    <script src="../scripts/Home.js"></script>
 
 </asp:Content>
