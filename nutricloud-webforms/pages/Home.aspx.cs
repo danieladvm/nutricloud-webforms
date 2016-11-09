@@ -21,13 +21,13 @@ namespace nutricloud_webforms
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
 
             if (UsuarioCompleto == null)
-            Response.Redirect("../Default.aspx");
+                Response.Redirect("../Default.aspx");
             else
             {
                 if (UsuarioCompleto.Usuario.id_usuario_tipo == 1)
-                this.Page.MasterPageFile = "~/HeaderFooter.Master";
+                    this.Page.MasterPageFile = "~/HeaderFooter.Master";
                 else if (UsuarioCompleto.Usuario.id_usuario_tipo == 2)
-                Response.Redirect("blog.aspx");
+                    Response.Redirect("blog.aspx");
             }
 
         }
@@ -95,8 +95,11 @@ namespace nutricloud_webforms
                         sb.Append("<div class='col s4' style='text-align: right'>");
                         sb.Append("<span>kcal</span><span class='calorias'>" + comida.energia_kcal + "</span>");
                         sb.Append("</div>");
-                        sb.Append("<div class='col s12'>");
+                        sb.Append("<div class='col s8'>");
                         sb.Append("<span class='cantidad'>" + comida.cantidad + comida.unidad_medida + "</span>");
+                        sb.Append("</div>");
+                        sb.Append("<div class='col s4'>");
+                        sb.Append("<a class='btn-eliminar' onclick='eliminar(" + comida.id_usuario_alimento + ")'><i class='material-icons'>delete</i></a>");
                         sb.Append("</div>");
                         sb.Append("</div>");
                     }
@@ -114,6 +117,12 @@ namespace nutricloud_webforms
                 return sb.ToString();
             }
             else return "0";
+        }
+
+        [WebMethod]
+        public static void deleteAlimentos(int idAlimentoUsuario)
+        {
+
         }
     }
 }

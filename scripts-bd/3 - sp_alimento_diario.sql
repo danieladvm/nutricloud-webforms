@@ -11,7 +11,8 @@ AS
 BEGIN
 
 	Select
-	 ua.id_usuario
+	 ua.id_usuario_alimento
+	,ua.id_usuario
 	,ua.id_alimento
 	,ua.id_comida_tipo
 	,ua.cantidad

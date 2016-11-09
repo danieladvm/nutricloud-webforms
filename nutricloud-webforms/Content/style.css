@@ -619,6 +619,12 @@ span.calorias {
     float: right;
 }
 
+div.row.item-alimento a.btn-eliminar {
+    cursor: pointer;
+    float: right;
+    color: gray !important;
+}
+
 .list-food {
     padding-left: 18px;
     padding-bottom: 9px;
@@ -627,6 +633,7 @@ span.calorias {
 
 .total_cal {
     float: right;
+    color: white;
 }
 
 .divtop {

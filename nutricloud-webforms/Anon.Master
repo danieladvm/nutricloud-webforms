@@ -205,6 +205,19 @@
                 }
             });
         }
+
+        function eliminar(idUsuarioAllimento) {
+            $.ajax({
+                type: "POST",
+                url: "Home.aspx/deleteAlimentos",
+                data: "{idAlimentoUsuario:'" + idAlimentoUsuario + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function () {
+                    CargaComidas();
+                }
+            });
+        }
     </script>
     <script>
         $(document).ready(function () {
