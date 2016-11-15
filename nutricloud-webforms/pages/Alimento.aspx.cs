@@ -101,20 +101,19 @@ namespace nutricloud_webforms
             alimento a = ar.BuscarAlimentoId(id);
             usuario_alimento diario = new usuario_alimento();
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            DateTime fecha = (DateTime)Session["fecha_diario"];
 
             diario.id_alimento = a.id_alimento;
             diario.id_comida_tipo = Convert.ToInt32(ddlComidaTipo.SelectedValue);
             diario.id_usuario = Convert.ToInt32(UsuarioCompleto.Usuario.id_usuario);
             diario.cantidad = Convert.ToInt32(porcion.Text);
-            diario.f_ingreso = DateTime.Today;
-
-
+            diario.f_ingreso = fecha;
+            
             if (diario != null)
             {
                 dr.IngresarAlimentoDiario(diario);
                 Response.Redirect("Home.aspx");
             }
-
         }
 
         protected void add_fav_Click(object sender, EventArgs e)

@@ -19,6 +19,7 @@ namespace nutricloud_webforms
         void Page_PreInit(object sender, EventArgs e)
         {
             UsuarioCompleto UsuarioCompleto = (UsuarioCompleto)Session["UsuarioCompleto"];
+            Session["fecha_diario"] = null;
 
             if (UsuarioCompleto == null)
                 Response.Redirect("../Default.aspx");
@@ -64,10 +65,19 @@ namespace nutricloud_webforms
                 try
                 {
                     f = DateTime.Parse(fecha);
+                    HttpContext.Current.Session["fecha_diario"] = f;
                 }
                 catch (Exception)
                 {
-                    f = DateTime.Now;
+                    if (HttpContext.Current.Session["fecha_diario"] == null)
+                    {
+                        f = DateTime.Now;
+                        HttpContext.Current.Session["fecha_diario"] = f;
+                    }
+                    else
+                    {
+                        f = (DateTime)HttpContext.Current.Session["fecha_diario"];
+                    }
                 }
 
                 foreach (var tipoComida in ar.ListarTipoComida())
