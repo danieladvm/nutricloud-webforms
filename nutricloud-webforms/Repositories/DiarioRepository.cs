@@ -23,5 +23,23 @@ namespace nutricloud_webforms.Repositories
                 throw;
             }
         }
+
+        public void EliminarAlimentoUsuario(int id_usuario_alimento)
+        {
+            try
+            {
+                var query = (from ua in c.usuario_alimento
+                            where ua.id_usuario_alimento == id_usuario_alimento
+                            select ua).FirstOrDefault();
+
+                c.usuario_alimento.Remove(query);
+                c.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

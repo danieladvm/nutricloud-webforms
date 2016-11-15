@@ -120,9 +120,10 @@ namespace nutricloud_webforms
         }
 
         [WebMethod]
-        public static void deleteAlimentos(int idAlimentoUsuario)
+        public static void deleteAlimentos(int id_usuario_alimento)
         {
-
+            DiarioRepository dr = new DiarioRepository();
+            dr.EliminarAlimentoUsuario(id_usuario_alimento);
         }
     }
 }

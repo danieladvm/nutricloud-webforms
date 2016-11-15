@@ -155,3 +155,16 @@ $(document).ready(function () {
     });
 });
 
+function eliminar(idUsuarioAllimento) {
+    $.ajax({
+        type: "POST",
+        url: "Home.aspx/deleteAlimentos",
+        data: "{id_usuario_alimento:'" + idUsuarioAllimento + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            CargaComidas();
+        }
+    });
+}
+
