@@ -9,6 +9,8 @@ using System.Web.Script.Serialization;
 using System.Text;
 using nutricloud_webforms.Repositories;
 using nutricloud_webforms.Models;
+using nutricloud_webforms.DataBase;
+using System.Web.Script.Services;
 
 namespace nutricloud_webforms
 {
@@ -82,31 +84,35 @@ namespace nutricloud_webforms
 
                 foreach (var tipoComida in ar.ListarTipoComida())
                 {
-                    sb.Append("<div class='row' id='" + tipoComida.comida_tipo1 + "'>");
+                    sb.Append("<div class='row tipoComida' id='" + tipoComida.id_comida_tipo + "'>");
+                    sb.Append("<input type='hidden' class='idTipoComida' value='" + tipoComida.id_comida_tipo + "' />");
                     sb.Append("<div class='col s12 m12'>");
                     sb.Append("<div class='card'>");
                     sb.Append("<div class='fast-charge'>");
-                    sb.Append("<a class='waves-effect waves-light btn orange lighten-1 modal-trigger cargaRapida' data-tipo-comida='" + tipoComida.comida_tipo1 + "' href=\"#modal_fav\"><i class=\"material-icons left-i\">star</i>Carga Rápida</a>");
+                    sb.Append("<a class='waves-effect waves-light btn orange lighten-1 modal-trigger cargaRapida' data-tipo-comida='" + tipoComida.id_comida_tipo + "' href=\"#modal_fav\"><i class=\"material-icons left-i\">star</i>Carga Rápida</a>");
                     sb.Append("</div>");
-                    sb.Append("<div class='card-content orange-text text-darken-3'>");
+                    sb.Append("<div id='" + tipoComida.id_comida_tipo + "-listado' class='card-content orange-text text-darken-3'>");
                     sb.Append("<img src='../Content/img/" + tipoComida.imagen + "' class='responsive-img icon-food' />");
                     sb.Append("<h4>" + tipoComida.comida_tipo1 + "</h4>");
 
                     decimal? totalCalorias = 0;
+                    var listarDiario = ar.ListarDiario(idUsuario, tipoComida.id_comida_tipo, f);
 
-                    foreach (var comida in ar.ListarDiario(idUsuario, tipoComida.id_comida_tipo, f))
+                    foreach (var comida in listarDiario)
                     {
                         totalCalorias = totalCalorias + comida.energia_kcal;
 
                         sb.Append("<div class='row item-alimento'>");
                         sb.Append("<div class='col s8'>");
                         sb.Append("<a class='alimento' href = 'Alimento.aspx?Idalimento=" + comida.id_alimento + "'>" + comida.alimento + "</a>");
+                        sb.Append("<input type='hidden' class='idAlimento' value='" + comida.id_alimento + "' />");
+                        sb.Append("<input type='hidden' class='idUsuarioAlimento' value='" + comida.id_usuario_alimento + "' />");
                         sb.Append("</div>");
                         sb.Append("<div class='col s4' style='text-align: right'>");
-                        sb.Append("<span>kcal</span><span class='calorias'>" + comida.energia_kcal + "</span>");
+                        sb.Append("<span class='cantidadCalorias'>" + comida.energia_kcal + "</span><span> kcal</span>");
                         sb.Append("</div>");
                         sb.Append("<div class='col s8'>");
-                        sb.Append("<span class='cantidad'>" + comida.cantidad + comida.unidad_medida + "</span>");
+                        sb.Append("<span class='cantidadPorcion'>" + comida.cantidad + "</span><span> " + comida.unidad_medida + "</span>");
                         sb.Append("</div>");
                         sb.Append("<div class='col s4'>");
                         sb.Append("<a class='btn-eliminar' onclick='eliminar(" + comida.id_usuario_alimento + ")'><i class='material-icons'>delete</i></a>");
@@ -127,6 +133,14 @@ namespace nutricloud_webforms
                 return sb.ToString();
             }
             else return "0";
+        }
+
+        [WebMethod]
+        public static void actualizarDiario(List<Diario> diario)
+        {
+            UsuarioCompleto usuario = (UsuarioCompleto)HttpContext.Current.Session["UsuarioCompleto"];
+            DiarioRepository diarioRepository = new DiarioRepository();
+            diarioRepository.actualizarDiario(diario);
         }
 
         [WebMethod]
