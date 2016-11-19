@@ -22,11 +22,10 @@ function getCargaRapida(event) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
-            var favoritos = response.d;
-            setCargaRapida(favoritos, event);
+            setCargaRapida(response.d, event);
         },
         error: function (msg) {
-            debugger;
+            alert("Hubo un error en getCargaRapida")
         }
     });
 }
@@ -35,11 +34,15 @@ function setCargaRapida(favoritos, event) {
 
     favoritos.forEach(function (f) {
 
-        var strFav = "<div class='row favorito' data-nombre='" + f.nombre + "' data-id='" + f.id + "' data-kcal='" + f.kcal + "'>" +
+        var strFav = "<div class='row favorito'>" +
         "<div class='col s9'>" +
         "<p>" +
         "<input class='checkBox' type='checkbox' id='c" + f.id + "' />" +
         "<label class='nombre' for='c" + f.id + "'>" + f.nombre + "</label>" +
+        "<input type='hidden' class='idAlimento' value='" + f.id + "' />" +
+        "<input type='hidden' class='kcalAlimento' value='" + f.kcal + "' />" +
+        "<input type='hidden' class='nombreAlimento' value='" + f.nombre + "' />" +
+        "<input type='hidden' class='idUsuarioAlimento' value='' />" +
         "</p>" +
         "</div>" +
         "<div class='input-field col s3'>" +
@@ -48,62 +51,89 @@ function setCargaRapida(favoritos, event) {
         "</div>" +
         "</div>";
 
+        // convierto el string a html 
         var htmlFav = $.parseHTML(strFav)[0];
+        // lo appendeo en el div #alimentos
         $("#alimentos").append(htmlFav);
     });
 
+    // string del boton "Agregar" que tiene en el atributo "data-tipo-consumo" el tipo de comida
     var strBoton = "<a href='#' data-tipo-consumo='" + event.target.dataset.tipoComida + "' class='modal-action modal-close waves-effect waves-green btn-flat'>Agregar</a>"
+    // convierto el string a html
     var htmlBoton = $.parseHTML(strBoton)[0];
+    // lo appendeo en el div #agregarCargaRapida
     $("#agregarCargaRapida").append(htmlBoton);
 
+    // seteo el evento click de boton "Agregar"
     $(htmlBoton).click(function (node) {
 
+        // obtengo del atributo data-tipo-consumo el tipo de comida
         var tipoConsumo = node.target.dataset.tipoConsumo;
+        // obtengo todos nodos que tenga la clase .favorito, que son los nodos que contienen todo el html del favorito
         var favoritos = $(".favorito");
 
+        // los itero
         for (var i = 0; i < favoritos.length; i++) {
 
+            // obtengo el valor de la propiedad checked de cada CheckBox
             var favoritoChekeado = $(favoritos[i]).find(".checkBox")[0].checked;
 
+            // si el favorito esta chekeado
             if (favoritoChekeado) {
 
+                //obtengo los datos del favorito
                 var nombre = $(favoritos[i]).find(".nombre")[0].textContent;
-                var porcion = $(favoritos[i]).find(".porcion")[0].value;
+                var porcion = $(favoritos[i]).find(".porcionCR")[0].value;
+                var idAlimento = $(favoritos[i]).find(".idAlimento")[0].value;
 
+                // valido que hay ingresado un porcion 
                 if (!/^[0-9]{1,5}$/.test(porcion) || parseInt(porcion) == 0) {
                     alert("Vacío o formato incorrecto.");
                     return;
                 }
 
-                var kcalAlimento = favoritos[i].dataset.kcal;
+                var kcalAlimento = $(favoritos[i]).find(".kcalAlimento")[0].value;
+
+                // obtengo las calorias totales
                 var kcalTotal = (kcalAlimento * porcion) / 100;
 
+                // string del html que va a ir al diario
                 var strF = "<div class='row item-alimento'>" +
                     "<div class='col s8'>" +
-                    "<a class='alimento' href='Alimento.aspx?Idalimento=" + "5" + "'>" + nombre + "</a>" +
+                    "<a class='alimento' href='Alimento.aspx?Idalimento=" + idAlimento + "'>" + nombre + "</a>" +
+                    "<input type='hidden' class='idUsuarioAlimento' value='' />" +
+                    "<input type='hidden' class='idAlimento' value='" + idAlimento + "' />" +
                     "</div>" +
-                    "<div class='col s4'>" +
-                    "<span class='calorias'>" + kcalTotal + "kcal</span>" +
+                    "<div class='col s4' style='text-align: right'>" +
+                    "<span class='cantidadCalorias'>" + kcalTotal.toString().replace(".", ",") + "</span><span> kcal</span>" +
                     "</div>" +
                     "<div class='col s12'>" +
-                    "<span class='cantidad'>" + porcion + "gr</span>" +
+                    "<span class='cantidadPorcion'>" + porcion + "</span><span> gr</span>" +
                     "</div>" +
                     "</div>";
 
+                // lo convierto a html
                 var htmlF = $.parseHTML(strF)[0];
-                $("#" + tipoConsumo).append(htmlF);
+                // lo appendeo
+                $("#" + tipoConsumo + "-listado").append(htmlF);
+
             };
 
         }
 
-        var calorias = $("#" + tipoConsumo).find(".calorias");
+        // obtengo todas la calorias de los alimentos de ese tipo de comida
+        var calorias = $("#" + tipoConsumo).find(".cantidadCalorias");
         var totalCalorias = 0;
+
+        // itero y acumulo las calorias
         for (var i = 0; i < calorias.length; i++) {
             var cal = parseFloat(calorias[i].textContent);
             totalCalorias = totalCalorias + cal;
         }
 
-        $("#" + tipoConsumo).find(".total_cal")[0].textContent = totalCalorias;
+        // la seteo en el total del html
+        $("#" + tipoConsumo).find(".total_cal")[0].textContent = totalCalorias.toString().replace(".", ",");
+
         // elimino el contenido del div que tiene todos los favoritos
         $("#alimentos").empty();
         // y elimino el boton "AGREGAR"
@@ -132,7 +162,7 @@ function CargaComidas() {
             });
         },
         error: function (msg) {
-            debugger;
+            alert("error en cargaComidas()");
         }
     });
 }
@@ -155,6 +185,60 @@ $(document).ready(function () {
     });
 });
 
+function actualizarDiario() {
+
+    var request = {};
+    // esta array va contener los datos de todos los alimentos del diario
+    var diario = [];
+    // obtengo todos los tipos de comida del diario
+    var tiposDeComida = $(".tipoComida");
+
+    for (var i = 0; i < tiposDeComida.length; i++) {
+
+        // obtengo los alimentos del tipo de comida
+        var alimentos = $(tiposDeComida[i]).find(".item-alimento");
+
+        for (var j = 0; j < alimentos.length; j++) {
+
+            // de cada alimentos obtengo sus datos
+            var cantidad = $(tiposDeComida[i]).find(".cantidadPorcion")[j].textContent;
+            var idAlimento = $(tiposDeComida[i]).find(".idAlimento")[j].value;
+            var idUsuarioAlimento = $(tiposDeComida[i]).find(".idUsuarioAlimento")[j].value;
+            var fecha = new Date();
+
+            // los guardo en un json
+            var a = {
+                cantidad: cantidad,
+                idAlimento: idAlimento,
+                fecha: fecha,
+                tipoDeComida: tiposDeComida[i].id,
+                idUsuarioAlimento: idUsuarioAlimento
+            };
+
+            // y los aniado a la lista
+            diario.push(a);
+        }
+    }
+
+
+    // lo aniado al request
+    request.diario = diario;
+
+    $.ajax({
+        type: "POST",
+        url: "Home.aspx/actualizarDiario",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        success: function (response) {
+            // como la operacion fue exitosa cargo de vuelta el diario
+            CargaComidas();
+        },
+        error: function (msg) {
+            alert("actualizarDiario()");
+        }
+    });
+}
+
 function eliminar(idUsuarioAllimento) {
     $.ajax({
         type: "POST",
@@ -167,4 +251,3 @@ function eliminar(idUsuarioAllimento) {
         }
     });
 }
-

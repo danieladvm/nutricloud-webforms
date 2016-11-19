@@ -162,6 +162,7 @@
     <Content Include="Pages\Notificaciones.aspx" />
     <Content Include="scripts\Chart.js" />
     <Content Include="scripts\Chart.min.js" />
+    <Content Include="scripts\Home.js" />
     <Content Include="scripts\JavaScript.js" />
     <Content Include="scripts\Notificaciones.js" />
     <Content Include="scripts\Reportes.js" />
@@ -402,6 +403,7 @@
     <Compile Include="MasterPro.Master.designer.cs">
       <DependentUpon>MasterPro.Master</DependentUpon>
     </Compile>
+    <Compile Include="Models\Favorito.cs" />
     <Compile Include="Models\General.cs" />
     <Compile Include="Models\Mensaje.cs" />
     <Compile Include="Models\Notificacion.cs" />
